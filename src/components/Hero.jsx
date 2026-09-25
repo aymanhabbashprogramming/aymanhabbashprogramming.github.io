@@ -48,8 +48,6 @@ function Hero({ name = 'MOHAMMED AYMAN HABBASH', role = 'Software Developer | C+
 
       <div className="hero__layout">
         <section className="hero__content hero__panel--card" id="top">
-          <p className="hero__intro">{t.hero.greeting}</p>
-          <h1 id="hero-title">{name}<span className="hero__period">.</span></h1>
           <p className="hero__role">
             <span className="hero__role-badges">
               <span className="hero__role-badge hero__role-badge--violet">{(t.hero.role || role).split('|')[0].trim()}</span>
@@ -64,6 +62,8 @@ function Hero({ name = 'MOHAMMED AYMAN HABBASH', role = 'Software Developer | C+
         </section>
 
         <aside className="hero__panel" aria-label="Profile summary">
+          <p id="hero-title" className="hero__panel-name">{name}<span className="hero__period">.</span></p>
+
           <div className="hero__avatar">
             <ProfileIcon />
           </div>

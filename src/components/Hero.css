@@ -34,17 +34,15 @@
   box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
 }
 
-.hero__content { padding: 40px clamp(28px, 4vw, 48px); animation: hero-enter .8s .12s both; }
+.hero__content { padding: 32px clamp(28px, 4vw, 48px); animation: hero-enter .8s .12s both; }
 .hero__eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; color: var(--sky); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .16em; }
 .hero__eyebrow span { display: block; width: 28px; height: 1px; background: currentColor; }
-.hero__intro { margin: 0 0 2px; color: var(--muted); font-size: clamp(17px, 2vw, 22px); font-weight: 500; }
-.hero h1 { margin: 0; color: var(--text); font-size: clamp(30px, 2vw, 50px); line-height: 1.1; letter-spacing: -.075em; word-spacing: .18em; font-weight: 750; }
 .hero__period { color: var(--sky); }
-.hero__role { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin: 23px 0 0; color: var(--text); font-size: clamp(20px, 3vw, 34px); line-height: 1.2; letter-spacing: -.035em; font-weight: 500; }
-.hero__role-badges { display: inline-flex; align-items: center; gap: 8px; }
-.hero__role-badge { padding: 4px 12px; border: 1px solid rgb(37 99 235 / 35%); border-radius: 999px; background: rgb(37 99 235 / 7%); color: var(--sky); font-size: 14px; font-weight: 600; letter-spacing: 0; }
+.hero__role { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 0; }
+.hero__role-badges { display: inline-flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.hero__role-badge { padding: 5px 13px; border: 1px solid rgb(37 99 235 / 35%); border-radius: 999px; background: rgb(37 99 235 / 7%); color: var(--sky); font-size: 14px; font-weight: 600; letter-spacing: 0; }
 .hero__role-badge--violet { border-color: rgb(124 58 237 / 35%); background: rgb(124 58 237 / 7%); color: var(--violet); }
-.hero__description { max-width: 560px; margin: 22px 0 0; color: var(--muted); font-size: 16px; line-height: 1.75; }
+.hero__description { max-width: 560px; margin: 18px 0 0; color: var(--muted); font-size: 16px; line-height: 1.7; }
 
 .hero__panel {
   display: flex;
@@ -54,6 +52,8 @@
   padding: 28px 24px;
   animation: hero-enter .8s .28s both;
 }
+
+.hero__panel-name { margin: 0; color: var(--text); font-size: 17px; font-weight: 700; letter-spacing: -.01em; text-align: center; }
 
 .hero__avatar {
   display: flex;
