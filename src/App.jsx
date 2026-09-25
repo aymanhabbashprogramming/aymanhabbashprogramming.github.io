@@ -3,7 +3,6 @@ import AboutMe from './components/AboutMe'
 import Skills from './components/Skills'
 import FeaturedProjects from './components/FeaturedProjects'
 import OtherProjects from './components/OtherProjects'
-import Education from './components/Education'
 import Training from './components/Training'
 import Achievements from './components/Achievements'
 import SiteNavigation from './components/SiteNavigation'
@@ -17,7 +16,6 @@ function App() {
       <Skills />
       <FeaturedProjects />
       <OtherProjects />
-      <Education />
       <Training />
       <Achievements />
     </>
