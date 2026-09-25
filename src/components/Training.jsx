@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './Training.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 const entries = [
   {
@@ -17,6 +18,7 @@ const entries = [
 ]
 
 function Training({ items = entries }) {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -38,7 +40,7 @@ function Training({ items = entries }) {
       <div className="training__inner">
         <header className="training__header">
           <span className="training__index" aria-hidden="true">06</span>
-          <h2 id="training-title">Training &amp; Professional Development<span>.</span></h2>
+          <h2 id="training-title">{t.headings.training}<span>.</span></h2>
         </header>
         <div className="training__timeline">
           {items.map((entry, index) => (
@@ -47,7 +49,7 @@ function Training({ items = entries }) {
               <div className="training__card">
                 <div className="training__topline">
                   <h3>{entry.title}</h3>
-                  <span className="training__status">{entry.status}</span>
+                  <span className="training__status">{entry.status === 'Completed' ? t.common.completed : t.common.upcoming}</span>
                 </div>
                 <p>{entry.description}</p>
               </div>

@@ -4,3 +4,16 @@
 html { scroll-behavior: smooth; background: #0b0f14; }
 body { margin: 0; min-width: 320px; background: #0b0f14; font-family: Inter, sans-serif; }
 #root { min-height: 100svh; }
+
+html[dir='rtl'] .site-navigation__links,
+html[dir='rtl'] .hero__actions,
+html[dir='rtl'] .featured-projects__repositories,
+html[dir='rtl'] .other-projects__badges,
+html[dir='rtl'] .skills ul { direction: rtl; }
+
+html[dir='rtl'] .hero__description,
+html[dir='rtl'] .about__copy,
+html[dir='rtl'] .featured-projects__card,
+html[dir='rtl'] .other-projects__card,
+html[dir='rtl'] .training__card,
+html[dir='rtl'] .achievements__intro { text-align: right; }

@@ -6,10 +6,11 @@ import OtherProjects from './components/OtherProjects'
 import Training from './components/Training'
 import Achievements from './components/Achievements'
 import SiteNavigation from './components/SiteNavigation'
+import { LanguageProvider } from './i18n/LanguageContext'
 
 function App() {
   return (
-    <>
+    <LanguageProvider>
       <SiteNavigation />
       <Hero />
       <AboutMe />
@@ -18,7 +19,7 @@ function App() {
       <OtherProjects />
       <Training />
       <Achievements />
-    </>
+    </LanguageProvider>
   )
 }
 

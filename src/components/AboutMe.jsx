@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './AboutMe.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 // أيقونات SVG بسيطة ومتناسقة مع باقي الصفحة
 const LayersIcon = () => (
@@ -64,7 +65,24 @@ const cardsData = [
   }
 ]
 
+const localizedCards = {
+  en: cardsData.map(({ title, description }) => ({ title, description })),
+  tr: [
+    { title: 'Katmanlı Mimari', description: 'Uygulamaları kodun düzenli, bakımı kolay ve zaman içinde genişletilebilir kalması için Veri Erişimi, İş Mantığı ve Sunum olmak üzere ayrı katmanlara ayırma yaklaşımı.' },
+    { title: 'Veritabanı Entegrasyonu', description: 'Uygulamalar ile veritabanları (SQL Server) arasında gerçek ve çalışan bağlantılar kurmak; izole sorgular yerine pratik veri işlemlerini yönetmek.' },
+    { title: 'Kodun Yeniden Kullanılabilirliği', description: 'Temel kodu yeniden yazmadan farklı uygulamalarda kullanılabilecek Veri Erişimi ve İş Mantığı katmanları tasarlamak.' },
+    { title: 'Güçlü Programlama Temeli', description: 'C++ ile oluşturulan ve C# ile pratikte uygulanan nesne yönelimli programlama, veri yapıları ve algoritmalarda sağlam bir temel.' },
+  ],
+  ar: [
+    { title: 'المعمارية الطبقية', description: 'تنظيم التطبيقات في طبقات منفصلة — الوصول إلى البيانات ومنطق الأعمال وواجهة العرض — للحفاظ على الكود منظمًا وقابلًا للصيانة والتوسع مع الوقت.' },
+    { title: 'تكامل قواعد البيانات', description: 'بناء اتصالات حقيقية وعملية بين التطبيقات وقواعد البيانات (SQL Server)، مع التعامل مع عمليات البيانات العملية بدلًا من الاستعلامات المنعزلة.' },
+    { title: 'إعادة استخدام الكود', description: 'تصميم طبقات الوصول إلى البيانات ومنطق الأعمال بحيث يمكن إعادة استخدامها في تطبيقات مختلفة دون إعادة كتابة الكود الأساسي.' },
+    { title: 'أساس قوي في البرمجة', description: 'قاعدة متينة في البرمجة كائنية التوجه وهياكل البيانات والخوارزميات، بُنيت باستخدام C++ وطُبقت عمليًا عبر C#.' },
+  ],
+}
+
 function AboutMe() {
+  const { t, language } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -93,11 +111,13 @@ function AboutMe() {
       <div className="about__frame">
         <div className="about__heading">
           <span className="about__index" aria-hidden="true">01</span>
-          <h2 id="about-title">What My Development Experience Includes<span>.</span></h2>
+          <h2 id="about-title">{t.headings.about}<span>.</span></h2>
         </div>
 
         <div className="about__grid">
-          {cardsData.map((card, index) => (
+          {cardsData.map((card, index) => {
+            const localized = localizedCards[language][index]
+            return (
             <article
               key={card.id}
               className={`about__card about__card--${card.accent}`}
@@ -106,10 +126,11 @@ function AboutMe() {
               <div className="about__card-icon" aria-hidden="true">
                 {card.icon}
               </div>
-              <h3 className="about__card-title">{card.title}</h3>
-              <p className="about__card-description">{card.description}</p>
+              <h3 className="about__card-title">{localized.title}</h3>
+              <p className="about__card-description">{localized.description}</p>
             </article>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

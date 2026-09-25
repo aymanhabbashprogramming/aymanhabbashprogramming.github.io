@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './OtherProjects.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 const projects = [
   {
@@ -32,6 +33,22 @@ const projects = [
   },
 ]
 
+const localizedProjects = {
+  en: projects.map(({ title, badges, description }) => ({ title, badges, description })),
+  tr: [
+    { title: 'Görüntü İşleme Sistemi', badges: ['C#', 'Matematiksel İşlemler', 'Görüntü İşleme'], description: 'Görüntü yeniden boyutlandırma, birleştirme, ayırma ve görüntüler üzerinde matematiksel işlemler dahil yaklaşık 15 işlem gerçekleştiren pratik bir görüntü işleme uygulaması.' },
+    { title: 'Kişi Yöneticisi', badges: ['C#', 'SQL', 'CRUD'], description: 'Pratik veritabanı işlemleri ve CRUD işlevselliğini uygulayan, SQL veritabanına bağlı bir C# uygulaması.' },
+    { title: 'XOX Oyunu', badges: ['C#', 'WinForms', 'Graphics/GDI+'], description: 'Oyun mantığını ve Graphics ile Paint mekanizmalarını kullanarak özel grafik çizimini gösteren bir C# WinForms oyunu.' },
+    { title: 'Pizza Projesi', badges: ['C#', 'WinForms', 'Dinamik Fiyatlandırma'], description: 'Dinamik sipariş yönetimi ve gerçek zamanlı fiyat hesaplaması sunan pizza siparişi için bir C# WinForms uygulaması.' },
+  ],
+  ar: [
+    { title: 'نظام معالجة الصور', badges: ['C#', 'عمليات رياضية', 'معالجة الصور'], description: 'تطبيق عملي لمعالجة الصور ينفذ قرابة 15 عملية، تشمل تغيير حجم الصور ودمجها وتقسيمها وإجراء العمليات الرياضية عليها.' },
+    { title: 'مدير جهات الاتصال', badges: ['C#', 'SQL', 'CRUD'], description: 'تطبيق C# متصل بقاعدة بيانات SQL، ينفذ عمليات قواعد البيانات العملية ووظائف الإضافة والقراءة والتحديث والحذف.' },
+    { title: 'لعبة إكس-أو', badges: ['C#', 'WinForms', 'Graphics/GDI+'], description: 'لعبة C# WinForms توضح منطق الألعاب والرسم الرسومي المخصص باستخدام آليتي Graphics وPaint.' },
+    { title: 'مشروع البيتزا', badges: ['C#', 'WinForms', 'تسعير ديناميكي'], description: 'تطبيق C# WinForms لطلب البيتزا مع معالجة ديناميكية للطلبات وحساب السعر في الوقت الفعلي.' },
+  ],
+}
+
 function ProjectIcon({ type }) {
   const paths = {
     image: <><rect x="3" y="4" width="18" height="16" rx="2" /><circle cx="8.5" cy="9" r="1.5" /><path d="m4 17 5-5 3.5 3.5 2.5-2.5L20 18" /></>,
@@ -47,6 +64,7 @@ function GitHubIcon() {
 }
 
 function OtherProjects({ items = projects }) {
+  const { t, language } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -68,22 +86,25 @@ function OtherProjects({ items = projects }) {
       <div className="other-projects__inner">
         <header className="other-projects__header">
           <span className="other-projects__index" aria-hidden="true">04</span>
-          <h2 id="other-projects-title">Other Projects<span>.</span></h2>
+          <h2 id="other-projects-title">{t.headings.other}<span>.</span></h2>
         </header>
         <div className="other-projects__grid">
-          {items.map((project, index) => (
+          {items.map((project, index) => {
+            const localized = localizedProjects[language][index]
+            return (
             <article className="other-projects__card" style={{ '--project-index': index }} key={project.title}>
               <ProjectIcon type={project.icon} />
-              <h3>{project.title}</h3>
-              <ul className="other-projects__badges" aria-label={`${project.title} technologies`}>
-                {project.badges.map((badge) => <li key={badge}>{badge}</li>)}
+              <h3>{localized.title}</h3>
+              <ul className="other-projects__badges" aria-label={`${localized.title} technologies`}>
+                {localized.badges.map((badge) => <li key={badge}>{badge}</li>)}
               </ul>
-              <p>{project.description}</p>
+              <p>{localized.description}</p>
               <a href={project.url} target="_blank" rel="noopener noreferrer">
-                <GitHubIcon /> View Repository
+                <GitHubIcon /> {t.common.viewRepository}
               </a>
             </article>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

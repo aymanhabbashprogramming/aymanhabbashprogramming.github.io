@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './Skills.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 /* --- أيقونات SVG --- */
 const CodeIcon = () => (
@@ -60,6 +61,7 @@ function SkillBlock({ title, skills, icon, index }) {
 }
 
 function Skills() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -81,7 +83,7 @@ function Skills() {
       <div className="skills__inner">
         <header className="skills__header">
           <span className="skills__index" aria-hidden="true">02</span>
-          <h2 id="skills-title">My Technical Stack & Foundations<span>.</span></h2>
+          <h2 id="skills-title">{t.headings.skills}<span>.</span></h2>
         </header>
 
         <p className="skills__intro">

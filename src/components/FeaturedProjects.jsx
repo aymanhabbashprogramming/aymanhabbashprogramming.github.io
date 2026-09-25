@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './FeaturedProjects.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 const projects = [
   {
@@ -37,6 +38,24 @@ const projects = [
   },
 ]
 
+const localizedProjects = {
+  en: projects.map(({ title, badges, description }) => ({ title, badges, description })),
+  tr: [
+    { title: 'Eczane Yönetim Sistemi', badges: ['C#', 'SQL', '.NET Framework', '3 Katmanlı Mimari'], description: 'Uygulama geliştirme, veritabanı entegrasyonu ve Veri Erişimi, İş Mantığı ile Sunum katmanlarının ayrılması konularında pratik deneyim gösteren yapılandırılmış bir eczane yönetim sistemi.' },
+    { title: 'POS / Envanter Sistemi', badges: ['C#', 'SQL Server', 'Entity Framework', '3 Katmanlı Mimari'], description: 'Ürünler, kategoriler, müşteriler, tedarikçiler, satın alma, satış, envanter işlemleri ve iş mantığını kapsayan bir satış noktası ve envanter yönetim sistemi.' },
+    { title: 'Banka Yönetim Sistemi', badges: ['C++', 'OOP', 'Yazılım Tasarımı'], description: 'Nesne yönelimli programlama, sınıflar, kalıtım, veri işleme ve yapılandırılmış uygulama tasarımını gösteren C++ ile geliştirilmiş kapsamlı bir bankacılık sistemi.' },
+    { title: 'C++ ile Veri Yapıları', badges: ['C++', 'Veri Yapıları', 'Algoritmalar', 'İşaretçiler'], description: 'Bağlı listeler, dinamik diziler, yığınlar, kuyruklar ve pratik veri yapısı uygulamaları dahil temel veri yapıları ile algoritmaları sıfırdan uygulayan bir C++ projesi.' },
+    { title: 'ContactHub + ContactsDesktop', badges: ['C#', 'SQL Server', 'ADO.NET', '3 Katmanlı Mimari', 'Kodun Yeniden Kullanımı'], description: 'Veri Erişimi, İş Mantığı ve Sunum katmanlarının ayrımını gösteren iki projeli mimari. Mevcut Veri Erişimi ve İş Mantığı katmanları, temel kod yeniden yazılmadan ayrı bir masaüstü uygulamasında yeniden kullanılmıştır.' },
+  ],
+  ar: [
+    { title: 'نظام إدارة الصيدلية', badges: ['C#', 'SQL', '.NET Framework', 'معمارية ثلاثية الطبقات'], description: 'نظام منظم لإدارة الصيدلية يوضح خبرة عملية في تطوير التطبيقات وتكامل قواعد البيانات وفصل طبقات الوصول إلى البيانات ومنطق الأعمال وواجهة العرض.' },
+    { title: 'نظام نقاط البيع والمخزون', badges: ['C#', 'SQL Server', 'Entity Framework', 'معمارية ثلاثية الطبقات'], description: 'نظام لنقاط البيع وإدارة المخزون يغطي المنتجات والفئات والعملاء والموردين والمشتريات والمبيعات وعمليات المخزون ومنطق الأعمال.' },
+    { title: 'نظام إدارة البنك', badges: ['C++', 'البرمجة كائنية التوجه', 'تصميم البرمجيات'], description: 'نظام مصرفي شامل طُوّر باستخدام C++، يوضح البرمجة كائنية التوجه والفئات والوراثة ومعالجة البيانات وتصميم التطبيقات المنظم.' },
+    { title: 'هياكل البيانات في C++', badges: ['C++', 'هياكل البيانات', 'الخوارزميات', 'المؤشرات'], description: 'مشروع C++ ينفذ هياكل البيانات والخوارزميات الأساسية من الصفر، بما فيها القوائم المرتبطة والمصفوفات الديناميكية والمكدسات والطوابير وتطبيقات عملية لهياكل البيانات.' },
+    { title: 'ContactHub + ContactsDesktop', badges: ['C#', 'SQL Server', 'ADO.NET', 'معمارية ثلاثية الطبقات', 'إعادة استخدام الكود'], description: 'معمارية من مشروعين توضح فصل طبقات الوصول إلى البيانات ومنطق الأعمال وواجهة العرض. أُعيد استخدام طبقتي الوصول إلى البيانات ومنطق الأعمال الموجودتين في تطبيق سطح مكتب منفصل دون إعادة كتابة الكود الأساسي.' },
+  ],
+}
+
 function GitHubIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -46,6 +65,7 @@ function GitHubIcon() {
 }
 
 function FeaturedProjects({ items = projects }) {
+  const { t, language } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -67,30 +87,33 @@ function FeaturedProjects({ items = projects }) {
       <div className="featured-projects__inner">
         <header className="featured-projects__header">
           <span className="featured-projects__index" aria-hidden="true">03</span>
-          <h2 id="featured-projects-title">Featured Projects<span>.</span></h2>
+          <h2 id="featured-projects-title">{t.headings.featured}<span>.</span></h2>
         </header>
 
         <div className="featured-projects__timeline">
-          {items.map((project, index) => (
+          {items.map((project, index) => {
+            const localized = localizedProjects[language][index]
+            return (
             <article className={`featured-projects__item featured-projects__item--${index % 2 === 0 ? 'left' : 'right'}`} style={{ '--project-index': index }} key={project.title}>
               <span className="featured-projects__node" aria-hidden="true" />
               <div className="featured-projects__card">
                 <span className="featured-projects__number" aria-hidden="true">0{index + 1}</span>
-                <h3>{project.title}</h3>
-                <ul className="featured-projects__badges" aria-label={`${project.title} technologies`}>
-                  {project.badges.map((badge) => <li key={badge}>{badge}</li>)}
+                <h3>{localized.title}</h3>
+                <ul className="featured-projects__badges" aria-label={`${localized.title} technologies`}>
+                  {localized.badges.map((badge) => <li key={badge}>{badge}</li>)}
                 </ul>
-                <p>{project.description}</p>
+                <p>{localized.description}</p>
                 <div className="featured-projects__repositories">
                   {project.repositories.map((repository) => (
                     <a href={repository.url} target="_blank" rel="noopener noreferrer" key={repository.url}>
-                      <GitHubIcon /> {repository.label}
+                      <GitHubIcon /> {repository.label === 'View Repository' ? t.common.viewRepository : repository.label}
                     </a>
                   ))}
                 </div>
               </div>
             </article>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>

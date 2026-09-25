@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './Achievements.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 const courses = Array.from({ length: 14 }, (_, index) => index + 5)
 
@@ -17,6 +18,7 @@ function ArrowUpRight() {
 }
 
 function Achievements({ certificates = courses }) {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -38,16 +40,16 @@ function Achievements({ certificates = courses }) {
       <div className="achievements__inner">
         <header className="achievements__header">
           <span className="achievements__index" aria-hidden="true">07</span>
-          <h2 id="achievements-title">Achievements &amp; Certifications<span>.</span></h2>
+          <h2 id="achievements-title">{t.headings.achievements}<span>.</span></h2>
         </header>
-        <p className="achievements__intro">Certificates obtained for the completed courses within the structured programming and software development training path.</p>
+        <p className="achievements__intro">{t.common.certificatesIntro}</p>
         <div className="achievements__grid">
           {certificates.map((course, index) => (
             <article className="achievements__card" style={{ '--certificate-index': index }} key={course}>
               <CertificateIcon />
-              <h3>Course {course}</h3>
+              <h3>{t.common.course} {course}</h3>
               <a href={`/certificates/course-${course}.pdf`} target="_blank" rel="noopener noreferrer">
-                View Certificate <ArrowUpRight />
+                {t.common.viewCertificate} <ArrowUpRight />
               </a>
             </article>
           ))}
