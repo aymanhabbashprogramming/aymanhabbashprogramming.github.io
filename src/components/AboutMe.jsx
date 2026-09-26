@@ -39,6 +39,12 @@ const ClassesIcon = () => (
   </svg>
 )
 
+const ChevronIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+)
+
 const cardsData = [
   {
     id: 1,
@@ -84,6 +90,7 @@ function AboutMe() {
   const { t, language } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [showMore, setShowMore] = useState(false)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -141,6 +148,27 @@ function AboutMe() {
             </article>
             )
           })}
+        </div>
+
+        <div className="about__more">
+          <button
+            type="button"
+            className="about__more-toggle"
+            aria-expanded={showMore}
+            aria-controls="about-more-panel"
+            onClick={() => setShowMore((prev) => !prev)}
+          >
+            {showMore ? 'Show Less' : 'Show More Skills'}
+            <span className={`about__more-chevron ${showMore ? 'about__more-chevron--up' : ''}`} aria-hidden="true">
+              <ChevronIcon />
+            </span>
+          </button>
+
+          {showMore && (
+            <div id="about-more-panel" className="about__more-panel">
+              <p>More skills coming soon.</p>
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -197,6 +197,57 @@
   white-space: nowrap;
 }
 
+/* --- زر عرض المزيد --- */
+.about__more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+.about__more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: 1px solid rgb(37 99 235 / 35%);
+  border-radius: 999px;
+  background: rgb(37 99 235 / 6%);
+  color: var(--sky);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.about__more-toggle:hover {
+  background: rgb(37 99 235 / 12%);
+  border-color: rgb(37 99 235 / 50%);
+}
+
+.about__more-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+.about__more-chevron svg { width: 14px; height: 14px; }
+.about__more-chevron--up { transform: rotate(180deg); }
+
+.about__more-panel {
+  width: 100%;
+  margin-top: 20px;
+  padding: clamp(20px, 2.5vw, 28px);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+.about__more-panel p { margin: 0; }
+
 /* --- تأثيرات الدخول عند الظهور --- */
 .about__heading,
 .about__card {
