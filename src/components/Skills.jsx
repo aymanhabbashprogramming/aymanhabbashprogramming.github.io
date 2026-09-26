@@ -55,7 +55,9 @@ function SkillBlock({ title, skills, icon, index }) {
         <span className="skills__block-icon" aria-hidden="true">{icon}</span>
         <h3>{title}</h3>
       </div>
-      <ul>{skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+      <div className="skills__block-body">
+        <ul>{skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+      </div>
     </article>
   )
 }
@@ -82,8 +84,7 @@ function Skills() {
     <section ref={sectionRef} id="skills" className={`skills ${isVisible ? 'skills--visible' : ''}`} aria-labelledby="skills-title">
       <div className="skills__inner">
         <header className="skills__header">
-          <span className="skills__index" aria-hidden="true">02</span>
-          <h2 id="skills-title">{t.headings.skills}<span>.</span></h2>
+          <h2 id="skills-title">{t.headings.skills}</h2>
         </header>
 
         <p className="skills__intro">

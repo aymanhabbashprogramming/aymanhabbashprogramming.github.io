@@ -76,6 +76,7 @@ const cardsData = [
     title: 'Data Structures',
     description: 'Data structures are also an important part of my experience. I focus on choosing the right data type for each situation, and when needed, I build custom data types instead of relying only on ready-made ones. I applied this principle practically by building fundamental data structures from scratch in C++, including linked lists, dynamic arrays, stacks, and queues, among others.',
     badges: ['Custom Data Types', 'Memory Management', 'Algorithm Efficiency'],
+    wrapBadges: true,
     accent: 'sky'
   }
 ]
@@ -139,7 +140,7 @@ function AboutMe() {
               </div>
               <div className="about__card-body">
                 {card.badges && (
-                  <ul className="about__card-badges">
+                  <ul className={`about__card-badges ${card.wrapBadges ? 'about__card-badges--wrap' : ''}`}>
                     {card.badges.map((badge) => <li key={badge}>{badge}</li>)}
                   </ul>
                 )}
