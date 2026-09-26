@@ -1,15 +1,15 @@
 .featured-projects {
-  --background: #0b0f14;
-  --surface: #111820;
-  --text: #f1f5f9;
-  --muted: #94a3b8;
-  --sky: #38bdf8;
-  --violet: #a78bfa;
-  --border: #1e293b;
+  --background: #fafafa;
+  --surface: #ffffff;
+  --text: #0f172a;
+  --muted: #5b6472;
+  --sky: #2563eb;
+  --violet: #7c3aed;
+  --border: #dbe4f0;
   position: relative;
   overflow: hidden;
   /* تم تقليل الهوامش الجانبية لتوسيع المحتوى */
-  padding: clamp(88px, 12vw, 168px) clamp(20px, 4vw, 60px);
+  padding: clamp(24px, 3vw, 40px) clamp(20px, 4vw, 60px) clamp(88px, 12vw, 168px);
   background: var(--background);
 }
 
@@ -18,8 +18,16 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse 35% 22% at 15% 37%, rgb(56 189 248 / 6%), transparent 76%),
-              radial-gradient(ellipse 35% 24% at 88% 70%, rgb(167 139 250 / 6%), transparent 76%);
+  background: radial-gradient(ellipse 35% 22% at 15% 37%, rgb(37 99 235 / 6%), transparent 76%),
+              radial-gradient(ellipse 35% 24% at 88% 70%, rgb(124 58 237 / 6%), transparent 76%);
+}
+
+.featured-projects::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgb(37 99 235 / 12%), transparent) top / 100% 1px no-repeat;
 }
 
 /* تم إزالة max-width ليتمدد الإطار على كامل العرض */
@@ -34,254 +42,225 @@
   transition: opacity .7s ease, transform .7s cubic-bezier(.2, .65, .3, 1);
 }
 
-.featured-projects__index,
-.featured-projects__number {
-  color: var(--sky);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
-  letter-spacing: .13em;
-}
-
 .featured-projects h2 {
   margin: 0;
   color: var(--text);
-  font-size: clamp(30px, 2vw, 50px);
+  font-size: clamp(28px, 2vw, 46px);
   line-height: 1.1;
   letter-spacing: -.075em;
   word-spacing: .18em;
-  font-weight: 750;
-}
-.featured-projects h2 span { color: var(--sky); }
-
-/* --- الخط الزمني --- */
-.featured-projects__timeline {
-  position: relative;
-  margin-top: clamp(52px, 8vw, 88px);
-  padding: 4px 0;
+  font-weight: 620;
 }
 
-.featured-projects__timeline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  background: linear-gradient(to bottom,
-    transparent,
-    var(--sky) 4%,
-    var(--border) 18%,
-    var(--border) 84%,
-    var(--violet) 96%,
-    transparent);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 1.5s .15s cubic-bezier(.2, .65, .3, 1);
+/* --- شبكة المشاريع (تخطيط ماسونري) --- */
+.featured-projects__grid {
+  column-count: 3;
+  column-gap: clamp(20px, 2.5vw, 28px);
+  margin-top: clamp(40px, 6vw, 64px);
 }
 
-/* --- البطاقة والعناصر --- */
-.featured-projects__item {
-  position: relative;
-  /* زيادة المسافة بين العمودين لاستيعاب العرض الأوسع */
-  width: calc(50% - 70px);
-  min-height: 196px;
-  margin-bottom: 38px;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .68s calc(.11s * var(--project-index) + .15s) ease,
-              transform .68s calc(.11s * var(--project-index) + .15s) cubic-bezier(.2, .65, .3, 1);
-}
-
-.featured-projects__item:last-child { margin-bottom: 0; }
-.featured-projects__item--left { margin-right: auto; }
-.featured-projects__item--right { margin-left: auto; }
-
-/* خط الاتصال بين البطاقة والخط الزمني */
-.featured-projects__item::before {
-  content: '';
-  position: absolute;
-  top: 38px;
-  width: 70px;
-  height: 1px;
-  background: var(--border);
-}
-.featured-projects__item--left::before { right: -70px; }
-.featured-projects__item--right::before { left: -70px; }
-
-/* نقطة الاتصال */
-.featured-projects__node {
-  position: absolute;
-  z-index: 2;
-  top: 32px;
-  width: 13px;
-  height: 13px;
-  border: 2px solid var(--background);
-  border-radius: 50%;
-  background: var(--sky);
-  box-shadow: 0 0 0 1px var(--sky), 0 0 20px rgb(56 189 248 / 30%);
-}
-.featured-projects__item--left .featured-projects__node { right: -77px; }
-.featured-projects__item--right .featured-projects__node {
-  left: -77px;
-  background: var(--violet);
-  box-shadow: 0 0 0 1px var(--violet), 0 0 20px rgb(167 139 250 / 28%);
-}
-
-/* --- البطاقة الداخلية --- */
+/* --- البطاقة --- */
 .featured-projects__card {
   position: relative;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  min-height: 196px;
-  padding: 26px 27px 25px;
+  height: auto;
+  margin: 0 0 clamp(20px, 2.5vw, 28px);
   border: 1px solid var(--border);
-  background: linear-gradient(145deg, rgb(17 24 32 / 95%), rgb(11 15 20 / 90%));
-  box-shadow: inset 0 1px rgb(241 245 249 / 3%), 0 22px 42px rgb(0 0 0 / 14%);
-  transition: border-color .22s ease, transform .22s ease;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
+  break-inside: avoid;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .68s calc(.11s * var(--project-index) + .15s) ease,
+              transform .68s calc(.11s * var(--project-index) + .15s) cubic-bezier(.2, .65, .3, 1),
+              border-color .22s ease,
+              box-shadow .22s ease;
 }
 
 .featured-projects__card:hover {
-  border-color: rgb(56 189 248 / 62%);
-  transform: translateY(-3px);
+  border-color: rgb(37 99 235 / 45%);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 12%);
 }
 
-.featured-projects__number {
-  position: absolute;
-  top: 27px;
-  right: 26px;
-  color: rgb(148 163 184 / 50%);
-  font-size: 10px;
+/* --- الشريط العلوي (الأيقونة + اسم المشروع) --- */
+.featured-projects__card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px clamp(18px, 2.2vw, 24px);
+  background: rgb(37 99 235 / 8%);
 }
+
+.featured-projects__card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgb(37 99 235 / 12%);
+  border: 1px solid rgb(37 99 235 / 30%);
+  color: var(--sky);
+  flex-shrink: 0;
+}
+.featured-projects__card-icon svg { width: 16px; height: 16px; }
 
 .featured-projects h3 {
-  max-width: calc(100% - 36px);
   margin: 0;
   color: var(--text);
-  font-size: clamp(18px, 2vw, 22px);
-  line-height: 1.2;
-  letter-spacing: -.035em;
+  font-size: clamp(16px, 1.3vw, 19px);
+  line-height: 1.25;
+  letter-spacing: -.02em;
   font-weight: 650;
+}
+
+/* --- جسم البطاقة --- */
+.featured-projects__card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: clamp(18px, 2.2vw, 24px);
+}
+
+.featured-projects__badges-label {
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .01em;
 }
 
 .featured-projects__badges {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin: 18px 0 16px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .featured-projects__badges li {
-  padding: 4px 8px;
-  border: 1px solid rgb(56 189 248 / 35%);
+  padding: 4px 9px;
+  border: 1px solid rgb(37 99 235 / 35%);
   border-radius: 999px;
   color: var(--sky);
-  background: rgb(56 189 248 / 7%);
+  background: rgb(37 99 235 / 7%);
   font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   line-height: 1.2;
   letter-spacing: .01em;
 }
 
-.featured-projects__item--right .featured-projects__badges li {
-  border-color: rgb(167 139 250 / 35%);
-  color: var(--violet);
-  background: rgb(167 139 250 / 7%);
-}
-
-.featured-projects__card p {
+.featured-projects__card-body p {
   margin: 0;
   color: var(--muted);
   font-size: 14px;
   line-height: 1.7;
+  text-align: justify;
 }
 
-.featured-projects__repositories {
+/* --- الشريط السفلي (زر المستودع) --- */
+.featured-projects__card-foot {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
-  margin-top: 21px;
+  padding: 16px clamp(18px, 2.2vw, 24px);
+  background: rgb(37 99 235 / 8%);
 }
 
-.featured-projects__repositories a {
+.featured-projects__card-foot a {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 7px 9px;
-  border: 1px solid rgb(56 189 248 / 42%);
-  border-radius: 4px;
+  padding: 7px 12px;
+  border: 1px solid rgb(37 99 235 / 42%);
+  border-radius: 999px;
   color: var(--sky);
-  background: rgb(56 189 248 / 6%);
+  background: var(--surface);
   font-size: 12px;
   font-weight: 600;
   text-decoration: none;
   transition: transform .2s ease, border-color .2s ease, background .2s ease;
 }
 
-.featured-projects__repositories a:hover {
+.featured-projects__card-foot a:hover {
   border-color: var(--sky);
-  background: rgb(56 189 248 / 13%);
+  background: rgb(37 99 235 / 13%);
   transform: translateY(-2px);
 }
 
-.featured-projects__repositories svg {
+.featured-projects__card-foot svg {
   width: 15px;
   height: 15px;
   fill: currentColor;
 }
 
+.featured-projects__grid--more {
+  margin-top: clamp(20px, 2.5vw, 28px);
+}
+
+/* --- زر عرض المزيد --- */
+.featured-projects__more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: clamp(24px, 3vw, 36px);
+}
+
+.featured-projects__more-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border: 1px solid rgb(37 99 235 / 35%);
+  border-radius: 999px;
+  background: rgb(37 99 235 / 6%);
+  color: var(--sky);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.featured-projects__more-toggle:hover {
+  background: rgb(37 99 235 / 12%);
+  border-color: rgb(37 99 235 / 50%);
+}
+
+.featured-projects__more-chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease;
+}
+.featured-projects__more-chevron svg { width: 14px; height: 14px; }
+.featured-projects__more-chevron--up { transform: rotate(180deg); }
+
 /* --- حركات الظهور --- */
 .featured-projects--visible .featured-projects__header,
-.featured-projects--visible .featured-projects__item {
+.featured-projects--visible .featured-projects__card {
   opacity: 1;
   transform: translateY(0);
 }
-.featured-projects--visible .featured-projects__timeline::before {
-  transform: scaleY(1);
-}
 
 /* --- تعديلات الشاشات الصغيرة --- */
-@media (max-width: 720px) {
-  .featured-projects__timeline { padding-left: 38px; }
-  .featured-projects__timeline::before { left: 8px; }
-  .featured-projects__item,
-  .featured-projects__item--left,
-  .featured-projects__item--right {
-    width: 100%;
-    min-height: 0;
-    margin: 0 0 22px;
-  }
-  .featured-projects__item::before,
-  .featured-projects__item--left::before,
-  .featured-projects__item--right::before {
-    top: 35px;
-    right: auto;
-    left: -30px;
-    width: 30px;
-  }
-  .featured-projects__node,
-  .featured-projects__item--left .featured-projects__node,
-  .featured-projects__item--right .featured-projects__node {
-    top: 29px;
-    right: auto;
-    left: -36px;
-  }
-  .featured-projects__card { min-height: 0; padding: 23px 21px; }
-  .featured-projects__card p { font-size: 13px; line-height: 1.65; }
+@media (max-width: 900px) {
+  .featured-projects__grid { column-count: 2; }
+}
+
+@media (max-width: 560px) {
+  .featured-projects__grid { column-count: 1; column-gap: 18px; }
+  .featured-projects__card { margin-bottom: 18px; }
+  .featured-projects__card-body p { font-size: 13px; line-height: 1.65; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .featured-projects__header,
-  .featured-projects__item {
+  .featured-projects__card {
     opacity: 1;
     transform: none;
     transition: none;
   }
-  .featured-projects__timeline::before {
-    transform: scaleY(1);
-    transition: none;
-  }
-  .featured-projects__card:hover { transform: none; }
 }

@@ -7,53 +7,82 @@ const projects = [
     title: 'Pharmacy Management System',
     repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/PharmacyManagementSystem' }],
     badges: ['C#', 'SQL', '.NET Framework', '3-Layer Architecture'],
-    description: 'A structured pharmacy management system demonstrating practical experience in application development, database integration, and separation of Data Access, Business Logic, and Presentation layers.',
+    description: 'A pharmacy management system that handles users, suppliers, and patient records, allowing medications received by each patient to be tracked through a dedicated archive. The system also manages medication dispensing and sales through batches, prioritizing the sale of medications closest to their expiration date, in addition to issuing sales and purchase invoices.',
   },
   {
     title: 'POS / Inventory System',
     repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/POS-InventorySystem' }],
     badges: ['C#', 'SQL Server', 'Entity Framework', '3-Layer Architecture'],
-    description: 'A point-of-sale and inventory management system covering products, categories, customers, suppliers, purchasing, sales, inventory operations, and business logic.',
+    description: 'A sales and point-of-sale management system focused on tracking product movement in and out of inventory, with every sale or purchase linked to its own invoice. The system also manages supplier, customer, and user data within a single integrated structure.',
   },
   {
     title: 'Bank Management System',
     repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/BankManagementSystem' }],
     badges: ['C++', 'OOP', 'Software Design'],
-    description: 'A comprehensive banking system developed in C++, demonstrating object-oriented programming, classes, inheritance, data handling, and structured application design.',
+    description: 'A banking management system operating under a comprehensive permissions system, where each user’s allowed operations are defined across the system, including client management, transfers, user management, and login records. The system supports withdrawals, deposits, and transfers between client accounts, along with a dedicated screen for currency exchange rates and direct currency conversion operations.',
   },
   {
     title: 'Data Structures in C++',
     repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/Data-Structures-CPP' }],
-    badges: ['C++', 'Data Structures', 'Algorithms', 'Pointers'],
-    description: 'A C++ project implementing core data structures and algorithms from scratch, including linked lists, dynamic arrays, stacks, queues, and practical data-structure applications.',
+    badges: ['C++', 'Data Structures', 'Algorithms', 'Template Classes', 'Template Functions'],
+    description: 'A data structures project involving building core structures from scratch, such as doubly linked lists, dynamic arrays, queues, and stacks, using a template-based approach to make them usable with any data type. I applied these structures practically in an undo/redo system for text editing using the stack, and in another system simulating a real-world queue line that issues tickets and tracks served clients.',
   },
   {
-    title: 'ContactHub + ContactsDesktop',
+    title: 'ContactHub',
     repositories: [
       { label: 'ContactHub', url: 'https://github.com/aymanhabbashprogramming/ContactHub' },
       { label: 'ContactsDesktop', url: 'https://github.com/aymanhabbashprogramming/ContactsDesktop' },
     ],
-    badges: ['C#', 'SQL Server', 'ADO.NET', '3-Layer Architecture', 'Code Reusability'],
-    description: 'A two-project architecture demonstrating separation of Data Access, Business Logic, and Presentation layers. The existing Data Access and Business Logic layers were reused in a separate desktop application without rewriting the underlying code.',
+    badges: ['C#', 'SQL Server', 'ADO.NET', '3-Layer Architecture', 'DataTable', 'Console Application'],
+    description: 'A contact management system that manages countries and contacts, supporting add, update, delete, and search operations. The project applies a 3-tier architecture, where every operation flows clearly from the presentation layer to the business logic layer, then to the data access layer that executes against the database. Efficient queries were used throughout, such as existence-check queries instead of retrieving a full record just to confirm its presence, alongside using DataTable to organize and process query results.',
+  },
+  {
+    title: 'Image Processing System',
+    repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/ImageProcessingSystem' }],
+    badges: ['C#', 'Windows Forms', '.NET Framework', 'Krypton Toolkit', 'Pixel-Level Processing'],
+    description: 'An image processing application implementing 15 different operations manually, without relying on ready-made libraries, by working directly with the image’s pixel data. Each operation’s result is displayed in a separate area without altering the original image, with the ability to undo changes when needed.',
   },
 ]
 
+const moreProjects = [
+  {
+    title: 'ContactsDesktopPresentation',
+    repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/ContactsDesktop' }],
+    badges: ['C#', 'WinForms', '3-Layer Architecture', 'Code Reusability'],
+    description: 'A contacts management system with a WinForms interface, fully reusing the business logic and data access layers from the ContactHub project without duplicating any code, limiting the work in this project to the presentation layer only. This project demonstrates a practical application of the reusability principle within a 3-tier architecture.',
+  },
+  {
+    title: 'ContactsManager',
+    repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/ContactsManager' }],
+    badges: ['C#', 'ADO.NET', 'SQL Server'],
+    description: 'A contacts management system connected to a database, supporting the four core operations: create, read, update, and delete. The system supports searching in multiple ways, whether by first name, first name and country, or partial matching, along with the ability to delete a single contact or multiple contacts at once.',
+  },
+  {
+    title: 'Tic-Tac-Toe Game',
+    repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/Tic-Tac-Toe-Game' }],
+    badges: ['C#', 'Windows Forms', 'Graphics (GDI+)', 'Bitwise Operations'],
+    description: 'A Tic-Tac-Toe game with a WinForms interface, where the game board is drawn manually using Graphics instead of relying on ready-made buttons. The project represents each cell as a bit, comparing the player’s state against predefined binary patterns using bitwise operations to detect a win or draw quickly and efficiently, instead of manually checking every possible combination.',
+  },
+  {
+    title: 'Pizza Order App',
+    repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/PizzaProject' }],
+    badges: ['C#', 'Windows Forms'],
+    description: 'A pizza ordering application with a WinForms interface, allowing order customization through size, toppings, and crust type selection, with the total price calculated instantly as each option changes. The app displays a full order summary before confirmation, with the ability to cancel or reset the form entirely.',
+  },
+]
+
+const toLocalized = (list) => list.map(({ title, badges, description }) => ({ title, badges, description }))
+
 const localizedProjects = {
-  en: projects.map(({ title, badges, description }) => ({ title, badges, description })),
-  tr: [
-    { title: 'Eczane Yönetim Sistemi', badges: ['C#', 'SQL', '.NET Framework', '3 Katmanlı Mimari'], description: 'Uygulama geliştirme, veritabanı entegrasyonu ve Veri Erişimi, İş Mantığı ile Sunum katmanlarının ayrılması konularında pratik deneyim gösteren yapılandırılmış bir eczane yönetim sistemi.' },
-    { title: 'POS / Envanter Sistemi', badges: ['C#', 'SQL Server', 'Entity Framework', '3 Katmanlı Mimari'], description: 'Ürünler, kategoriler, müşteriler, tedarikçiler, satın alma, satış, envanter işlemleri ve iş mantığını kapsayan bir satış noktası ve envanter yönetim sistemi.' },
-    { title: 'Banka Yönetim Sistemi', badges: ['C++', 'OOP', 'Yazılım Tasarımı'], description: 'Nesne yönelimli programlama, sınıflar, kalıtım, veri işleme ve yapılandırılmış uygulama tasarımını gösteren C++ ile geliştirilmiş kapsamlı bir bankacılık sistemi.' },
-    { title: 'C++ ile Veri Yapıları', badges: ['C++', 'Veri Yapıları', 'Algoritmalar', 'İşaretçiler'], description: 'Bağlı listeler, dinamik diziler, yığınlar, kuyruklar ve pratik veri yapısı uygulamaları dahil temel veri yapıları ile algoritmaları sıfırdan uygulayan bir C++ projesi.' },
-    { title: 'ContactHub + ContactsDesktop', badges: ['C#', 'SQL Server', 'ADO.NET', '3 Katmanlı Mimari', 'Kodun Yeniden Kullanımı'], description: 'Veri Erişimi, İş Mantığı ve Sunum katmanlarının ayrımını gösteren iki projeli mimari. Mevcut Veri Erişimi ve İş Mantığı katmanları, temel kod yeniden yazılmadan ayrı bir masaüstü uygulamasında yeniden kullanılmıştır.' },
-  ],
-  ar: [
-    { title: 'نظام إدارة الصيدلية', badges: ['C#', 'SQL', '.NET Framework', 'معمارية ثلاثية الطبقات'], description: 'نظام منظم لإدارة الصيدلية يوضح خبرة عملية في تطوير التطبيقات وتكامل قواعد البيانات وفصل طبقات الوصول إلى البيانات ومنطق الأعمال وواجهة العرض.' },
-    { title: 'نظام نقاط البيع والمخزون', badges: ['C#', 'SQL Server', 'Entity Framework', 'معمارية ثلاثية الطبقات'], description: 'نظام لنقاط البيع وإدارة المخزون يغطي المنتجات والفئات والعملاء والموردين والمشتريات والمبيعات وعمليات المخزون ومنطق الأعمال.' },
-    { title: 'نظام إدارة البنك', badges: ['C++', 'البرمجة كائنية التوجه', 'تصميم البرمجيات'], description: 'نظام مصرفي شامل طُوّر باستخدام C++، يوضح البرمجة كائنية التوجه والفئات والوراثة ومعالجة البيانات وتصميم التطبيقات المنظم.' },
-    { title: 'هياكل البيانات في C++', badges: ['C++', 'هياكل البيانات', 'الخوارزميات', 'المؤشرات'], description: 'مشروع C++ ينفذ هياكل البيانات والخوارزميات الأساسية من الصفر، بما فيها القوائم المرتبطة والمصفوفات الديناميكية والمكدسات والطوابير وتطبيقات عملية لهياكل البيانات.' },
-    { title: 'ContactHub + ContactsDesktop', badges: ['C#', 'SQL Server', 'ADO.NET', 'معمارية ثلاثية الطبقات', 'إعادة استخدام الكود'], description: 'معمارية من مشروعين توضح فصل طبقات الوصول إلى البيانات ومنطق الأعمال وواجهة العرض. أُعيد استخدام طبقتي الوصول إلى البيانات ومنطق الأعمال الموجودتين في تطبيق سطح مكتب منفصل دون إعادة كتابة الكود الأساسي.' },
-  ],
+  en: toLocalized(projects),
+  tr: toLocalized(projects),
+  ar: toLocalized(projects),
+}
+
+const localizedMoreProjects = {
+  en: toLocalized(moreProjects),
+  tr: toLocalized(moreProjects),
+  ar: toLocalized(moreProjects),
 }
 
 function GitHubIcon() {
@@ -64,10 +93,54 @@ function GitHubIcon() {
   )
 }
 
-function FeaturedProjects({ items = projects }) {
+function ProjectIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="4" width="18" height="16" rx="2" />
+      <path d="M3 9h18" />
+      <path d="M8 4v-1M16 4v-1" />
+    </svg>
+  )
+}
+
+function ChevronIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 9l6 6 6-6" />
+    </svg>
+  )
+}
+
+function ProjectCard({ project, localized, index, viewRepositoryLabel }) {
+  return (
+    <article className="featured-projects__card" style={{ '--project-index': index }}>
+      <div className="featured-projects__card-head">
+        <span className="featured-projects__card-icon" aria-hidden="true"><ProjectIcon /></span>
+        <h3>{localized.title}</h3>
+      </div>
+      <div className="featured-projects__card-body">
+        <span className="featured-projects__badges-label">Technologies and concepts used:</span>
+        <ul className="featured-projects__badges" aria-label={`${localized.title} technologies`}>
+          {localized.badges.map((badge) => <li key={badge}>{badge}</li>)}
+        </ul>
+        <p>{localized.description}</p>
+      </div>
+      <div className="featured-projects__card-foot">
+        {project.repositories.map((repository) => (
+          <a href={repository.url} target="_blank" rel="noopener noreferrer" key={repository.url}>
+            <GitHubIcon /> {repository.label === 'View Repository' ? viewRepositoryLabel : repository.label}
+          </a>
+        ))}
+      </div>
+    </article>
+  )
+}
+
+function FeaturedProjects({ items = projects, extraItems = moreProjects }) {
   const { t, language } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [showMore, setShowMore] = useState(false)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -86,34 +159,48 @@ function FeaturedProjects({ items = projects }) {
     <section ref={sectionRef} id="projects" className={`featured-projects ${isVisible ? 'featured-projects--visible' : ''}`} aria-labelledby="featured-projects-title">
       <div className="featured-projects__inner">
         <header className="featured-projects__header">
-          <span className="featured-projects__index" aria-hidden="true">03</span>
-          <h2 id="featured-projects-title">{t.headings.featured}<span>.</span></h2>
+          <h2 id="featured-projects-title">{t.headings.featured}</h2>
         </header>
 
-        <div className="featured-projects__timeline">
-          {items.map((project, index) => {
-            const localized = localizedProjects[language][index]
-            return (
-            <article className={`featured-projects__item featured-projects__item--${index % 2 === 0 ? 'left' : 'right'}`} style={{ '--project-index': index }} key={project.title}>
-              <span className="featured-projects__node" aria-hidden="true" />
-              <div className="featured-projects__card">
-                <span className="featured-projects__number" aria-hidden="true">0{index + 1}</span>
-                <h3>{localized.title}</h3>
-                <ul className="featured-projects__badges" aria-label={`${localized.title} technologies`}>
-                  {localized.badges.map((badge) => <li key={badge}>{badge}</li>)}
-                </ul>
-                <p>{localized.description}</p>
-                <div className="featured-projects__repositories">
-                  {project.repositories.map((repository) => (
-                    <a href={repository.url} target="_blank" rel="noopener noreferrer" key={repository.url}>
-                      <GitHubIcon /> {repository.label === 'View Repository' ? t.common.viewRepository : repository.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </article>
-            )
-          })}
+        <div className="featured-projects__grid">
+          {items.map((project, index) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              localized={localizedProjects[language][index]}
+              index={index}
+              viewRepositoryLabel={t.common.viewRepository}
+            />
+          ))}
+        </div>
+
+        <div className="featured-projects__more">
+          <button
+            type="button"
+            className="featured-projects__more-toggle"
+            aria-expanded={showMore}
+            aria-controls="featured-projects-more-panel"
+            onClick={() => setShowMore((prev) => !prev)}
+          >
+            {showMore ? 'Show Less' : 'Show More Projects'}
+            <span className={`featured-projects__more-chevron ${showMore ? 'featured-projects__more-chevron--up' : ''}`} aria-hidden="true">
+              <ChevronIcon />
+            </span>
+          </button>
+
+          {showMore && (
+            <div id="featured-projects-more-panel" className="featured-projects__grid featured-projects__grid--more">
+              {extraItems.map((project, index) => (
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  localized={localizedMoreProjects[language][index]}
+                  index={index}
+                  viewRepositoryLabel={t.common.viewRepository}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

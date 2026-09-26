@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import './Skills.css'
-import { useLanguage } from '../i18n/LanguageContext'
 
 /* --- أيقونات SVG --- */
 const CodeIcon = () => (
@@ -40,11 +39,17 @@ const WrenchIcon = () => (
   </svg>
 )
 
+const ChevronIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+)
+
 const mainTrack = [
   { title: 'Languages', skills: ['C++', 'C#'], icon: <CodeIcon /> },
   { title: 'Database', skills: ['SQL', 'SQL Server', 'ADO.NET'], icon: <DatabaseIcon /> },
   { title: '.NET Development', skills: ['.NET Framework', 'WinForms', 'Entity Framework'], icon: <LayersIcon /> },
-  { title: 'Software Engineering', skills: ['OOP', 'Layered Architecture (3-Layer)', 'Data Structures & Algorithms', 'Software Design Principles'], icon: <BlueprintIcon /> },
+  { title: 'Software Design Concepts', skills: ['OOP', 'Layered Architecture (3-Layer)', 'Data Structures & Algorithms', 'Software Design Principles'], icon: <BlueprintIcon /> },
   { title: 'Tools', skills: ['Git', 'GitHub', 'Visual Studio'], icon: <WrenchIcon /> },
 ]
 
@@ -63,9 +68,9 @@ function SkillBlock({ title, skills, icon, index }) {
 }
 
 function Skills() {
-  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [showMore, setShowMore] = useState(false)
 
   useEffect(() => {
     const section = sectionRef.current
@@ -84,15 +89,36 @@ function Skills() {
     <section ref={sectionRef} id="skills" className={`skills ${isVisible ? 'skills--visible' : ''}`} aria-labelledby="skills-title">
       <div className="skills__inner">
         <header className="skills__header">
-          <h2 id="skills-title">{t.headings.skills}</h2>
+          <h2 id="skills-title">My Technical Skills and Foundations</h2>
         </header>
 
         <p className="skills__intro">
-          Using these technologies, I've built multiple structured management systems, including inventory management, banking systems, and pharmacy management, primarily in C# and C++.
+          Using these technologies, I&apos;ve built multiple structured software systems, and continue to expand my skill set.
         </p>
 
         <div className="skills__blocks">
           {mainTrack.map((block, index) => <SkillBlock {...block} index={index} key={block.title} />)}
+        </div>
+
+        <div className="skills__more">
+          <button
+            type="button"
+            className="skills__more-toggle"
+            aria-expanded={showMore}
+            aria-controls="skills-more-panel"
+            onClick={() => setShowMore((prev) => !prev)}
+          >
+            {showMore ? 'Show Less' : 'Show More Skills'}
+            <span className={`skills__more-chevron ${showMore ? 'skills__more-chevron--up' : ''}`} aria-hidden="true">
+              <ChevronIcon />
+            </span>
+          </button>
+
+          {showMore && (
+            <div id="skills-more-panel" className="skills__more-panel">
+              <p>More skills coming soon.</p>
+            </div>
+          )}
         </div>
       </div>
     </section>
