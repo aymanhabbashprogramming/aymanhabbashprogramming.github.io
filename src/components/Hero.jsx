@@ -57,12 +57,12 @@ function Hero({ name = 'MOHAMMED AYMAN HABBASH', role = 'Software Developer | C+
             </span>
           </p>
           <p className="hero__description">
-            {t.hero.description}
+            Computer Engineering student at Selçuk University, with a strong specialization in C++, C#, and SQL. I have designed and built multiple structured software systems, including pharmacy management, point-of-sale, and banking applications, applying layered architecture and solid software design principles throughout the full development lifecycle.
           </p>
         </section>
 
         <aside className="hero__panel" aria-label="Profile summary">
-          <p id="hero-title" className="hero__panel-name">{name}<span className="hero__period">.</span></p>
+          <p id="hero-title" className="hero__panel-name">{name}</p>
 
           <div className="hero__avatar">
             <ProfileIcon />
