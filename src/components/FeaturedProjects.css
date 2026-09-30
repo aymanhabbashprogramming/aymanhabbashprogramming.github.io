@@ -6,10 +6,10 @@
   --sky: #2563eb;
   --violet: #7c3aed;
   --border: #dbe4f0;
-  position: relative;
   overflow: hidden;
   /* تم تقليل الهوامش الجانبية لتوسيع المحتوى */
-  padding: clamp(24px, 3vw, 40px) clamp(20px, 4vw, 60px) clamp(88px, 12vw, 168px);
+  padding-left: clamp(20px, 4vw, 60px);
+  padding-right: clamp(20px, 4vw, 60px);
   background: var(--background);
 }
 
@@ -20,14 +20,6 @@
   pointer-events: none;
   background: radial-gradient(ellipse 35% 22% at 15% 37%, rgb(37 99 235 / 6%), transparent 76%),
               radial-gradient(ellipse 35% 24% at 88% 70%, rgb(124 58 237 / 6%), transparent 76%);
-}
-
-.featured-projects::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(90deg, transparent, rgb(37 99 235 / 12%), transparent) top / 100% 1px no-repeat;
 }
 
 /* تم إزالة max-width ليتمدد الإطار على كامل العرض */
@@ -52,10 +44,12 @@
   font-weight: 620;
 }
 
-/* --- شبكة المشاريع (تخطيط ماسونري) --- */
+/* --- شبكة المشاريع --- */
 .featured-projects__grid {
-  column-count: 3;
-  column-gap: clamp(20px, 2.5vw, 28px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(20px, 2.5vw, 28px);
   margin-top: clamp(40px, 6vw, 64px);
 }
 
@@ -64,14 +58,12 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  height: auto;
-  margin: 0 0 clamp(20px, 2.5vw, 28px);
+  height: 100%;
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
   background: var(--surface);
   box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
-  break-inside: avoid;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .68s calc(.11s * var(--project-index) + .15s) ease,
@@ -94,19 +86,14 @@
   background: rgb(37 99 235 / 8%);
 }
 
+/* أيقونة بلا صندوق مربّع خلفها، تجلس مباشرة على الشريط العلوي */
 .featured-projects__card-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: rgb(37 99 235 / 12%);
-  border: 1px solid rgb(37 99 235 / 30%);
-  color: var(--sky);
-  flex-shrink: 0;
+  width: auto;
+  height: auto;
+  background: none;
+  border: none;
+  border-radius: 0;
 }
-.featured-projects__card-icon svg { width: 16px; height: 16px; }
 
 .featured-projects h3 {
   margin: 0;
@@ -120,36 +107,11 @@
 /* --- جسم البطاقة --- */
 .featured-projects__card-body {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
+  align-items: flex-start;
   gap: 12px;
   padding: clamp(18px, 2.2vw, 24px);
-}
-
-.featured-projects__badges-label {
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: .01em;
-}
-
-.featured-projects__badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.featured-projects__badges li {
-  padding: 4px 9px;
-  border: 1px solid rgb(37 99 235 / 35%);
-  border-radius: 999px;
-  color: var(--sky);
-  background: rgb(37 99 235 / 7%);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  line-height: 1.2;
-  letter-spacing: .01em;
 }
 
 .featured-projects__card-body p {
@@ -194,10 +156,6 @@
   width: 15px;
   height: 15px;
   fill: currentColor;
-}
-
-.featured-projects__grid--more {
-  margin-top: clamp(20px, 2.5vw, 28px);
 }
 
 /* --- زر عرض المزيد --- */
@@ -247,12 +205,11 @@
 
 /* --- تعديلات الشاشات الصغيرة --- */
 @media (max-width: 900px) {
-  .featured-projects__grid { column-count: 2; }
+  .featured-projects__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 560px) {
-  .featured-projects__grid { column-count: 1; column-gap: 18px; }
-  .featured-projects__card { margin-bottom: 18px; }
+  .featured-projects__grid { grid-template-columns: 1fr; gap: 18px; }
   .featured-projects__card-body p { font-size: 13px; line-height: 1.65; }
 }
 

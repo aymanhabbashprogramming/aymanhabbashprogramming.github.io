@@ -42,18 +42,18 @@ function UniversityIcon() {
 function Hero({ name = 'MOHAMMED AYMAN HABBASH', role = 'Software Developer | C++ • C# • SQL' }) {
   const { t } = useLanguage()
   return (
-    <main className="hero" aria-labelledby="hero-title">
+    <main className="hero site-section" aria-labelledby="hero-title">
       <div className="hero__glow hero__glow--blue" />
       <div className="hero__glow hero__glow--violet" />
 
       <div className="hero__layout">
         <section className="hero__content hero__panel--card" id="top">
           <p className="hero__role">
-            <span className="hero__role-badges">
-              <span className="hero__role-badge hero__role-badge--violet">{(t.hero.role || role).split('|')[0].trim()}</span>
-              <span className="hero__role-badge">C++</span>
-              <span className="hero__role-badge">C#</span>
-              <span className="hero__role-badge">SQL</span>
+            <span className="hero__role-badges site-badge-list">
+              <span className="site-badge hero__role-badge--violet">{(t.hero.role || role).split('|')[0].trim()}</span>
+              <span className="site-badge">C++</span>
+              <span className="site-badge">C#</span>
+              <span className="site-badge">SQL</span>
             </span>
           </p>
           <p className="hero__description">

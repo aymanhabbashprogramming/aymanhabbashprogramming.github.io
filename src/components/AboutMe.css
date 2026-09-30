@@ -6,13 +6,12 @@
   --sky: #2563eb;
   --violet: #7c3aed;
   --border: #dbe4f0;
-  position: relative;
   overflow: hidden;
-  padding: clamp(24px, 3vw, 40px) clamp(20px, 4vw, 60px) clamp(40px, 5vw, 72px);
+  padding-left: clamp(20px, 4vw, 60px);
+  padding-right: clamp(20px, 4vw, 60px);
   background: var(--background);
 }
 
-.about::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, transparent, rgb(37 99 235 / 12%), transparent) top / 100% 1px no-repeat; }
 .about::after { content: ''; position: absolute; right: -15%; bottom: -35%; width: min(680px, 60vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(124 58 237 / 6%), transparent 67%); pointer-events: none; }
 .about__frame { position: relative; z-index: 1; width: 100%; margin: 0 auto; }
 
@@ -115,25 +114,18 @@
 }
 
 .about__card-icon {
-  width: 44px;
-  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border-radius: 10px;
-  transition: all 0.35s ease;
+  transition: transform 0.35s ease;
 }
 
 .about__card--sky .about__card-icon {
-  background: rgb(37 99 235 / 12%);
-  border: 1px solid rgb(37 99 235 / 30%);
   color: var(--sky);
 }
 
 .about__card--violet .about__card-icon {
-  background: rgb(124 58 237 / 12%);
-  border: 1px solid rgb(124 58 237 / 30%);
   color: var(--violet);
 }
 
@@ -242,8 +234,7 @@
 .about__more-chevron--up { transform: rotate(180deg); }
 
 .about__more-panel {
-  width: 100%;
-  margin-top: 20px;
+  grid-column: 1 / -1;
   padding: clamp(20px, 2.5vw, 28px);
   border: 1px dashed var(--border);
   border-radius: 12px;
@@ -292,11 +283,6 @@
 
   .about__card-body {
     padding: 20px;
-  }
-
-  .about__card-icon {
-    width: 40px;
-    height: 40px;
   }
 }
 

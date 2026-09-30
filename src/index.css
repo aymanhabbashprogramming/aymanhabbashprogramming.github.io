@@ -5,6 +5,86 @@ html { scroll-behavior: smooth; background: #0b0f14; }
 body { margin: 0; min-width: 320px; background: #0b0f14; font-family: Inter, sans-serif; }
 #root { min-height: 100svh; }
 
+/*
+  Shared vertical rhythm for page sections.
+  --section-padding-y is the single source of truth for the space above and
+  below every section's content, and .site-section is the single source of
+  truth for that spacing.
+
+  Any new section should add the .site-section class (instead of defining its
+  own top/bottom padding) so spacing stays consistent automatically as
+  sections are added, removed, or reordered. If the section should be
+  separated from the one above it by a divider line, also add
+  .site-section--divided (every section except the very first one on the
+  page). This is a plain border-top rather than a ::before pseudo-element
+  because several sections already use ::before/::after for their own
+  decorative background glow, and a pseudo-element here would silently lose
+  that fight instead of erroring.
+*/
+:root {
+  --section-padding-y: clamp(2rem, 4vw, 3.5rem);
+}
+
+.site-section {
+  position: relative;
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+.site-section--divided {
+  border-top: 1px solid rgb(37 99 235 / 12%);
+}
+
+/*
+  Shared badge (tech-tag pill) and card icon-box styling, taken from
+  "What My Development Experience Includes" (.about__card-badges li /
+  .about__card-icon), so every badge and icon box on the site looks
+  identical. Apply .site-badge to each <li> in a badge list and .site-badge-list
+  to its wrapping <ul>/<ol> (wraps naturally, never truncates). Apply
+  .site-icon-box to the tinted square that sits beside a card/block title,
+  and pass an inline SVG as its only child.
+*/
+.site-badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-badge {
+  padding: 4px 7px;
+  border: 1px solid rgb(37 99 235 / 35%);
+  border-radius: 999px;
+  background: rgb(37 99 235 / 7%);
+  color: #2563eb;
+  font-family: Inter, sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.site-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgb(37 99 235 / 12%);
+  border: 1px solid rgb(37 99 235 / 30%);
+  color: #2563eb;
+}
+
+.site-icon-box svg {
+  width: 22px;
+  height: 22px;
+}
+
 html[dir='rtl'] .site-navigation__links,
 html[dir='rtl'] .hero__actions,
 html[dir='rtl'] .featured-projects__repositories,

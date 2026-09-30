@@ -112,7 +112,7 @@ function AboutMe() {
     <section
       ref={sectionRef}
       id="about"
-      className={`about ${isVisible ? 'about--visible' : ''}`}
+      className={`about site-section site-section--divided ${isVisible ? 'about--visible' : ''}`}
       aria-labelledby="about-title"
     >
       <div className="about__frame">
@@ -123,7 +123,7 @@ function AboutMe() {
           </p>
         </div>
 
-        <div className="about__grid">
+        <div className="about__grid" id="about-grid">
           {cardsData.map((card, index) => {
             const localized = localizedCards[language][index]
             return (
@@ -149,6 +149,12 @@ function AboutMe() {
             </article>
             )
           })}
+
+          {showMore && (
+            <div className="about__more-panel">
+              <p>More skills coming soon.</p>
+            </div>
+          )}
         </div>
 
         <div className="about__more">
@@ -156,7 +162,7 @@ function AboutMe() {
             type="button"
             className="about__more-toggle"
             aria-expanded={showMore}
-            aria-controls="about-more-panel"
+            aria-controls="about-grid"
             onClick={() => setShowMore((prev) => !prev)}
           >
             {showMore ? 'Show Less' : 'Show More Skills'}
@@ -164,12 +170,6 @@ function AboutMe() {
               <ChevronIcon />
             </span>
           </button>
-
-          {showMore && (
-            <div id="about-more-panel" className="about__more-panel">
-              <p>More skills coming soon.</p>
-            </div>
-          )}
         </div>
       </div>
     </section>

@@ -57,11 +57,11 @@ function SkillBlock({ title, skills, icon, index }) {
   return (
     <article className="skills__block" style={{ '--block-index': index }}>
       <div className="skills__block-header">
-        <span className="skills__block-icon" aria-hidden="true">{icon}</span>
+        <span className="site-icon-box skills__block-icon" aria-hidden="true">{icon}</span>
         <h3>{title}</h3>
       </div>
       <div className="skills__block-body">
-        <ul>{skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
+        <ul className="site-badge-list">{skills.map((skill) => <li className="site-badge" key={skill}>{skill}</li>)}</ul>
       </div>
     </article>
   )
@@ -86,7 +86,7 @@ function Skills() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="skills" className={`skills ${isVisible ? 'skills--visible' : ''}`} aria-labelledby="skills-title">
+    <section ref={sectionRef} id="skills" className={`skills site-section site-section--divided ${isVisible ? 'skills--visible' : ''}`} aria-labelledby="skills-title">
       <div className="skills__inner">
         <header className="skills__header">
           <h2 id="skills-title">My Technical Skills and Foundations</h2>
@@ -96,8 +96,14 @@ function Skills() {
           Using these technologies, I&apos;ve built multiple structured software systems, and continue to expand my skill set.
         </p>
 
-        <div className="skills__blocks">
+        <div className="skills__blocks" id="skills-blocks">
           {mainTrack.map((block, index) => <SkillBlock {...block} index={index} key={block.title} />)}
+
+          {showMore && (
+            <div className="skills__more-panel">
+              <p>More skills coming soon.</p>
+            </div>
+          )}
         </div>
 
         <div className="skills__more">
@@ -105,7 +111,7 @@ function Skills() {
             type="button"
             className="skills__more-toggle"
             aria-expanded={showMore}
-            aria-controls="skills-more-panel"
+            aria-controls="skills-blocks"
             onClick={() => setShowMore((prev) => !prev)}
           >
             {showMore ? 'Show Less' : 'Show More Skills'}
@@ -113,12 +119,6 @@ function Skills() {
               <ChevronIcon />
             </span>
           </button>
-
-          {showMore && (
-            <div id="skills-more-panel" className="skills__more-panel">
-              <p>More skills coming soon.</p>
-            </div>
-          )}
         </div>
       </div>
     </section>

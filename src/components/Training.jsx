@@ -36,11 +36,10 @@ function Training({ items = entries }) {
   }, [])
 
   return (
-    <section ref={sectionRef} id="training" className={`training ${isVisible ? 'training--visible' : ''}`} aria-labelledby="training-title">
+    <section ref={sectionRef} id="training" className={`training site-section site-section--divided ${isVisible ? 'training--visible' : ''}`} aria-labelledby="training-title">
       <div className="training__inner">
         <header className="training__header">
-          <span className="training__index" aria-hidden="true">06</span>
-          <h2 id="training-title">{t.headings.training}<span>.</span></h2>
+          <h2 id="training-title">Training and Professional Development</h2>
         </header>
         <div className="training__timeline">
           {items.map((entry, index) => (
