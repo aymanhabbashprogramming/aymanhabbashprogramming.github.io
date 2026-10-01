@@ -3,6 +3,7 @@ import AboutMe from './components/AboutMe'
 import Skills from './components/Skills'
 import FeaturedProjects from './components/FeaturedProjects'
 import Training from './components/Training'
+import Footer from './components/Footer'
 import SiteNavigation from './components/SiteNavigation'
 import { LanguageProvider } from './i18n/LanguageContext'
 
@@ -15,6 +16,7 @@ function App() {
       <Skills />
       <FeaturedProjects />
       <Training />
+      <Footer />
     </LanguageProvider>
   )
 }
