@@ -91,7 +91,7 @@
 .hero__github svg { width: 17px; height: 17px; fill: currentColor; }
 .hero__github:hover { background: var(--sky); color: var(--background); }
 
-#about, #skills, #projects, #training, #certificates { scroll-margin-top: 84px; }
+#about, #skills, #projects, #training { scroll-margin-top: 84px; }
 
 @keyframes hero-enter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
 @keyframes pulse { 50% { box-shadow: 0 0 0 7px rgb(56 189 248 / 0%); } }

@@ -19,7 +19,6 @@ function SiteNavigation({ name = 'MOHAMMED AYMAN HABBASH' }) {
         <a href="#skills">{t.nav.skills}</a>
         <a href="#projects">{t.nav.projects}</a>
         <a href="#training">{t.nav.training}</a>
-        <a href="#certificates">{t.nav.certificates}</a>
         <select className="site-navigation__language" value={language} onChange={(event) => setLanguage(event.target.value)} aria-label={t.nav.language}>
           <option value="en">EN</option><option value="tr">TR</option><option value="ar">AR</option>
         </select>
