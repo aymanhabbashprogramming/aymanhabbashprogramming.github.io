@@ -2,10 +2,126 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 const translations = {
-  en: { nav: { about: 'Experience', skills: 'Tech Stack', projects: 'Projects', training: 'Training', certificates: 'Certificates', language: 'Language' }, hero: { greeting: 'Hello, I’m', role: 'Software Developer | C++ • C# • SQL', description: 'Computer Engineering student at Selçuk University, with a strong specialization in C++, C#, and SQL/SQL Server, built through intensive structured training and hands-on project development. I have designed and built multiple structured software systems — including pharmacy management, point-of-sale, and banking applications — applying layered architecture and solid software design principles across the full development lifecycle. I am continuously expanding my technical range while maintaining a deep foundation in the fundamentals of software engineering.', focusLabel: 'CURRENTLY FOCUSED ON', focus: 'Building with intent.' }, headings: { about: 'What My Development Experience Includes', skills: 'My Technical Stack & Foundations', featured: 'Featured Projects', other: 'Other Projects', education: 'Education', training: 'Training & Professional Development', achievements: 'Achievements & Certifications' }, common: { viewRepository: 'View Repository', viewCertificate: 'View Certificate', course: 'Course', certificatesIntro: 'Certificates obtained for the completed courses within the structured programming and software development training path.', completed: 'Completed', upcoming: 'Upcoming', currentStudent: 'Current Student', currentlyPursuing: 'CURRENTLY PURSUING' } },
-  tr: { nav: { about: 'Deneyim', skills: 'Teknolojiler', projects: 'Projeler', training: 'Eğitim', certificates: 'Sertifikalar', language: 'Dil' }, hero: { greeting: 'Merhaba, ben', role: 'Yazılım Geliştirici | C++ • C# • SQL', description: 'Selçuk Üniversitesi Bilgisayar Mühendisliği öğrencisiyim. Yoğun ve yapılandırılmış eğitim ile uygulamalı proje geliştirme sayesinde C++, C# ve SQL/SQL Server alanlarında güçlü bir uzmanlık kazandım. Eczane yönetimi, satış noktası ve bankacılık uygulamaları dahil olmak üzere katmanlı mimari ve sağlam yazılım tasarım ilkelerini kullanarak çeşitli yazılım sistemleri tasarladım ve geliştirdim. Yazılım mühendisliğinin temellerindeki derin altyapımı korurken teknik yetkinliklerimi sürekli genişletiyorum.', focusLabel: 'ŞU ANDA ODAKLANDIĞIM', focus: 'Amaçla geliştirmek.' }, headings: { about: 'Geliştirme Deneyimim Neleri Kapsıyor', skills: 'Teknik Altyapım ve Temellerim', featured: 'Öne Çıkan Projeler', other: 'Diğer Projeler', education: 'Eğitim', training: 'Eğitim ve Profesyonel Gelişim', achievements: 'Başarılar ve Sertifikalar' }, common: { viewRepository: 'Depoyu Görüntüle', viewCertificate: 'Sertifikayı Görüntüle', course: 'Kurs', certificatesIntro: 'Yapılandırılmış programlama ve yazılım geliştirme eğitim yolundaki tamamlanmış kurslar için alınan sertifikalar.', completed: 'Tamamlandı', upcoming: 'Yaklaşan', currentStudent: 'Mevcut Öğrenci', currentlyPursuing: 'HALEN DEVAM EDİYOR' } },
-  ar: { nav: { about: 'الخبرة', skills: 'التقنيات', projects: 'المشاريع', training: 'التدريب', certificates: 'الشهادات', language: 'اللغة' }, hero: { greeting: 'مرحبًا، أنا', role: 'مطوّر برمجيات | C++ • C# • SQL', description: 'أنا طالب هندسة حاسوب في جامعة سلجوق، مع تخصص قوي في C++ وC# وSQL/SQL Server، اكتسبته من خلال تدريب مكثف ومنهجي وتطوير مشاريع عملية. صممت وبنيت عدة أنظمة برمجية منظمة، منها إدارة الصيدليات ونقاط البيع والتطبيقات المصرفية، مع تطبيق المعمارية الطبقية ومبادئ تصميم البرمجيات السليمة خلال دورة التطوير الكاملة. أواصل توسيع نطاقي التقني مع الحفاظ على أساس عميق في مبادئ هندسة البرمجيات.', focusLabel: 'أركز حاليًا على', focus: 'البناء بهدف واضح.' }, headings: { about: 'ما تتضمنه خبرتي في التطوير', skills: 'بنيتي التقنية وأساسياتي', featured: 'المشاريع المميزة', other: 'مشاريع أخرى', education: 'التعليم', training: 'التدريب والتطوير المهني', achievements: 'الإنجازات والشهادات' }, common: { viewRepository: 'عرض المستودع', viewCertificate: 'عرض الشهادة', course: 'الدورة', certificatesIntro: 'شهادات تم الحصول عليها للدورات المكتملة ضمن مسار التدريب المنهجي في البرمجة وتطوير البرمجيات.', completed: 'مكتمل', upcoming: 'قادم', currentStudent: 'طالب حالي', currentlyPursuing: 'أدرس حاليًا' } },
+  en: {
+    nav: { home: 'Home', about: 'Core Skills', skills: 'Tech Stack', projects: 'Projects', training: 'Training', certificates: 'Certificates', language: 'Language', backToTop: 'Back to top' },
+    hero: {
+      name: 'Mohammed Ayman Habbash',
+      uniName: 'Selçuk University',
+      uniDept: 'Computer Engineering',
+      uniLogoAlt: 'Selçuk University logo',
+      description: 'Computer Engineering student at Selçuk University, with a strong specialization in C++, C#, and SQL. I have designed and built multiple structured software systems, including pharmacy management, point-of-sale, and banking applications, applying layered architecture and solid software design principles throughout the full development lifecycle.',
+      profileName: 'Mohammed Ayman Habbash',
+      role: 'Software Developer',
+      tech: 'C++ | C# | SQL',
+      github: 'View My GitHub',
+    },
+    skillsIntro: "Using these technologies, I've built multiple structured software systems, and continue to expand my skill set.",
+    headings: { about: 'What My Development Experience Includes', skills: 'Technical Skills and Foundations', featured: 'Featured Projects', other: 'Other Projects', education: 'Education', training: 'Training & Professional Development', achievements: 'Achievements & Certifications' },
+    about: {
+      intro: 'Using the skills and tools shown below, I build solid, well-organized software projects that are easy to maintain and extend. As I learn new skills, I continue to apply this same approach to keep improving the quality and efficiency of my projects.',
+      showMore: 'Show More Skills',
+      showLess: 'Show Less',
+      cards: [
+        { title: 'Layered Architecture', description: 'As part of my development experience, I structure code into three layers: Data Access, Business Logic, and Presentation. This makes project files easier to organize, simplifies maintenance later on, and makes it easier to trace and fix errors.', badges: ['Data Access', 'Business Logic', 'Presentation'] },
+        { title: 'Object-Oriented Programming', description: 'Object-oriented programming is a core part of how I write code. I separate different entities by creating independent classes for each one, applying the principles of abstraction, encapsulation, and inheritance, and defining the appropriate access level for each property or method, whether public, private, or protected. I applied these concepts practically by building a banking management system in C++.', badges: ['Encapsulation', 'Inheritance', 'Abstraction'] },
+        { title: 'Database Integration', description: 'As part of my experience with databases, I have worked with ADO.NET across multiple projects, always focusing on writing efficient queries, since query performance matters as much as the query itself. I have also worked with Entity Framework in other projects, drawing on my solid understanding of relational databases and object-oriented programming to work with it effectively.', badges: ['ADO.NET', 'Entity Framework'] },
+        { title: 'Data Structures', description: 'Data structures are also an important part of my experience. I focus on choosing the right data type for each situation, and when needed, I build custom data types instead of relying only on ready-made ones. I applied this principle practically by building fundamental data structures from scratch in C++, including linked lists, dynamic arrays, stacks, and queues, among others.', badges: ['Custom Data Types', 'Memory Management', 'Algorithm Efficiency'] },
+      ],
+    },
+    common: { viewRepository: 'View Repository', viewCertificate: 'View Certificate', course: 'Course', certificatesIntro: 'Certificates obtained for the completed courses within the structured programming and software development training path.', completed: 'Completed', upcoming: 'Upcoming', currentStudent: 'Current Student', currentlyPursuing: 'CURRENTLY PURSUING' },
+  },
+  tr: {
+    nav: { home: 'Ana Sayfa', about: 'Temel Beceriler', skills: 'Teknolojiler', projects: 'Projeler', training: 'Eğitim', certificates: 'Sertifikalar', language: 'Dil', backToTop: 'Başa dön' },
+    hero: {
+      name: 'Mohammed Ayman Habbash',
+      uniName: 'Selçuk Üniversitesi',
+      uniDept: 'Bilgisayar Mühendisliği',
+      uniLogoAlt: 'Selçuk Üniversitesi logosu',
+      description: 'Selçuk Üniversitesi Bilgisayar Mühendisliği öğrencisiyim. Yoğun ve yapılandırılmış eğitim ile uygulamalı proje geliştirme sayesinde C++, C# ve SQL/SQL Server alanlarında güçlü bir uzmanlık kazandım. Eczane yönetimi, satış noktası ve bankacılık uygulamaları dahil olmak üzere katmanlı mimari ve sağlam yazılım tasarım ilkelerini kullanarak çeşitli yazılım sistemleri tasarladım ve geliştirdim.',
+      profileName: 'Mohammed Ayman Habbash',
+      role: 'Yazılım Geliştirici',
+      tech: 'C++ | C# | SQL',
+      github: 'GitHub Profilim',
+    },
+    skillsIntro: "Using these technologies, I've built multiple structured software systems, and continue to expand my skill set.",
+    headings: { about: 'Geliştirme Deneyimim Neleri Kapsıyor', skills: 'Teknik Altyapım ve Temellerim', featured: 'Öne Çıkan Projeler', other: 'Diğer Projeler', education: 'Eğitim', training: 'Eğitim ve Profesyonel Gelişim', achievements: 'Başarılar ve Sertifikalar' },
+    about: {
+      intro: 'Using the skills and tools shown below, I build solid, well-organized software projects that are easy to maintain and extend. As I learn new skills, I continue to apply this same approach to keep improving the quality and efficiency of my projects.',
+      showMore: 'Show More Skills',
+      showLess: 'Show Less',
+      cards: [
+        { title: 'Layered Architecture', description: 'As part of my development experience, I structure code into three layers: Data Access, Business Logic, and Presentation. This makes project files easier to organize, simplifies maintenance later on, and makes it easier to trace and fix errors.', badges: ['Data Access', 'Business Logic', 'Presentation'] },
+        { title: 'Object-Oriented Programming', description: 'Object-oriented programming is a core part of how I write code. I separate different entities by creating independent classes for each one, applying the principles of abstraction, encapsulation, and inheritance, and defining the appropriate access level for each property or method, whether public, private, or protected. I applied these concepts practically by building a banking management system in C++.', badges: ['Encapsulation', 'Inheritance', 'Abstraction'] },
+        { title: 'Database Integration', description: 'As part of my experience with databases, I have worked with ADO.NET across multiple projects, always focusing on writing efficient queries, since query performance matters as much as the query itself. I have also worked with Entity Framework in other projects, drawing on my solid understanding of relational databases and object-oriented programming to work with it effectively.', badges: ['ADO.NET', 'Entity Framework'] },
+        { title: 'Data Structures', description: 'Data structures are also an important part of my experience. I focus on choosing the right data type for each situation, and when needed, I build custom data types instead of relying only on ready-made ones. I applied this principle practically by building fundamental data structures from scratch in C++, including linked lists, dynamic arrays, stacks, and queues, among others.', badges: ['Custom Data Types', 'Memory Management', 'Algorithm Efficiency'] },
+      ],
+    },
+    common: { viewRepository: 'Depoyu Görüntüle', viewCertificate: 'Sertifikayı Görüntüle', course: 'Kurs', certificatesIntro: 'Yapılandırılmış programlama ve yazılım geliştirme eğitim yolundaki tamamlanmış kurslar için alınan sertifikalar.', completed: 'Tamamlandı', upcoming: 'Yaklaşan', currentStudent: 'Mevcut Öğrenci', currentlyPursuing: 'HALEN DEVAM EDİYOR' },
+  },
+  ar: {
+    nav: { home: 'الرئيسية', about: 'المهارات الأساسية', skills: 'التقنيات والأدوات', projects: 'المشاريع', training: 'التدريب', certificates: 'الشهادات', language: 'اللغة', backToTop: 'العودة إلى الأعلى' },
+    hero: {
+      name: 'محمد أيمن هباش',
+      uniName: 'جامعة سلجوق',
+      uniDept: 'هندسة الحاسوب',
+      uniLogoAlt: 'شعار جامعة سلجوق',
+      description: 'طالب هندسة حاسوب في جامعة سلجوق، أتخصص في لغات C++ وC# وSQL. صمّمتُ وبنيتُ عدة أنظمة برمجية، منها نظام لإدارة الصيدليات ونقاط البيع والبنوك، مع تطبيق البنية متعددة الطبقات ومبادئ التصميم البرمجي السليم في جميع مراحل التطوير.',
+      profileName: 'محمد أيمن هباش',
+      role: 'مطوّر برمجيات',
+      tech: 'C++ | C# | SQL',
+      github: 'زيارة حسابي على GitHub',
+    },
+    skillsIntro: 'باستخدام هذه التقنيات، قمت ببناء العديد من الأنظمة البرمجية المنظمة، وما زلت أعمل على توسيع مجموعة مهاراتي.',
+    headings: { about: 'ما تشمله خبرتي في التطوير', skills: 'المهارات والأسس التقنية', featured: 'المشاريع المميزة', other: 'مشاريع أخرى', education: 'التعليم', training: 'التدريب والتطوير المهني', achievements: 'الإنجازات والشهادات' },
+    about: {
+      intro: 'باستخدام المهارات والأدوات الموضحة أدناه، أبني مشاريع برمجية متينة ومنظمة يسهل صيانتها وتطويرها. ومع كل مهارة جديدة أتعلمها، أواصل تطبيق النهج نفسه لتحسين جودة مشاريعي وكفاءتها.',
+      showMore: 'عرض المزيد من المهارات',
+      showLess: 'عرض أقل',
+      cards: [
+        {
+          title: 'البنية متعددة الطبقات',
+          description: 'ضمن الخبرات التي اكتسبتها، أقوم بفصل بنية الكود إلى ثلاث طبقات: طبقة الوصول للبيانات (Data Access)، وطبقة منطق الأعمال (Business Logic)، وطبقة العرض (Presentation). بهذه الطريقة يصبح تنظيم ملفات المشروع أوضح، وتسهل صيانته لاحقًا مع سهولة أكبر في تتبع الأخطاء وإصلاحها.',
+          badges: ['الوصول للبيانات', 'منطق الأعمال', 'العرض'],
+        },
+        {
+          title: 'البرمجة كائنية التوجه',
+          description: 'البرمجة كائنية التوجه جزء أساسي من أسلوبي في كتابة الكود. أقوم بفصل الكيانات المختلفة عن بعضها من خلال إنشاء كلاسات مستقلة لكل منها، مع تطبيق مبادئ التجريد والتغليف والوراثة، وتحديد مستوى الوصول المناسب لكل خاصية أو دالة، سواء كان عامًا أو خاصًا أو محميًا. طبّقت هذه المفاهيم عمليًا من خلال بناء نظام إدارة العمليات البنكية بلغة C++.',
+          badges: ['التغليف', 'الوراثة', 'التجريد'],
+        },
+        {
+          title: 'التكامل مع قواعد البيانات',
+          description: 'في إطار خبرتي مع قواعد البيانات، تعاملت مع ADO.NET في عدة مشاريع، وحرصت دائمًا على كتابة الاستعلامات بطريقة فعالة، لأن كفاءة الاستعلام لا تقل أهمية عن الاستعلام نفسه. كما تعاملت مع Entity Framework في مشاريع أخرى، مستفيدًا من فهمي الجيد لقواعد البيانات العلائقية والبرمجة الكائنية في التعامل معها بسهولة.',
+          badges: ['ADO.NET', 'Entity Framework'],
+        },
+        {
+          title: 'هياكل البيانات',
+          description: 'تُعد هياكل البيانات جزءًا مهمًا من خبرتي أيضًا، حيث أحرص على اختيار أنواع البيانات المناسبة لكل حالة، وعند الحاجة أقوم ببناء أنواع بيانات مخصصة بدل الاقتصار على الأنواع الجاهزة فقط. طبّقت هذا المبدأ عمليًا من خلال بناء هياكل بيانات أساسية من الصفر بلغة C++، مثل القوائم المترابطة والمصفوفات الديناميكية والمكدسات وطوابير الانتظار.',
+          badges: ['أنواع بيانات مخصصة', 'إدارة الذاكرة', 'كفاءة الخوارزميات'],
+        },
+      ],
+    },
+    common: { viewRepository: 'عرض المستودع', viewCertificate: 'عرض الشهادة', course: 'الدورة', certificatesIntro: 'شهادات تم الحصول عليها للدورات المكتملة ضمن مسار التدريب المنهجي في البرمجة وتطوير البرمجيات.', completed: 'مكتمل', upcoming: 'قادم', currentStudent: 'طالب حالي', currentlyPursuing: 'أدرس حاليًا' },
+  },
 }
+
 const LanguageContext = createContext(null)
-export function LanguageProvider({ children }) { const [language, setLanguage] = useState(() => localStorage.getItem('portfolio-language') || 'en'); useEffect(() => { localStorage.setItem('portfolio-language', language); document.documentElement.lang = language; document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr' }, [language]); const value = useMemo(() => ({ language, setLanguage, t: translations[language] }), [language]); return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider> }
-export function useLanguage() { const context = useContext(LanguageContext); if (!context) throw new Error('useLanguage must be used within LanguageProvider'); return context }
+
+export function LanguageProvider({ children }) {
+  const [language, setLanguage] = useState(() => localStorage.getItem('portfolio-language') || 'en')
+
+  useEffect(() => {
+    localStorage.setItem('portfolio-language', language)
+    document.documentElement.lang = language
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'
+  }, [language])
+
+  const value = useMemo(() => ({ language, setLanguage, t: translations[language] }), [language])
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext)
+  if (!context) throw new Error('useLanguage must be used within LanguageProvider')
+  return context
+}

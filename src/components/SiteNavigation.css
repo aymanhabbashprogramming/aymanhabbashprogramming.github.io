@@ -13,7 +13,7 @@
 .site-navigation--scrolled { box-shadow: 0 2px 16px rgb(0 0 0 / 30%); }
 
 /* ── Left: home icon ── */
-.site-navigation__left { display: flex; align-items: center; }
+.site-navigation__left { display: flex; align-items: center; justify-self: start; }
 
 .site-navigation__home {
   display: inline-flex;
@@ -58,7 +58,7 @@
 .site-navigation__links a:hover { color: #ffffff; }
 
 /* ── Right: custom language switcher ── */
-.site-navigation__right { display: flex; align-items: center; justify-content: flex-end; }
+.site-navigation__right { display: flex; align-items: center; justify-self: end; }
 
 .site-navigation__lang-wrap {
   position: relative;
@@ -144,4 +144,20 @@
   .site-navigation__links::-webkit-scrollbar { display: none; }
   .site-navigation__links a { flex: 0 0 auto; font-size: 13px; }
   .site-navigation__lang-btn { padding: 6px 11px; font-size: 13px; }
+}
+
+/* ── RTL (Arabic) ── */
+/*
+  The grid is "1fr auto 1fr". In RTL the browser flips column order automatically,
+  so column 1 is on the right and column 3 is on the left.
+  justify-self: start  → sticks to the inline-start edge (right in RTL, left in LTR)
+  justify-self: end    → sticks to the inline-end  edge (left  in RTL, right in LTR)
+  No order swapping needed — logical properties handle both directions.
+*/
+html[dir='rtl'] .site-navigation { direction: rtl; }
+
+/* Dropdown opens toward inline-start (leftward in RTL) */
+html[dir='rtl'] .site-navigation__lang-dropdown {
+  right: auto;
+  left: 0;
 }

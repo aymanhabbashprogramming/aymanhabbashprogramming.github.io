@@ -1,11 +1,5 @@
 import './Footer.css'
-
-const LINKS = [
-  { href: '#about',    label: 'Experience' },
-  { href: '#skills',   label: 'Tech Stack'  },
-  { href: '#projects', label: 'Projects'    },
-  { href: '#training', label: 'Training'    },
-]
+import { useLanguage } from '../i18n/LanguageContext'
 
 function ArrowUpIcon() {
   return (
@@ -21,7 +15,15 @@ function scrollToTop(e) {
 }
 
 export default function Footer() {
+  const { t } = useLanguage()
   const year = new Date().getFullYear()
+
+  const links = [
+    { href: '#about',    label: t.nav.about    },
+    { href: '#skills',   label: t.nav.skills   },
+    { href: '#projects', label: t.nav.projects  },
+    { href: '#training', label: t.nav.training  },
+  ]
 
   return (
     <footer className="footer">
@@ -37,7 +39,7 @@ export default function Footer() {
 
           <div className="footer__col footer__col--center">
             <nav aria-label="Footer navigation">
-              {LINKS.map(link => (
+              {links.map(link => (
                 <a key={link.href} className="footer__nav-link" href={link.href}>{link.label}</a>
               ))}
             </nav>
@@ -52,9 +54,9 @@ export default function Footer() {
           <div className="footer__bottom-spacer" />
           <p className="footer__copy">© {year} Mohammed Ayman Habbash. All rights reserved.</p>
           <div className="footer__bottom-end">
-            <a className="footer__top-btn" href="#top" onClick={scrollToTop} aria-label="Back to top" title="Back to top">
+            <a className="footer__top-btn" href="#top" onClick={scrollToTop} aria-label={t.nav.backToTop} title={t.nav.backToTop}>
               <ArrowUpIcon />
-              Back to top
+              {t.nav.backToTop}
             </a>
           </div>
         </div>

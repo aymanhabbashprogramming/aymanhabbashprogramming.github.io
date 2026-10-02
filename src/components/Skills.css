@@ -188,3 +188,7 @@
 @media (prefers-reduced-motion: reduce) {
   .skills__header, .skills__intro, .skills__block { opacity: 1; transform: none; transition: none; }
 }
+
+/* ── RTL (Arabic) — title and intro only; rest of section stays LTR ── */
+html[dir='rtl'] .skills__title,
+html[dir='rtl'] .skills__intro { text-align: right; }

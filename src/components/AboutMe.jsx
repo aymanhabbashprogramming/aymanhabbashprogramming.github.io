@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import './AboutMe.css'
 import { useLanguage } from '../i18n/LanguageContext'
 
-// أيقونات SVG بسيطة ومتناسقة مع باقي الصفحة
 const LayersIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 2L2 7l10 5 10-5-10-5z" />
@@ -45,47 +44,43 @@ const ChevronIcon = () => (
   </svg>
 )
 
-const cardsData = [
-  {
-    id: 1,
-    icon: <LayersIcon />,
-    title: 'Layered Architecture',
-    description: 'As part of my development experience, I structure code into three layers: Data Access, Business Logic, and Presentation. This makes project files easier to organize, simplifies maintenance later on, and makes it easier to trace and fix errors.',
-    badges: ['Data Access', 'Business Logic', 'Presentation'],
-    accent: 'sky'
-  },
-  {
-    id: 2,
-    icon: <ClassesIcon />,
-    title: 'Object-Oriented Programming',
-    description: 'Object-oriented programming is a core part of how I write code. I separate different entities by creating independent classes for each one, applying the principles of abstraction, encapsulation, and inheritance, and defining the appropriate access level for each property or method, whether public, private, or protected. I applied these concepts practically by building a banking management system in C++.',
-    badges: ['Encapsulation', 'Inheritance', 'Abstraction'],
-    accent: 'sky'
-  },
-  {
-    id: 3,
-    icon: <DatabaseIcon />,
-    title: 'Database Integration',
-    description: 'As part of my experience with databases, I have worked with ADO.NET across multiple projects, always focusing on writing efficient queries, since query performance matters as much as the query itself. I have also worked with Entity Framework in other projects, drawing on my solid understanding of relational databases and object-oriented programming to work with it effectively.',
-    badges: ['ADO.NET', 'Entity Framework'],
-    accent: 'sky'
-  },
-  {
-    id: 4,
-    icon: <TreeIcon />,
-    title: 'Data Structures',
-    description: 'Data structures are also an important part of my experience. I focus on choosing the right data type for each situation, and when needed, I build custom data types instead of relying only on ready-made ones. I applied this principle practically by building fundamental data structures from scratch in C++, including linked lists, dynamic arrays, stacks, and queues, among others.',
-    badges: ['Custom Data Types', 'Memory Management', 'Algorithm Efficiency'],
-    wrapBadges: true,
-    accent: 'sky'
-  }
+// English terms that must render LTR inside Arabic text
+function Ltr({ children }) {
+  return <bdi dir="ltr">{children}</bdi>
+}
+
+// Arabic descriptions have inline English terms wrapped in <bdi dir="ltr">
+// so they are stored as render functions, not plain strings.
+const arDescriptions = [
+  // Card 1 — Layered Architecture
+  () => (
+    <>
+      ضمن الخبرات التي اكتسبتها، أقوم بفصل بنية الكود إلى ثلاث طبقات: طبقة الوصول للبيانات (<Ltr>Data Access</Ltr>)، وطبقة منطق الأعمال (<Ltr>Business Logic</Ltr>)، وطبقة العرض (<Ltr>Presentation</Ltr>). بهذه الطريقة يصبح تنظيم ملفات المشروع أوضح، وتسهل صيانته لاحقًا مع سهولة أكبر في تتبع الأخطاء وإصلاحها.
+    </>
+  ),
+  // Card 2 — OOP
+  () => (
+    <>
+      البرمجة كائنية التوجه جزء أساسي من أسلوبي في كتابة الكود. أقوم بفصل الكيانات المختلفة عن بعضها من خلال إنشاء كلاسات مستقلة لكل منها، مع تطبيق مبادئ التجريد والتغليف والوراثة، وتحديد مستوى الوصول المناسب لكل خاصية أو دالة، سواء كان عامًا أو خاصًا أو محميًا. طبّقت هذه المفاهيم عمليًا من خلال بناء نظام إدارة العمليات البنكية بلغة <Ltr>C++</Ltr>.
+    </>
+  ),
+  // Card 3 — Database Integration
+  () => (
+    <>
+      في إطار خبرتي مع قواعد البيانات، تعاملت مع <Ltr>ADO.NET</Ltr> في عدة مشاريع، وحرصت دائمًا على كتابة الاستعلامات بطريقة فعالة، لأن كفاءة الاستعلام لا تقل أهمية عن الاستعلام نفسه. كما تعاملت مع <Ltr>Entity Framework</Ltr> في مشاريع أخرى، مستفيدًا من فهمي الجيد لقواعد البيانات العلائقية والبرمجة الكائنية في التعامل معها بسهولة.
+    </>
+  ),
+  // Card 4 — Data Structures
+  () => (
+    <>
+      تُعد هياكل البيانات جزءًا مهمًا من خبرتي أيضًا، حيث أحرص على اختيار أنواع البيانات المناسبة لكل حالة، وعند الحاجة أقوم ببناء أنواع بيانات مخصصة بدل الاقتصار على الأنواع الجاهزة فقط. طبّقت هذا المبدأ عمليًا من خلال بناء هياكل بيانات أساسية من الصفر بلغة <Ltr>C++</Ltr>، مثل القوائم المترابطة والمصفوفات الديناميكية والمكدسات وطوابير الانتظار.
+    </>
+  ),
 ]
 
-const localizedCards = {
-  en: cardsData.map(({ title, description }) => ({ title, description })),
-  tr: cardsData.map(({ title, description }) => ({ title, description })),
-  ar: cardsData.map(({ title, description }) => ({ title, description })),
-}
+const ICONS = [<LayersIcon />, <ClassesIcon />, <DatabaseIcon />, <TreeIcon />]
+const WRAP_BADGES = [false, false, false, true]
+const ACCENT = 'sky'
 
 function AboutMe() {
   const { t, language } = useLanguage()
@@ -96,17 +91,17 @@ function AboutMe() {
   useEffect(() => {
     const section = sectionRef.current
     if (!section) return undefined
-
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
         setIsVisible(true)
         observer.unobserve(entry.target)
       }
     }, { threshold: 0.15 })
-
     observer.observe(section)
     return () => observer.disconnect()
   }, [])
+
+  const cards = t.about.cards
 
   return (
     <section
@@ -118,35 +113,37 @@ function AboutMe() {
       <div className="about__frame">
         <div className="about__heading">
           <h2 id="about-title">{t.headings.about}</h2>
-          <p className="about__intro">
-            Using the skills and tools shown below, I build solid, well-organized software projects that are easy to maintain and extend. As I learn new skills, I continue to apply this same approach to keep improving the quality and efficiency of my projects.
-          </p>
+          <p className="about__intro">{t.about.intro}</p>
         </div>
 
         <div className="about__grid" id="about-grid">
-          {cardsData.map((card, index) => {
-            const localized = localizedCards[language][index]
+          {cards.map((card, index) => {
+            const DescNode = language === 'ar' ? arDescriptions[index] : null
             return (
-            <article
-              key={card.id}
-              className={`about__card about__card--${card.accent}`}
-              style={{ '--card-index': index }}
-            >
-              <div className="about__card-head">
-                <div className="about__card-icon" aria-hidden="true">
-                  {card.icon}
+              <article
+                key={index}
+                className={`about__card about__card--${ACCENT}`}
+                style={{ '--card-index': index }}
+              >
+                <div className="about__card-head">
+                  <div className="about__card-icon" aria-hidden="true">
+                    {ICONS[index]}
+                  </div>
+                  <h3 className="about__card-title">{card.title}</h3>
                 </div>
-                <h3 className="about__card-title">{localized.title}</h3>
-              </div>
-              <div className="about__card-body">
-                {card.badges && (
-                  <ul className={`about__card-badges ${card.wrapBadges ? 'about__card-badges--wrap' : ''}`}>
-                    {card.badges.map((badge) => <li key={badge}>{badge}</li>)}
-                  </ul>
-                )}
-                <p className="about__card-description">{localized.description}</p>
-              </div>
-            </article>
+                <div className="about__card-body">
+                  {card.badges && (
+                    <ul className={`about__card-badges ${WRAP_BADGES[index] ? 'about__card-badges--wrap' : ''}`}>
+                      {card.badges.map((badge) => (
+                        <li key={badge} dir={language === 'ar' ? undefined : undefined}>{badge}</li>
+                      ))}
+                    </ul>
+                  )}
+                  <p className="about__card-description">
+                    {DescNode ? <DescNode /> : card.description}
+                  </p>
+                </div>
+              </article>
             )
           })}
 
@@ -165,7 +162,7 @@ function AboutMe() {
             aria-controls="about-grid"
             onClick={() => setShowMore((prev) => !prev)}
           >
-            {showMore ? 'Show Less' : 'Show More Skills'}
+            {showMore ? t.about.showLess : t.about.showMore}
             <span className={`about__more-chevron ${showMore ? 'about__more-chevron--up' : ''}`} aria-hidden="true">
               <ChevronIcon />
             </span>

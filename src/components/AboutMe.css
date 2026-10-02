@@ -7,12 +7,11 @@
   --violet: #7c3aed;
   --border: #dbe4f0;
   overflow: hidden;
-  padding-left: clamp(20px, 4vw, 60px);
-  padding-right: clamp(20px, 4vw, 60px);
+  padding-inline: clamp(20px, 4vw, 60px);
   background: var(--background);
 }
 
-.about::after { content: ''; position: absolute; right: -15%; bottom: -35%; width: min(680px, 60vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(124 58 237 / 6%), transparent 67%); pointer-events: none; }
+.about::after { content: ''; position: absolute; inset-inline-end: -15%; bottom: -35%; width: min(680px, 60vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(124 58 237 / 6%), transparent 67%); pointer-events: none; }
 .about__frame { position: relative; z-index: 1; width: 100%; margin: 0 auto; }
 
 .about__heading { display: flex; flex-direction: column; gap: 16px; }
@@ -297,3 +296,16 @@
     transform: none;
   }
 }
+
+/* ── RTL (Arabic) ── */
+html[dir='rtl'] .about h2,
+html[dir='rtl'] .about__intro,
+html[dir='rtl'] .about__card-title,
+html[dir='rtl'] .about__card-description { text-align: start; }
+
+html[dir='rtl'] .about__card-description { text-align: justify; }
+
+html[dir='rtl'] .about__card-badges { justify-content: flex-start; }
+
+/* card-head is a flex row — in RTL the browser reverses it, so icon sits on the right naturally */
+html[dir='rtl'] .about__card-head { flex-direction: row-reverse; }

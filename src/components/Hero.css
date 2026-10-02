@@ -16,10 +16,13 @@
 }
 
 .hero__banner-inner {
-  padding: calc(var(--hero-nav-h) + var(--hero-banner-py)) var(--hero-px) var(--hero-banner-py);
-  padding-right: calc(var(--hero-col-width) + var(--hero-px) + 32px);
+  padding-top: calc(var(--hero-nav-h) + var(--hero-banner-py));
+  padding-bottom: var(--hero-banner-py);
+  padding-inline-start: var(--hero-px);
+  padding-inline-end: calc(var(--hero-col-width) + var(--hero-px) + 32px);
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 18px;
 }
 
@@ -203,7 +206,7 @@
 /* ── Responsive: tablet ── */
 @media (max-width: 768px) {
   .hero__banner-inner {
-    padding-right: var(--hero-px);
+    padding-inline-end: var(--hero-px);
   }
 
   .hero { --hero-uni-logo-size: 52px; }
@@ -242,4 +245,33 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero * { transition-duration: .01ms !important; }
+}
+
+/* ── RTL (Arabic) ── */
+/*
+  padding-inline-start/end on .hero__banner-inner already flip automatically
+  in RTL (start = right, end = left), so the photo-column gap is reserved on
+  the left and the content block sits against the right edge with no overrides.
+  align-items: flex-start on the column container keeps children at the
+  inline-start edge (right in RTL), so name and uni row share the same right edge.
+*/
+
+html[dir='rtl'] .hero__banner-uni-text {
+  align-items: flex-start;  /* text lines align to their own inline-start (right) */
+  text-align: start;
+}
+
+html[dir='rtl'] .hero__name,
+html[dir='rtl'] .hero__banner-uni-name,
+html[dir='rtl'] .hero__banner-uni-dept { text-align: start; }
+
+html[dir='rtl'] .hero__body-inner { flex-direction: row-reverse; }
+
+html[dir='rtl'] .hero__description { text-align: start; }
+
+html[dir='rtl'] .hero__body-right { order: -1; }
+
+@media (max-width: 768px) {
+  html[dir='rtl'] .hero__body-inner { flex-direction: column; }
+  html[dir='rtl'] .hero__body-right { order: unset; }
 }

@@ -122,11 +122,11 @@ function SiteNavigation() {
           className="site-navigation__home"
           href="#top"
           onClick={scrollToTop}
-          aria-label="Back to top"
-          title="Back to top"
+          aria-label={t.nav.backToTop}
+          title={t.nav.backToTop}
         >
           <HomeIcon />
-          <span className="site-navigation__home-label">Home</span>
+          <span className="site-navigation__home-label">{t.nav.home}</span>
         </a>
       </div>
 

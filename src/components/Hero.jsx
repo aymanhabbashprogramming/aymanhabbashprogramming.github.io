@@ -1,4 +1,5 @@
 import './Hero.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 function ProfileIcon() {
   return (
@@ -18,27 +19,29 @@ function GitHubIcon() {
 }
 
 function Hero() {
+  const { t, language } = useLanguage()
+  const h = t.hero
+
   return (
     <main className="hero" id="top" aria-labelledby="hero-title">
 
       {/* ── Banner ── */}
       <div className="hero__banner">
         <div className="hero__banner-inner">
-          <h1 id="hero-title" className="hero__name">Mohammed Ayman Habbash</h1>
+          <h1 id="hero-title" className="hero__name">{h.name}</h1>
 
-          {/* University block replaces "Software Developer" and "C++ | C# | SQL" */}
           <div className="hero__banner-uni">
             <div className="hero__banner-uni-badge">
               <img
                 src="/images/Picture2.png"
-                alt="Selçuk University logo"
+                alt={h.uniLogoAlt}
                 className="hero__banner-uni-logo"
                 onError={(e) => { e.currentTarget.style.display = 'none' }}
               />
             </div>
             <div className="hero__banner-uni-text">
-              <span className="hero__banner-uni-name">Selçuk University</span>
-              <span className="hero__banner-uni-dept">Computer Engineering</span>
+              <span className="hero__banner-uni-name">{h.uniName}</span>
+              <span className="hero__banner-uni-dept">{h.uniDept}</span>
             </div>
           </div>
         </div>
@@ -49,8 +52,8 @@ function Hero() {
         <div className="hero__body-inner">
 
           <div className="hero__body-left">
-            <p className="hero__description">
-              Computer Engineering student at Selçuk University, with a strong specialization in C++, C#, and SQL. I have designed and built multiple structured software systems, including pharmacy management, point-of-sale, and banking applications, applying layered architecture and solid software design principles throughout the full development lifecycle.
+            <p className="hero__description" lang={language}>
+              {h.description}
             </p>
           </div>
 
@@ -59,9 +62,9 @@ function Hero() {
             <div className="hero__photo-wrap">
               <div className="hero__avatar"><ProfileIcon /></div>
             </div>
-            <p className="hero__profile-name">Mohammed Ayman Habbash</p>
-            <p className="hero__profile-role">Software Developer</p>
-            <p className="hero__profile-tech">C++ | C# | SQL</p>
+            <p className="hero__profile-name">{h.profileName}</p>
+            <p className="hero__profile-role">{h.role}</p>
+            <p className="hero__profile-tech" dir="ltr">{h.tech}</p>
             <a
               className="hero__github"
               href="https://github.com/aymanhabbashprogramming"
@@ -69,7 +72,7 @@ function Hero() {
               rel="noopener noreferrer"
             >
               <GitHubIcon />
-              View My GitHub
+              {h.github}
             </a>
           </div>
 

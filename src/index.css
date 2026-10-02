@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; background: #0b0f14; }
@@ -85,6 +85,13 @@ body { margin: 0; min-width: 320px; background: #0b0f14; font-family: Inter, san
   height: 22px;
 }
 
+/* Arabic font — applied only when lang="ar" is set on <html> */
+:root:lang(ar),
+:root:lang(ar) body {
+  font-family: 'IBM Plex Sans Arabic', Inter, sans-serif;
+}
+
+/* RTL layout overrides */
 html[dir='rtl'] .site-navigation__links,
 html[dir='rtl'] .hero__actions,
 html[dir='rtl'] .featured-projects__repositories,
@@ -94,3 +101,8 @@ html[dir='rtl'] .hero__description,
 html[dir='rtl'] .about__copy,
 html[dir='rtl'] .featured-projects__card,
 html[dir='rtl'] .training__card { text-align: right; }
+
+/* Untranslated sections stay LTR while Arabic is active */
+html[dir='rtl'] .skills,
+html[dir='rtl'] .featured-projects,
+html[dir='rtl'] .training { direction: ltr; text-align: left; }

@@ -146,3 +146,10 @@
 @media (prefers-reduced-motion: reduce) {
   .footer * { transition-duration: .01ms !important; }
 }
+
+/* ── RTL (Arabic) ── */
+html[dir='rtl'] .footer__col--left { align-items: flex-end; text-align: right; }
+html[dir='rtl'] .footer__col--center nav { align-items: center; }
+html[dir='rtl'] .footer__bottom-end { justify-content: flex-start; order: -1; }
+html[dir='rtl'] .footer__bottom-spacer { order: 1; }
+html[dir='rtl'] .footer__copy { text-align: center; }

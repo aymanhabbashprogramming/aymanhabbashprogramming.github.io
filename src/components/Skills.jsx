@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './Skills.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 /* --- أيقونات SVG --- */
 const CodeIcon = () => (
@@ -49,7 +50,7 @@ const mainTrack = [
   { title: 'Languages', skills: ['C++', 'C#'], icon: <CodeIcon /> },
   { title: 'Database', skills: ['SQL', 'SQL Server', 'ADO.NET'], icon: <DatabaseIcon /> },
   { title: '.NET Development', skills: ['.NET Framework', 'WinForms', 'Entity Framework'], icon: <LayersIcon /> },
-  { title: 'Software Design Concepts', skills: ['OOP', 'Layered Architecture (3-Layer)', 'Data Structures & Algorithms', 'Software Design Principles'], icon: <BlueprintIcon /> },
+  { title: 'Software Concepts', skills: ['OOP', 'Layered Architecture (3-Layer)', 'Data Structures & Algorithms'], icon: <BlueprintIcon /> },
   { title: 'Tools', skills: ['Git', 'GitHub', 'Visual Studio'], icon: <WrenchIcon /> },
 ]
 
@@ -68,6 +69,7 @@ function SkillBlock({ title, skills, icon, index }) {
 }
 
 function Skills() {
+  const { t } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
   const [showMore, setShowMore] = useState(false)
@@ -89,12 +91,10 @@ function Skills() {
     <section ref={sectionRef} id="skills" className={`skills site-section site-section--divided ${isVisible ? 'skills--visible' : ''}`} aria-labelledby="skills-title">
       <div className="skills__inner">
         <header className="skills__header">
-          <h2 id="skills-title">My Technical Skills and Foundations</h2>
+          <h2 id="skills-title" className="skills__title">{t.headings.skills}</h2>
         </header>
 
-        <p className="skills__intro">
-          Using these technologies, I&apos;ve built multiple structured software systems, and continue to expand my skill set.
-        </p>
+        <p className="skills__intro">{t.skillsIntro}</p>
 
         <div className="skills__blocks" id="skills-blocks">
           {mainTrack.map((block, index) => <SkillBlock {...block} index={index} key={block.title} />)}
