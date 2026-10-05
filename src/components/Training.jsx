@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import './Training.css'
+import { useLanguage } from '../i18n/LanguageContext'
 
 const courseTitles = [
   'Algorithms Level 2',
@@ -11,11 +12,11 @@ const courseTitles = [
   'OOP Level 2',
   'Data Structures Level 1',
   'Algorithms Level 5',
-  'C# Level 1',
+  'C# - Level 1',
   'Database Level 1: SQL',
-  'OOP in C#',
+  'OOP In C#',
   'Database Project',
-  'C# and Database',
+  'C# & Database',
 ]
 
 const earlyCourses = [
@@ -23,24 +24,36 @@ const earlyCourses = [
   { title: 'Algorithms Level 1' },
   { title: 'C++ Level 1' },
   { title: 'Advanced Solutions for Algorithms Level 1' },
-].map((course, i) => ({ number: `Course ${i + 1}`, title: course.title }))
+].map((course, i) => ({ number: i + 1, title: course.title }))
 
 const courseCertificates = [
   ...earlyCourses,
   ...courseTitles.map((title, i) => {
     const number = i + 5
-    return { number: `Course ${number}`, title, pdf: `/certificates/course-${number}.pdf` }
+    return { number, title, pdf: `/certificates/course-${number}.pdf` }
   }),
 ]
 
-const educationEntries = [
-  {
-    title: 'Programming Advices',
-    platformUrl: 'https://programmingadvices.com',
-    description: 'I followed a structured programming learning path on Programming Advices, a platform run by programmer Mohammed Abu-Hadhoud, who has more than 30 years of experience. I started from the fundamentals and progressed step by step. I solved each task on my own first, then compared my solution with the solutions provided on the platform to learn better ways of thinking and implementing. So far, I have completed 18 courses and applied what I learned in practice. The most important things I learned were object-oriented programming in C++, which I applied in the Bank Management System project, and data structures, which I built from scratch in the Data Structures in C++ project. I also learned C# and databases using SQL and SQL Server, and applied them in three projects: ContactHub, ContactsDesktop, and ContactsManager. I am still continuing my learning on the platform.',
-    certificates: courseCertificates,
-  },
-]
+const EN_DESCRIPTION = 'I followed a structured programming learning path on Programming Advices, a platform run by programmer Mohammed Abu-Hadhoud, who has more than 30 years of experience. I started from the fundamentals and progressed step by step. I solved each task on my own first, then compared my solution with the solutions provided on the platform to learn better ways of thinking and implementing. So far, I have completed 18 courses and applied what I learned in practice. The most important things I learned were object-oriented programming in C++, which I applied in the Bank Management System project, and data structures, which I built from scratch in the Data Structures in C++ project. I also learned C# and databases using SQL and SQL Server, and applied them in three projects: ContactHub, ContactsDesktop, and ContactsManager. I am still continuing my learning on the platform.'
+
+const TR_DESCRIPTION = 'Programming Advices platformunda, 30 yılı aşkın deneyime sahip programcı Mohammed Abu-Hadhoud tarafından sunulan yapılandırılmış bir programlama eğitim yolunu takip ettim. Temellerden başlayarak adım adım ilerledim; her görevi önce kendi başıma çözdüm, ardından daha iyi düşünme ve uygulama yollarını öğrenmek için çözümümü platformda sunulan çözümlerle karşılaştırdım. Şu ana kadar 18 kursu tamamladım ve öğrendiklerimi uygulamaya döktüm. Öğrendiğim en önemli konular arasında, Bankacılık Yönetim Sistemi projesinde uyguladığım C++ ile nesne yönelimli programlama ve C++ ile Veri Yapıları projesinde sıfırdan geliştirdiğim veri yapıları yer alıyor. Ayrıca C# dilini ve SQL ile SQL Server kullanarak veritabanlarını öğrendim; bunları Kişi Merkezi, Kişiler - Masaüstü ve Kişi Yöneticisi olmak üzere üç projede uyguladım. Platformda öğrenmeye devam ediyorum.'
+
+const AR_DESCRIPTION = () => (
+  <>
+    تابعتُ مسارًا تعليميًا منظمًا في البرمجة على منصة{' '}
+    <bdi dir="ltr">Programming Advices</bdi>
+    {' '}، التي يقدّمها المبرمج محمد أبو هدهود صاحب الخبرة التي تتجاوز 30 عامًا. بدأتُ فيها من الأساسيات وتدرّجتُ خطوة بخطوة، وكنت أحلّ كل مهمة بنفسي أولًا، ثم أقارن حلّي بالحلول المطروحة في المنصة لأتعلّم طرقًا أفضل في التفكير والتنفيذ. أنهيتُ حتى الآن 18 كورسًا، وطبّقتُ ما تعلّمته فيها عمليًا. أهم الأمور التي تعلّمتها هي البرمجة كائنية التوجه بلغة{' '}
+    <bdi dir="ltr">C++</bdi>
+    {' '}وطبّقتها في مشروع نظام الإدارة المصرفية، وكذلك هياكل البيانات التي بنيتُها من الصفر في مشروع هياكل البيانات بلغة{' '}
+    <bdi dir="ltr">C++</bdi>
+    {' '}. كما تعلّمتُ لغة{' '}
+    <bdi dir="ltr">C#</bdi>
+    {' '}وقواعد البيانات باستخدام{' '}
+    <bdi dir="ltr">SQL</bdi>
+    {' '}و<bdi dir="ltr">SQL Server</bdi>
+    {' '}، وطبّقتها في ثلاثة مشاريع هي مركز جهات الاتصال، وجهات الاتصال - سطح المكتب، ومدير جهات الاتصال. وما زلتُ مستمرًا في التعلّم على المنصة.
+  </>
+)
 
 const ChevronIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
@@ -54,35 +67,32 @@ const CheckIcon = () => (
   </svg>
 )
 
-function CertificateCarousel({ certificates }) {
+function CertificateCarousel({ certificates, viewCertificate, completed, courseLabel }) {
   const trackRef = useRef(null)
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(false)
+  const { language } = useLanguage()
+  const [canScrollStart, setCanScrollStart] = useState(false)
+  const [canScrollEnd, setCanScrollEnd]     = useState(false)
 
   const updateArrows = useCallback(() => {
     const track = trackRef.current
     if (!track) return
     const { scrollLeft, scrollWidth, clientWidth } = track
+    const absLeft = Math.abs(scrollLeft)
     const maxScroll = scrollWidth - clientWidth
-    setCanScrollLeft(scrollLeft > 4)
-    setCanScrollRight(scrollLeft < maxScroll - 4)
+    setCanScrollStart(absLeft > 4)
+    setCanScrollEnd(absLeft < maxScroll - 4)
   }, [])
 
   useEffect(() => {
     const track = trackRef.current
     if (!track) return undefined
-
     const frame = requestAnimationFrame(updateArrows)
-    const handleScroll = () => updateArrows()
-    const handleResize = () => updateArrows()
-
-    track.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleResize)
-
+    track.addEventListener('scroll', updateArrows, { passive: true })
+    window.addEventListener('resize', updateArrows)
     return () => {
       cancelAnimationFrame(frame)
-      track.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('resize', handleResize)
+      track.removeEventListener('scroll', updateArrows)
+      window.removeEventListener('resize', updateArrows)
     }
   }, [updateArrows, certificates])
 
@@ -91,52 +101,56 @@ function CertificateCarousel({ certificates }) {
     if (!track) return
     const card = track.querySelector('.training__cert')
     const amount = card ? card.getBoundingClientRect().width + 16 : track.clientWidth
-    track.scrollBy({ left: direction * amount, behavior: 'smooth' })
+    const isRtl = getComputedStyle(track).direction === 'rtl'
+    track.scrollBy({ left: direction * amount * (isRtl ? -1 : 1), behavior: 'smooth' })
   }
 
   return (
     <div className="training__carousel">
       <button
         type="button"
-        className="training__carousel-arrow training__carousel-arrow--left"
-        style={{ visibility: canScrollLeft ? 'visible' : 'hidden' }}
-        aria-hidden={!canScrollLeft}
-        tabIndex={canScrollLeft ? 0 : -1}
+        className="training__carousel-arrow training__carousel-arrow--start"
+        style={{ visibility: canScrollStart ? 'visible' : 'hidden' }}
+        aria-hidden={!canScrollStart}
+        tabIndex={canScrollStart ? 0 : -1}
         onClick={() => scrollByCard(-1)}
         aria-label="Previous certificates"
       >
-        <span className="training__carousel-arrow-icon training__carousel-arrow-icon--left"><ChevronIcon /></span>
+        <span className="training__carousel-arrow-icon training__carousel-arrow-icon--back"><ChevronIcon /></span>
       </button>
 
       <div className="training__carousel-track" ref={trackRef}>
-        {certificates.map((cert) => (
-          <div className="training__cert" key={cert.number}>
-            <div className="training__cert-head">
-              <span className="training__cert-number">{cert.number}</span>
+        {certificates.map((cert) => {
+          const numberLabel = `${courseLabel} ${cert.number}`
+          return (
+            <div className="training__cert" key={cert.number}>
+              <div className="training__cert-head">
+                <span className="training__cert-number">{numberLabel}</span>
+              </div>
+              <div className="training__cert-body">
+                <p className="training__cert-title" dir="ltr">{cert.title}</p>
+                {cert.pdf ? (
+                  <a className="training__cert-link" href={cert.pdf} target="_blank" rel="noopener noreferrer">
+                    {viewCertificate}
+                  </a>
+                ) : (
+                  <span className="training__cert-status">
+                    <CheckIcon />
+                    {completed}
+                  </span>
+                )}
+              </div>
             </div>
-            <div className="training__cert-body">
-              <p className="training__cert-title">{cert.title}</p>
-              {cert.pdf ? (
-                <a className="training__cert-link" href={cert.pdf} target="_blank" rel="noopener noreferrer">
-                  View Certificate
-                </a>
-              ) : (
-                <span className="training__cert-status">
-                  <CheckIcon />
-                  Completed
-                </span>
-              )}
-            </div>
-          </div>
-        ))}
+          )
+        })}
       </div>
 
       <button
         type="button"
-        className="training__carousel-arrow training__carousel-arrow--right"
-        style={{ visibility: canScrollRight ? 'visible' : 'hidden' }}
-        aria-hidden={!canScrollRight}
-        tabIndex={canScrollRight ? 0 : -1}
+        className="training__carousel-arrow training__carousel-arrow--end"
+        style={{ visibility: canScrollEnd ? 'visible' : 'hidden' }}
+        aria-hidden={!canScrollEnd}
+        tabIndex={canScrollEnd ? 0 : -1}
         onClick={() => scrollByCard(1)}
         aria-label="Next certificates"
       >
@@ -146,26 +160,33 @@ function CertificateCarousel({ certificates }) {
   )
 }
 
-function EducationCard({ entry, index }) {
+function EducationCard({ entry, t }) {
+  const description = typeof entry.description === 'function' ? entry.description() : entry.description
   return (
-    <article className="training__card" style={{ '--entry-index': index }}>
+    <article className="training__card" style={{ '--entry-index': 0 }}>
       <div className="training__card-topline">
         <h3>{entry.title}</h3>
         {entry.platformUrl && (
           <a className="training__platform-link" href={entry.platformUrl} target="_blank" rel="noopener noreferrer">
-            Visit Platform
+            {t.common.visitPlatform}
           </a>
         )}
       </div>
-      <p className="training__card-description">{entry.description}</p>
-      <h4 className="training__cert-heading">Certifications</h4>
-      <CertificateCarousel certificates={entry.certificates} />
-      <p className="training__cert-note">Certificates are issued by the platform starting from Course 5.</p>
+      <p className="training__card-description">{description}</p>
+      <h4 className="training__cert-heading">{t.common.certifications}</h4>
+      <CertificateCarousel
+        certificates={entry.certificates}
+        viewCertificate={t.common.viewCertificate}
+        completed={t.common.completed}
+        courseLabel={t.common.course}
+      />
+      <p className="training__cert-note">{t.common.certNote}</p>
     </article>
   )
 }
 
-function Training({ items = educationEntries }) {
+function Training() {
+  const { t, language } = useLanguage()
   const sectionRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -182,15 +203,20 @@ function Training({ items = educationEntries }) {
     return () => observer.disconnect()
   }, [])
 
+  const entry = {
+    title: 'Programming Advices',
+    platformUrl: 'https://programmingadvices.com',
+    description: language === 'ar' ? AR_DESCRIPTION : language === 'tr' ? TR_DESCRIPTION : EN_DESCRIPTION,
+    certificates: courseCertificates,
+  }
+
   return (
     <section ref={sectionRef} id="training" className={`training site-section site-section--divided ${isVisible ? 'training--visible' : ''}`} aria-labelledby="training-title">
       <div className="training__inner">
         <header className="training__header">
-          <h2 id="training-title">Training and Professional Development</h2>
+          <h2 id="training-title">{t.headings.training}</h2>
         </header>
-        {items.map((entry, index) => (
-          <EducationCard entry={entry} index={index} key={entry.title} />
-        ))}
+        <EducationCard entry={entry} t={t} />
       </div>
     </section>
   )

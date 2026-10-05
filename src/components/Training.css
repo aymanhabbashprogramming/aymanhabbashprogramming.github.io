@@ -38,7 +38,7 @@
 
 .training__cert-heading { margin:26px 0 14px; color:var(--text); font-size:15px; font-weight:700; }
 
-.training__cert-note { margin:14px 0 0; color:var(--muted); font-size:12px; text-align:left; }
+.training__cert-note { margin:14px 0 0; color:var(--muted); font-size:12px; text-align:start; }
 
 /* --- الكاروسيل --- */
 .training__carousel { position:relative; display:flex; align-items:center; gap:8px; }
@@ -53,8 +53,16 @@
   scrollbar-width:none;
   -ms-overflow-style:none;
   padding:2px;
+  padding-inline-start:4px;
 }
 .training__carousel-track::-webkit-scrollbar { display:none; }
+/* Trailing pseudo-element ensures the last card's end edge is fully visible
+   in browsers that clip padding-inline-end on overflow containers. */
+.training__carousel-track::after {
+  content:'';
+  flex:0 0 4px;
+  min-width:4px;
+}
 
 .training__carousel-arrow {
   flex:0 0 auto;
@@ -73,7 +81,8 @@
 .training__carousel-arrow:hover { background:#1e40af; transform:scale(1.05); }
 .training__carousel-arrow-icon { display:flex; width:16px; height:16px; }
 .training__carousel-arrow-icon svg { width:16px; height:16px; }
-.training__carousel-arrow-icon--left { transform:rotate(180deg); }
+/* back arrow (toward inline-start): ChevronIcon points right, so rotate for LTR */
+.training__carousel-arrow-icon--back { transform:rotate(180deg); }
 
 /* --- بطاقة الشهادة المصغّرة --- */
 .training__cert {
@@ -113,11 +122,12 @@
   align-items:center;
   justify-content:center;
   width:100%;
-  padding:7px 14px;
+  padding:7px 8px;
   border-radius:999px;
-  font-size:12px;
+  font-size:11.5px;
   font-weight:600;
   box-sizing:border-box;
+  white-space:nowrap;
 }
 
 .training__cert-link {
@@ -151,3 +161,13 @@
   .training__header,.training__card { opacity:1; transform:none; transition:none; }
   .training__carousel-track { scroll-behavior:auto; }
 }
+
+/* ── RTL (Arabic) ── */
+html[dir='rtl'] .training h2 { text-align: start; }
+html[dir='rtl'] .training__card-description { text-align: justify; }
+
+/* Arrow icons: ChevronIcon default points RIGHT.
+   In LTR  → --back (toward left) needs rotate(180deg); --end (toward right) is fine.
+   In RTL  → --back (toward RIGHT = inline-start) needs no rotation; --end (toward left) needs rotate(180deg). */
+html[dir='rtl'] .training__carousel-arrow-icon--back { transform: none; }
+html[dir='rtl'] .training__carousel-arrow-icon:not(.training__carousel-arrow-icon--back) { transform: rotate(180deg); }

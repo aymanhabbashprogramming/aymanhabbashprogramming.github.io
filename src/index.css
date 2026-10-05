@@ -98,11 +98,5 @@ html[dir='rtl'] .featured-projects__repositories,
 html[dir='rtl'] .skills ul { direction: rtl; }
 
 html[dir='rtl'] .hero__description,
-html[dir='rtl'] .about__copy,
-html[dir='rtl'] .featured-projects__card,
-html[dir='rtl'] .training__card { text-align: right; }
+html[dir='rtl'] .about__copy { text-align: right; }
 
-/* Untranslated sections stay LTR while Arabic is active */
-html[dir='rtl'] .skills,
-html[dir='rtl'] .featured-projects,
-html[dir='rtl'] .training { direction: ltr; text-align: left; }

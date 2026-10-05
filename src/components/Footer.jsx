@@ -29,12 +29,11 @@ export default function Footer() {
     <footer className="footer">
       <div className="footer__inner">
 
-        {/* ── Three columns ── */}
+        {/* ── Top row: name | links | spacer ── */}
         <div className="footer__columns">
-
-          <div className="footer__col footer__col--left">
-            <p className="footer__brand">Mohammed Ayman Habbash</p>
-            <p className="footer__tagline">Software Developer. Computer Engineering student at Selçuk University.</p>
+          <div className="footer__col footer__col--identity">
+            <p className="footer__brand">{t.footer.name}</p>
+            <p className="footer__tagline">{t.footer.tagline}</p>
           </div>
 
           <div className="footer__col footer__col--center">
@@ -45,14 +44,13 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="footer__col footer__col--right" aria-hidden="true" />
-
+          <div className="footer__col footer__col--spacer" aria-hidden="true" />
         </div>
 
-        {/* ── Bottom bar ── */}
+        {/* ── Bottom bar: spacer | copyright | back-to-top ── */}
         <div className="footer__bottom">
           <div className="footer__bottom-spacer" />
-          <p className="footer__copy">© {year} Mohammed Ayman Habbash. All rights reserved.</p>
+          <p className="footer__copy">{t.footer.copyright(year)}</p>
           <div className="footer__bottom-end">
             <a className="footer__top-btn" href="#top" onClick={scrollToTop} aria-label={t.nav.backToTop} title={t.nav.backToTop}>
               <ArrowUpIcon />

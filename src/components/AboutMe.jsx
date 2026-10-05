@@ -82,6 +82,8 @@ const ICONS = [<LayersIcon />, <ClassesIcon />, <DatabaseIcon />, <TreeIcon />]
 const WRAP_BADGES = [false, false, false, true]
 const ACCENT = 'sky'
 
+const extraCards = []
+
 function AboutMe() {
   const { t, language } = useLanguage()
   const sectionRef = useRef(null)
@@ -154,20 +156,22 @@ function AboutMe() {
           )}
         </div>
 
-        <div className="about__more">
-          <button
-            type="button"
-            className="about__more-toggle"
-            aria-expanded={showMore}
-            aria-controls="about-grid"
-            onClick={() => setShowMore((prev) => !prev)}
-          >
-            {showMore ? t.about.showLess : t.about.showMore}
-            <span className={`about__more-chevron ${showMore ? 'about__more-chevron--up' : ''}`} aria-hidden="true">
-              <ChevronIcon />
-            </span>
-          </button>
-        </div>
+        {extraCards.length > 0 && (
+          <div className="about__more">
+            <button
+              type="button"
+              className="about__more-toggle"
+              aria-expanded={showMore}
+              aria-controls="about-grid"
+              onClick={() => setShowMore((prev) => !prev)}
+            >
+              {showMore ? t.about.showLess : t.about.showMore}
+              <span className={`about__more-chevron ${showMore ? 'about__more-chevron--up' : ''}`} aria-hidden="true">
+                <ChevronIcon />
+              </span>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )

@@ -14,7 +14,7 @@ const projects = [
     title: 'POS / Inventory System',
     repositories: [{ label: 'View Repository', url: 'https://github.com/aymanhabbashprogramming/POS-InventorySystem' }],
     badges: ['C#', 'SQL Server', 'Entity Framework', '3-Layer Architecture'],
-    description: 'A sales and point-of-sale management system focused on tracking product movement in and out of inventory, with every sale or purchase linked to its own invoice. The system also manages supplier, customer, and user data within a single integrated structure.',
+    description: 'An inventory and point of sale management system focused on tracking product movement, where every sale or purchase is linked to its own invoice. The system also manages supplier, customer, and user data within a single integrated structure.',
     icon: <CartIcon />,
   },
   {
@@ -83,13 +83,184 @@ const toLocalized = (list) => list.map(({ title, badges, description }) => ({ ti
 const localizedProjects = {
   en: toLocalized(projects),
   tr: toLocalized(projects),
-  ar: toLocalized(projects),
+  ar: toLocalized(projects),  // individual cards override this below
 }
 
 const localizedMoreProjects = {
   en: toLocalized(moreProjects),
   tr: toLocalized(moreProjects),
   ar: toLocalized(moreProjects),
+}
+
+// Turkish card overrides — keyed by index in the `projects` array.
+// Only title and description differ; badges stay English (same as base).
+const trProjectOverrides = {
+  0: {
+    title: 'Eczane Yönetim Sistemi',
+    description: 'Kullanıcıları, tedarikçileri ve hasta kayıtlarını yöneten bir eczane yönetim sistemi; her hastanın aldığı ilaçların özel bir arşiv üzerinden takip edilmesini sağlar. Sistem ayrıca ilaçların dağıtımını ve satışını partiler halinde yönetir, son kullanma tarihi en yakın olan ilaçların satışına öncelik verir ve satış ile alış faturaları düzenler.',
+  },
+  1: {
+    title: 'Stok ve Satış Noktası Sistemi',
+    description: 'Ürün hareketlerinin takibine odaklanan bir stok ve satış noktası yönetim sistemi; her satış veya alış işlemi kendine ait bir faturaya bağlanır. Sistem ayrıca tedarikçi, müşteri ve kullanıcı verilerini tek ve bütünleşik bir yapı içinde yönetir.',
+  },
+  2: {
+    title: 'Bankacılık Yönetim Sistemi',
+    description: 'Kapsamlı bir yetkilendirme sistemiyle çalışan bir bankacılık yönetim sistemi; her kullanıcının izin verilen işlemleri, müşteri yönetimi, transferler, kullanıcı yönetimi ve giriş kayıtları dahil olmak üzere sistem genelinde tanımlanır. Sistem, müşteri hesapları arasında para çekme, para yatırma ve transfer işlemlerini destekler; ayrıca döviz kurları ve doğrudan döviz çevirme işlemleri için özel bir ekran sunar.',
+  },
+  3: {
+    title: 'C++ ile Veri Yapıları',
+    description: 'Çift yönlü bağlı listeler, dinamik diziler, kuyruklar ve yığınlar gibi temel veri yapılarını sıfırdan oluşturmayı içeren bir veri yapıları projesi; şablon (template) tabanlı bir yaklaşımla her veri tipiyle kullanılabilir hale getirilmiştir. Bu yapıları, yığın kullanan bir metin düzenleme geri al/yinele (undo/redo) sisteminde ve bilet veren ve hizmet verilen müşterileri takip eden gerçek bir sıra düzenini simüle eden başka bir sistemde uygulamalı olarak kullandım.',
+  },
+  4: {
+    title: 'Kişiler - Masaüstü',
+    description: 'WinForms arayüzüne sahip bir kişi yönetim sistemi; Kişi Merkezi projesinin iş mantığı ve veri erişim katmanlarını hiçbir kodu tekrarlamadan tamamen yeniden kullanır ve bu projedeki çalışmayı yalnızca sunum katmanıyla sınırlar. Bu proje, 3 katmanlı mimari içinde yeniden kullanılabilirlik ilkesinin pratik bir uygulamasını gösterir.',
+  },
+  5: {
+    title: 'Görüntü İşleme Sistemi',
+    description: 'Hazır kütüphanelere başvurmadan, doğrudan görüntünün piksel verileri üzerinde çalışarak 15 farklı işlemi elle uygulayan bir görüntü işleme uygulaması. Her işlemin sonucu, orijinal görüntü değiştirilmeden ayrı bir alanda gösterilir ve gerektiğinde değişiklikler geri alınabilir.',
+  },
+}
+
+// Turkish card overrides for moreProjects — keyed by index in the `moreProjects` array.
+const trMoreProjectOverrides = {
+  0: {
+    title: 'Kişi Merkezi',
+    description: 'Ülkeleri ve kişileri yöneten; ekleme, güncelleme, silme ve arama işlemlerini destekleyen bir kişi yönetim sistemi. Proje, her işlemin sunum katmanından iş mantığı katmanına, ardından veritabanında çalışan veri erişim katmanına net bir şekilde aktığı 3 katmanlı mimariyi uygular. Proje genelinde verimli sorgular kullanıldı; örneğin bir kaydın varlığını doğrulamak için tüm kaydı getirmek yerine varlık kontrolü sorguları kullanıldı ve sorgu sonuçlarını düzenlemek ve işlemek için DataTable kullanıldı.',
+  },
+  1: {
+    title: 'Kişi Yöneticisi',
+    description: 'Veritabanına bağlı; oluşturma, okuma, güncelleme ve silme olmak üzere dört temel işlemi destekleyen bir kişi yönetim sistemi. Sistem; ada göre, ad ve ülkeye göre veya kısmi eşleşmeyle olmak üzere birden fazla şekilde aramayı destekler, ayrıca tek bir kişiyi ya da birden fazla kişiyi aynı anda silme imkânı sunar.',
+  },
+  2: {
+    title: 'X-O Oyunu',
+    description: 'WinForms arayüzüne sahip bir X-O (Tic-Tac-Toe) oyunu; oyun tahtası hazır butonlar yerine Graphics kullanılarak elle çizilir. Proje, her hücreyi bir bit olarak temsil eder ve olası tüm kombinasyonları tek tek kontrol etmek yerine, oyuncunun durumunu önceden tanımlanmış ikili desenlerle bitsel işlemler (bitwise operations) kullanarak karşılaştırır; böylece galibiyet veya beraberlik hızlı ve verimli bir şekilde tespit edilir.',
+  },
+  3: {
+    title: 'Pizza Sipariş Uygulaması',
+    description: 'WinForms arayüzüne sahip bir pizza sipariş uygulaması; boyut, malzeme ve hamur türü seçimiyle siparişin kişiselleştirilmesine olanak tanır ve her seçenek değiştiğinde toplam fiyat anında hesaplanır. Uygulama, onaydan önce siparişin tam bir özetini gösterir ve siparişi iptal etme ya da formu tamamen sıfırlama imkânı sunar.',
+  },
+}
+
+// Arabic card overrides for moreProjects — keyed by index in the `moreProjects` array.
+// title/description can be a plain string or a render function () => JSX (for mixed Arabic+English).
+// badges are arrays of React nodes; English terms wrapped in <bdi dir="ltr">.
+const arMoreProjectOverrides = {
+  3: {
+    title: 'تطبيق طلب البيتزا',
+    description: () => <>تطبيق لطلب البيتزا بواجهة <bdi dir="ltr">WinForms</bdi>، يتيح تخصيص الطلب من خلال اختيار الحجم والإضافات ونوع العجينة، مع حساب السعر الإجمالي فورًا عند تغيير أي خيار. ويعرض التطبيق ملخصًا كاملًا للطلب قبل تأكيده، مع إمكانية إلغائه أو إعادة تعيين النموذج بالكامل.</>,
+    badges: [
+      <bdi dir="ltr" key="cs">C#</bdi>,
+      <bdi dir="ltr" key="wf">Windows Forms</bdi>,
+    ],
+    isRtl: true,
+  },
+  2: {
+    title: () => <>لعبة <bdi dir="ltr">X-O</bdi></>,
+    description: () => <>لعبة إكس أو <bdi dir="ltr">(Tic-Tac-Toe)</bdi> بواجهة <bdi dir="ltr">WinForms</bdi>، تُرسم فيها لوحة اللعب يدويًا باستخدام <bdi dir="ltr">Graphics</bdi> بدل الاعتماد على أزرار جاهزة. ويمثّل المشروع كل خانة على شكل بت <bdi dir="ltr">(bit)</bdi>، ويقارن حالة اللاعب بأنماط ثنائية محددة مسبقًا باستخدام العمليات على مستوى البت <bdi dir="ltr">(Bitwise Operations)</bdi>، لاكتشاف الفوز أو التعادل بسرعة وكفاءة، بدل التحقق يدويًا من كل التركيبات الممكنة.</>,
+    badges: [
+      <bdi dir="ltr" key="cs">C#</bdi>,
+      <bdi dir="ltr" key="wf">Windows Forms</bdi>,
+      <bdi dir="ltr" key="gdi">Graphics (GDI+)</bdi>,
+      <bdi dir="ltr" key="bw">Bitwise Operations</bdi>,
+    ],
+    isRtl: true,
+  },
+  1: {
+    title: 'مدير جهات الاتصال',
+    description: 'نظام لإدارة جهات الاتصال مرتبط بقاعدة بيانات، ويدعم العمليات الأساسية الأربع: الإنشاء، والقراءة، والتعديل، والحذف. ويتيح النظام البحث بعدة طرق، سواء بالاسم الأول، أو بالاسم الأول والدولة معًا، أو بالمطابقة الجزئية، إلى جانب إمكانية حذف جهة اتصال واحدة أو عدة جهات اتصال دفعة واحدة.',
+    badges: [
+      <bdi dir="ltr" key="cs">C#</bdi>,
+      <bdi dir="ltr" key="ado">ADO.NET</bdi>,
+      <bdi dir="ltr" key="sql">SQL Server</bdi>,
+    ],
+    isRtl: true,
+  },
+  0: {
+    title: 'مركز جهات الاتصال',
+    description: () => <>نظام لإدارة جهات الاتصال يدير بيانات الدول وجهات الاتصال، ويدعم عمليات الإضافة والتعديل والحذف والبحث. يطبّق المشروع البنية ثلاثية الطبقات، حيث تنتقل كل عملية بوضوح من طبقة العرض إلى طبقة منطق الأعمال، ثم إلى طبقة الوصول إلى البيانات التي تنفّذها على قاعدة البيانات. واستُخدمت استعلامات فعّالة في جميع أجزاء المشروع، مثل استعلامات التحقق من الوجود بدل جلب السجل كاملًا لمجرد التأكد من وجوده، إلى جانب استخدام <bdi dir="ltr">DataTable</bdi> لتنظيم نتائج الاستعلامات ومعالجتها.</>,
+    badges: [
+      <bdi dir="ltr" key="cs">C#</bdi>,
+      <bdi dir="ltr" key="sql">SQL Server</bdi>,
+      <bdi dir="ltr" key="ado">ADO.NET</bdi>,
+      <bdi dir="ltr" key="arch">3-Layer Architecture</bdi>,
+      <bdi dir="ltr" key="dt">DataTable</bdi>,
+      <bdi dir="ltr" key="con">Console Application</bdi>,
+    ],
+    isRtl: true,
+  },
+}
+
+// Arabic card overrides — keyed by index in the `projects` array.
+// title/description can be a plain string or a render function () => JSX (for mixed Arabic+English).
+// badges are arrays of React nodes; English terms wrapped in <bdi dir="ltr">.
+const arProjectOverrides = {
+  0: {
+    title: 'نظام إدارة الصيدلية',
+    description: 'نظام إدارة صيدليات يتيح إدارة المستخدمين والموردين وسجلات المرضى، ويتيح تتبع الأدوية التي يتلقاها كل مريض من خلال أرشيف مخصص. كما يُدير النظام صرف الأدوية وبيعها على دفعات، مع إعطاء الأولوية لبيع الأدوية الأقرب إلى تاريخ انتهاء صلاحيتها، بالإضافة إلى إصدار فواتير البيع والشراء.',
+    badges: [
+      <bdi dir="ltr" key="cs">C#</bdi>,
+      <bdi dir="ltr" key="sql">SQL</bdi>,
+      <bdi dir="ltr" key="net">.NET Framework</bdi>,
+      <bdi dir="ltr" key="arch">3-Layer Architecture</bdi>,
+    ],
+    isRtl: true,
+  },
+  1: {
+    title: 'نظام المخزون ونقاط البيع',
+    description: 'نظام لإدارة المخزون ونقاط البيع يركّز على تتبع حركة المنتجات، حيث يرتبط كل عملية بيع أو شراء بفاتورتها الخاصة. يُدير النظام أيضًا بيانات الموردين والعملاء والمستخدمين ضمن هيكل متكامل واحد.',
+    badges: [
+      <bdi dir="ltr" key="cs">C#</bdi>,
+      <bdi dir="ltr" key="sql">SQL Server</bdi>,
+      <bdi dir="ltr" key="ef">Entity Framework</bdi>,
+      <bdi dir="ltr" key="arch">3-Layer Architecture</bdi>,
+    ],
+    isRtl: true,
+  },
+  2: {
+    title: 'نظام الإدارة المصرفية',
+    description: 'نظام إدارة مصرفية يعمل بنظام صلاحيات شامل، حيث تُحدَّد العمليات المسموح بها لكل مستخدم على مستوى النظام، بما في ذلك إدارة العملاء، والتحويلات، وإدارة المستخدمين، وسجلات تسجيل الدخول. يدعم النظام عمليات السحب والإيداع والتحويلات بين حسابات العملاء، بالإضافة إلى شاشة مخصصة لأسعار صرف العملات وعمليات تحويل العملات المباشرة.',
+    badges: [
+      <bdi dir="ltr" key="cpp">C++</bdi>,
+      <bdi dir="ltr" key="oop">OOP</bdi>,
+      <bdi dir="ltr" key="sd">Software Design</bdi>,
+    ],
+    isRtl: true,
+  },
+  3: {
+    title: () => <>هياكل البيانات بلغة <bdi dir="ltr">C++</bdi></>,
+    description: () => <>مشروع في هياكل البيانات يتضمن بناء الهياكل الأساسية من الصفر، مثل القوائم المترابطة المزدوجة، والمصفوفات الديناميكية، وطوابير الانتظار، والمكدسات، باستخدام القوالب <bdi dir="ltr">(Templates)</bdi> لتصبح قابلة للاستخدام مع أي نوع من البيانات. وطبّقت هذه الهياكل عمليًا في نظام للتراجع والإعادة <bdi dir="ltr">(Undo/Redo)</bdi> لتحرير النصوص باستخدام المكدس، وفي نظام آخر يحاكي طابور انتظار واقعيًا يُصدر التذاكر ويتتبع العملاء الذين تمت خدمتهم.</>,
+    badges: [
+      <bdi dir="ltr" key="cpp">C++</bdi>,
+      <bdi dir="ltr" key="ds">Data Structures</bdi>,
+      <bdi dir="ltr" key="alg">Algorithms</bdi>,
+      <bdi dir="ltr" key="tc">Template Classes</bdi>,
+      <bdi dir="ltr" key="tf">Template Functions</bdi>,
+    ],
+    isRtl: true,
+  },
+  4: {
+    title: 'جهات الاتصال - سطح المكتب',
+    description: () => <>نظام لإدارة جهات الاتصال بواجهة <bdi dir="ltr">WinForms</bdi>، يعيد استخدام طبقتَي منطق الأعمال والوصول إلى البيانات من مشروع مركز جهات الاتصال بالكامل دون تكرار أي كود، بحيث يقتصر العمل في هذا المشروع على طبقة العرض فقط. ويُظهر هذا المشروع تطبيقًا عمليًا لمبدأ إعادة الاستخدام ضمن البنية ثلاثية الطبقات.</>,
+    badges: [
+      <bdi dir="ltr" key="cs">C#</bdi>,
+      <bdi dir="ltr" key="wf">WinForms</bdi>,
+      <bdi dir="ltr" key="arch">3-Layer Architecture</bdi>,
+      <bdi dir="ltr" key="reuse">Code Reusability</bdi>,
+    ],
+    isRtl: true,
+  },
+  5: {
+    title: 'نظام معالجة الصور',
+    description: 'تطبيق لمعالجة الصور ينفّذ 15 عملية مختلفة يدويًا دون الاعتماد على مكتبات جاهزة، من خلال التعامل المباشر مع بيانات البكسلات في الصورة. وتُعرض نتيجة كل عملية في منطقة منفصلة دون تعديل الصورة الأصلية، مع إمكانية التراجع عن التغييرات عند الحاجة.',
+    badges: [
+      <bdi dir="ltr" key="cs">C#</bdi>,
+      <bdi dir="ltr" key="wf">Windows Forms</bdi>,
+      <bdi dir="ltr" key="net">.NET Framework</bdi>,
+      <bdi dir="ltr" key="kt">Krypton Toolkit</bdi>,
+      <bdi dir="ltr" key="plp">Pixel-Level Processing</bdi>,
+    ],
+    isRtl: true,
+  },
 }
 
 function GitHubIcon() {
@@ -211,17 +382,22 @@ function ChevronIcon() {
 }
 
 function ProjectCard({ project, localized, index, viewRepositoryLabel }) {
+  const cardDir = localized.isRtl ? 'rtl' : undefined
+  const title = typeof localized.title === 'function' ? localized.title() : localized.title
+  const description = typeof localized.description === 'function' ? localized.description() : localized.description
   return (
-    <article className="featured-projects__card" style={{ '--project-index': index }}>
+    <article className="featured-projects__card" style={{ '--project-index': index }} dir={cardDir}>
       <div className="featured-projects__card-head">
         <span className="site-icon-box featured-projects__card-icon" aria-hidden="true">{project.icon}</span>
-        <h3>{localized.title}</h3>
+        <h3>{title}</h3>
       </div>
       <div className="featured-projects__card-body">
-        <ul className="site-badge-list" aria-label={`${localized.title} technologies`}>
-          {localized.badges.map((badge) => <li className="site-badge" key={badge}>{badge}</li>)}
+        <ul className="site-badge-list" aria-label={`${project.title} technologies`}>
+          {localized.badges.map((badge, i) => (
+            <li className="site-badge" key={i}>{badge}</li>
+          ))}
         </ul>
-        <p>{localized.description}</p>
+        <p>{description}</p>
       </div>
       <div className="featured-projects__card-foot">
         {project.repositories.map((repository) => (
@@ -261,40 +437,52 @@ function FeaturedProjects({ items = projects, extraItems = moreProjects }) {
         </header>
 
         <div className="featured-projects__grid" id="featured-projects-grid">
-          {items.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              localized={localizedProjects[language][index]}
-              index={index}
-              viewRepositoryLabel={t.common.viewRepository}
-            />
-          ))}
-          {showMore && extraItems.map((project, index) => (
-            <ProjectCard
-              key={project.title}
-              project={project}
-              localized={localizedMoreProjects[language][index]}
-              index={items.length + index}
-              viewRepositoryLabel={t.common.viewRepository}
-            />
-          ))}
+          {items.map((project, index) => {
+            const base = localizedProjects[language][index]
+            const override = language === 'ar' ? arProjectOverrides[index] : language === 'tr' ? trProjectOverrides[index] : null
+            const localized = override ? { ...base, ...override } : base
+            return (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                localized={localized}
+                index={index}
+                viewRepositoryLabel={t.common.viewRepository}
+              />
+            )
+          })}
+          {showMore && extraItems.map((project, index) => {
+            const base = localizedMoreProjects[language][index]
+            const override = language === 'ar' ? arMoreProjectOverrides[index] : language === 'tr' ? trMoreProjectOverrides[index] : null
+            const localized = override ? { ...base, ...override } : base
+            return (
+              <ProjectCard
+                key={project.title}
+                project={project}
+                localized={localized}
+                index={items.length + index}
+                viewRepositoryLabel={t.common.viewRepository}
+              />
+            )
+          })}
         </div>
 
-        <div className="featured-projects__more">
-          <button
-            type="button"
-            className="featured-projects__more-toggle"
-            aria-expanded={showMore}
-            aria-controls="featured-projects-grid"
-            onClick={() => setShowMore((prev) => !prev)}
-          >
-            {showMore ? 'Show Less' : 'Show More Projects'}
-            <span className={`featured-projects__more-chevron ${showMore ? 'featured-projects__more-chevron--up' : ''}`} aria-hidden="true">
-              <ChevronIcon />
-            </span>
-          </button>
-        </div>
+        {extraItems.length > 0 && (
+          <div className="featured-projects__more">
+            <button
+              type="button"
+              className="featured-projects__more-toggle"
+              aria-expanded={showMore}
+              aria-controls="featured-projects-grid"
+              onClick={() => setShowMore((prev) => !prev)}
+            >
+              {showMore ? t.common.showLessProjects : t.common.showMoreProjects}
+              <span className={`featured-projects__more-chevron ${showMore ? 'featured-projects__more-chevron--up' : ''}`} aria-hidden="true">
+                <ChevronIcon />
+              </span>
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )

@@ -221,3 +221,12 @@
     transition: none;
   }
 }
+
+/* ── RTL (Arabic) ── */
+html[dir='rtl'] .featured-projects h2 { text-align: start; }
+
+/* Individual card RTL (applied via dir="rtl" on the card element itself).
+   Flex rows (card-head, site-badge-list, card-foot) mirror automatically because
+   the card element carries dir="rtl". Only text alignment needs explicit rules. */
+.featured-projects__card[dir='rtl'] h3 { text-align: start; }
+.featured-projects__card[dir='rtl'] p  { text-align: justify; }

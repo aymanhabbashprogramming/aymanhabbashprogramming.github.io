@@ -1,14 +1,11 @@
 .skills {
   --background: #fafafa;
-  --surface: #ffffff;
   --text: #0f172a;
   --muted: #5b6472;
   --sky: #2563eb;
-  --violet: #7c3aed;
   --border: #dbe4f0;
   overflow: hidden;
-  padding-left: clamp(20px, 4vw, 60px);
-  padding-right: clamp(20px, 4vw, 60px);
+  padding-inline: clamp(20px, 4vw, 60px);
   background: var(--background);
 }
 
@@ -22,10 +19,8 @@
 
 .skills__inner { position: relative; width: 100%; margin: 0 auto; }
 
+/* ── Header & intro ── */
 .skills__header {
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .7s ease, transform .7s cubic-bezier(.2, .65, .3, 1);
@@ -48,147 +43,174 @@
   font-size: 17px;
   line-height: 1.65;
   font-weight: 600;
-  letter-spacing: normal;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .7s .15s ease, transform .7s .15s cubic-bezier(.2, .65, .3, 1);
 }
 
-.skills__blocks {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  align-items: stretch;
-  gap: clamp(12px, 1.6vw, 20px);
+/* ── Carousel wrapper ── */
+.skills__carousel {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
   margin-top: clamp(40px, 6vw, 72px);
 }
 
-.skills__block {
+/* ── Scrollable track ── */
+.skills__track {
+  display: flex;
+  gap: clamp(24px, 3vw, 40px);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  flex: 1 1 0;
+  min-width: 0;
+  align-items: flex-start;
+}
+.skills__track::-webkit-scrollbar { display: none; }
+
+/* ── Column ── */
+.skills__col {
+  flex: 0 0 clamp(160px, 18vw, 210px);
+  scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  min-height: 158px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
+  gap: 16px;
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity .65s calc(.1s * var(--block-index) + .1s) ease,
-              transform .65s calc(.1s * var(--block-index) + .1s) cubic-bezier(.2, .65, .3, 1),
-              border-color .22s ease,
-              box-shadow .22s ease;
+  transition:
+    opacity .65s calc(.1s * var(--col-index) + .1s) ease,
+    transform .65s calc(.1s * var(--col-index) + .1s) cubic-bezier(.2, .65, .3, 1);
 }
 
-.skills__block:hover {
-  border-color: rgb(37 99 235 / 40%);
-  box-shadow: 0 12px 32px rgb(0 0 0 / 12%);
-}
-
-.skills__block-header {
+/* ── Column heading pill ── */
+.skills__col-heading {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 16px clamp(14px, 1.8vw, 20px);
-  background: rgb(37 99 235 / 8%);
-}
-
-/* أيقونة بلا صندوق مربّع خلفها، تجلس مباشرة على الشريط العلوي */
-.skills__block-icon {
-  width: auto;
-  height: auto;
-  background: none;
-  border: none;
-  border-radius: 0;
-}
-
-.skills h3 {
-  margin: 0;
-  color: var(--text);
-  font-size: 15px;
-  line-height: 1.25;
-  letter-spacing: -.02em;
-  font-weight: 650;
-}
-
-.skills__block-body {
-  padding: clamp(14px, 1.8vw, 20px);
-}
-
-/* --- زر عرض المزيد --- */
-.skills__more {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: clamp(24px, 3vw, 36px);
-}
-
-.skills__more-toggle {
-  display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 22px;
-  border: 1px solid rgb(37 99 235 / 35%);
-  border-radius: 999px;
-  background: rgb(37 99 235 / 6%);
-  color: var(--sky);
-  font-family: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.25s ease, border-color 0.25s ease;
+  padding: 8px 14px;
+  background: rgb(37 99 235 / 9%);
+  border-radius: 10px;
+  min-height: 44px;
 }
 
-.skills__more-toggle:hover {
-  background: rgb(37 99 235 / 12%);
-  border-color: rgb(37 99 235 / 50%);
-}
-
-.skills__more-chevron {
+.skills__col-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.25s ease;
+  flex-shrink: 0;
+  color: var(--sky);
 }
-.skills__more-chevron svg { width: 14px; height: 14px; }
-.skills__more-chevron--up { transform: rotate(180deg); }
+.skills__col-icon svg { width: 18px; height: 18px; }
 
-.skills__more-panel {
-  grid-column: 1 / -1;
-  padding: clamp(20px, 2.5vw, 28px);
-  border: 1px dashed var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-  color: var(--muted);
+.skills__col-title {
+  color: var(--sky);
   font-size: 14px;
-  text-align: center;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
-.skills__more-panel p { margin: 0; }
 
-/* --- حركات الظهور --- */
+/* ── Item list ── */
+.skills__col-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.skills__col-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--text);
+  font-size: 14.5px;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.skills__col-item::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sky);
+  opacity: 0.7;
+}
+
+/* ── Arrow buttons (match Training carousel style) ── */
+.skills__arrow {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #1e3a8a;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color .2s ease, transform .2s ease;
+  /* keep arrows vertically aligned with the column headings */
+  margin-top: 4px;
+}
+.skills__arrow:hover { background: #1e40af; transform: scale(1.05); }
+
+.skills__arrow-icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+}
+.skills__arrow-icon svg { width: 16px; height: 16px; }
+
+/* back arrow points left (chevron points right by default, so rotate for back) */
+.skills__arrow-icon--back { transform: rotate(180deg); }
+
+/* ── Reveal animations ── */
 .skills--visible .skills__header,
-.skills--visible .skills__intro,
-.skills--visible .skills__block { opacity: 1; transform: translateY(0); }
+.skills--visible .skills__intro { opacity: 1; transform: translateY(0); }
 
-@media (max-width: 1100px) {
-  .skills__blocks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.skills--visible .skills__col { opacity: 1; transform: translateY(0); }
+
+/* ── Responsive ── */
+
+/* Tablet: ~3 columns visible */
+@media (max-width: 900px) {
+  .skills__col { flex: 0 0 clamp(150px, 30vw, 200px); }
 }
 
-@media (max-width: 720px) {
-  .skills__blocks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .skills__block { min-height: 0; }
-}
-
-@media (max-width: 480px) {
-  .skills__blocks { grid-template-columns: 1fr; gap: 14px; }
-  .skills__block-header { padding: 16px 20px; }
-  .skills__block-body { padding: 20px; }
-  .skills h3 { font-size: 16px; }
+/* Mobile: ~1.5 columns visible as scroll hint */
+@media (max-width: 520px) {
+  .skills__col { flex: 0 0 65vw; }
+  .skills__carousel { gap: 6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .skills__header, .skills__intro, .skills__block { opacity: 1; transform: none; transition: none; }
+  .skills__header, .skills__intro, .skills__col { opacity: 1; transform: none; transition: none; }
+  .skills__track { scroll-behavior: auto; }
 }
 
-/* ── RTL (Arabic) — title and intro only; rest of section stays LTR ── */
-html[dir='rtl'] .skills__title,
-html[dir='rtl'] .skills__intro { text-align: right; }
+/* ── RTL (Arabic) ── */
+/*
+  The section now inherits dir="rtl" from the page when Arabic is active.
+  Most layout mirrors automatically because flexbox and text follow the
+  inline direction. Only the arrow icons and the bullet need explicit rules.
+*/
+
+/* Title and intro: block elements, inherit text direction naturally — no override needed */
+
+/* Column heading: flex row, browser mirrors it in RTL (icon on right, title on left) */
+
+/* Item bullet: ::before sits at inline-start. In RTL that's the right side automatically.
+   No extra rule needed — it just works once dir="rtl" is set on the section. */
+
+/* Arrow icons: ChevronIcon default points RIGHT.
+   In LTR  → --back (toward start/left) needs rotate(180deg); --end (toward right) is fine.
+   In RTL  → --back (toward start/RIGHT) needs no rotation; --end (toward left) needs rotate(180deg). */
+html[dir='rtl'] .skills__arrow-icon--back { transform: none; }
+html[dir='rtl'] .skills__arrow-icon:not(.skills__arrow-icon--back) { transform: rotate(180deg); }
