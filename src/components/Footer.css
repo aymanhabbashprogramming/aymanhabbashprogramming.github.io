@@ -1,5 +1,5 @@
 .footer {
-  background: #2563eb;
+  background: var(--bg-color);
 }
 
 .footer__inner {
@@ -33,7 +33,7 @@
 
 .footer__tagline {
   margin: 0;
-  color: rgb(255 255 255 / 70%);
+  color: rgb(255 255 255 / 85%);
   font-size: clamp(13px, 1.2vw, 14px);
   font-weight: 400;
   line-height: 1.65;
@@ -54,15 +54,15 @@
 }
 
 .footer__nav-link {
-  color: rgb(255 255 255 / 80%);
-  font-size: clamp(13.5px, 1.3vw, 15px);
+  color: rgb(255 255 255 / 85%);
+  font-size: 1rem;
   font-weight: 600;
+  letter-spacing: .01em;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 .footer__nav-link:hover {
   color: #ffffff;
-  text-decoration: underline;
 }
 
 /* Spacer column (third): empty, just fills space */
@@ -78,12 +78,12 @@
   gap: 16px;
   margin-top: clamp(1.75rem, 3vw, 2.5rem);
   padding-top: clamp(1rem, 2vw, 1.25rem);
-  border-top: 1px solid rgb(255 255 255 / 15%);
+  border-top: 1px solid rgb(255 255 255 / 20%);
 }
 
 .footer__copy {
   margin: 0;
-  color: rgb(255 255 255 / 65%);
+  color: rgb(255 255 255 / 85%);
   font-size: 13px;
   font-weight: 400;
   text-align: center;
@@ -98,12 +98,16 @@
 .footer__top-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: rgb(255 255 255 / 80%);
-  font-size: 13px;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 15%);
+  color: #ffffff;
+  font-size: 1rem;
   font-weight: 600;
+  letter-spacing: .01em;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: background 0.2s ease;
   white-space: nowrap;
 }
 .footer__top-btn svg {
@@ -112,7 +116,7 @@
   flex-shrink: 0;
 }
 .footer__top-btn:hover {
-  color: #ffffff;
+  background: rgb(255 255 255 / 25%);
 }
 
 /* ── Responsive: tablet ── */

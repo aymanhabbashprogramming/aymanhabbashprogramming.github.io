@@ -27,38 +27,103 @@ function Hero() {
 
       {/* ── Banner ── */}
       <div className="hero__banner">
-        <div className="hero__banner-inner">
-          <h1 id="hero-title" className="hero__name">{h.name}</h1>
 
-          <div className="hero__banner-uni">
-            <div className="hero__banner-uni-badge">
-              <img
-                src="/images/Picture2.png"
-                alt={h.uniLogoAlt}
-                className="hero__banner-uni-logo"
-                onError={(e) => { e.currentTarget.style.display = 'none' }}
-              />
-            </div>
-            <div className="hero__banner-uni-text">
-              <span className="hero__banner-uni-name">{h.uniName}</span>
-              <span className="hero__banner-uni-dept">{h.uniDept}</span>
-            </div>
+
+        <div className="hero__banner-inner">
+
+
+          {/* Descraption = Left */}
+
+          <div className="hero_descraption">
+
+            {/* <h1 id="hero-title" className="hero__name">{h.name}</h1> */}
+
+            <p className="hero__description" lang={language}>
+                {h.description}
+            </p>
+
+
+
+
+              <div className="hero__banner-uni">
+                  <div className="hero__banner-uni-badge">
+                    <img
+                      src="/images/Picture2.png"
+                      alt={h.uniLogoAlt}
+                      className="hero__banner-uni-logo"
+                      onError={(e) => { e.currentTarget.style.display = 'none' }}
+                    />
+                  </div>
+                  <div className="hero__banner-uni-text">
+                    <span className="hero__banner-uni-name">{h.uniName}</span>
+                    <span className="hero__banner-uni-dept">{h.uniDept}</span>
+                  </div>
+
+                </div>
+
+
+
+
           </div>
+
+
+
+
+
+
+
+          {/* Profile + Reight */}
+
+
+
+                
+                <div className="hero__body-right">
+                  <div className="hero__photo-wrap">
+                    <div className="hero__avatar">
+                      <img
+                        src="/images/myimage.png"
+                        alt={h.photoAlt}
+                      />
+                    </div>
+                  </div>
+                  <p className="hero__profile-name">{h.profileName}</p>
+                  <p className="hero__profile-role">{h.role}</p>
+                  <p className="hero__profile-tech" dir="ltr">{h.tech}</p>
+                  <a
+                    className="hero__github"
+                    href="https://github.com/aymanhabbashprogramming"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <GitHubIcon />
+                    {h.github}
+                  </a>
+                </div>
+
+
+
+
+          
+
         </div>
+
+          
       </div>
 
       {/* ── Body ── */}
       <div className="hero__body">
-        <div className="hero__body-inner">
 
-          <div className="hero__body-left">
+
+
+
+          {/* <div className="hero__body-left">
             <p className="hero__description" lang={language}>
               {h.description}
             </p>
-          </div>
+          </div> */}
 
           {/* Photo + info column */}
-          <div className="hero__body-right">
+          {/* <div className="hero__body-right">
             <div className="hero__photo-wrap">
               <div className="hero__avatar"><ProfileIcon /></div>
             </div>
@@ -74,11 +139,16 @@ function Hero() {
               <GitHubIcon />
               {h.github}
             </a>
-          </div>
+          </div> */}
 
-        </div>
+
+
+
+
+
+
+
       </div>
-
     </main>
   )
 }

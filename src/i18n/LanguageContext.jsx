@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 
 const translations = {
   en: {
-    nav: { home: 'Home', about: 'Core Skills', skills: 'Tech Stack', projects: 'Projects', training: 'Training', certificates: 'Certificates', language: 'Language', backToTop: 'Back to top' },
+    nav: { home: 'Home',  about: 'Core Skills', skills: 'Tech Stack', projects: 'Projects', training: 'Training', certificates: 'Certificates', language: 'Language', backToTop: 'Back to top', openMenu: 'Open menu', closeMenu: 'Close menu' },
     hero: {
       name: 'Mohammed Ayman Habbash',
       uniName: 'Selçuk University',
@@ -11,6 +11,7 @@ const translations = {
       uniLogoAlt: 'Selçuk University logo',
       description: 'Computer Engineering student at Selçuk University, with a strong specialization in C++, C#, and SQL. I have designed and built multiple structured software systems, including pharmacy management, point-of-sale, and banking applications, applying layered architecture and solid software design principles throughout the full development lifecycle.',
       profileName: 'Mohammed Ayman Habbash',
+      photoAlt: 'Mohammed Ayman Habbash',
       role: 'Software Developer',
       tech: 'C++ | C# | SQL',
       github: 'View My GitHub',
@@ -32,7 +33,7 @@ const translations = {
     footer: { name: 'Mohammed Ayman Habbash', tagline: 'Software Developer. Computer Engineering student at Selçuk University.', copyright: (year) => `© ${year} Mohammed Ayman Habbash. All rights reserved.` },
   },
   tr: {
-    nav: { home: 'Ana Sayfa', about: 'Temel Beceriler', skills: 'Teknolojiler', projects: 'Projeler', training: 'Eğitim', certificates: 'Sertifikalar', language: 'Dil', backToTop: 'Başa dön' },
+    nav: { home: 'Ana Sayfa', about: 'Temel Beceriler', skills: 'Teknolojiler', projects: 'Projeler', training: 'Eğitim', certificates: 'Sertifikalar', language: 'Dil', backToTop: 'Başa dön', openMenu: 'Menüyü aç', closeMenu: 'Menüyü kapat' },
     hero: {
       name: 'Muhammed Eymen Habbeş',
       uniName: 'Selçuk Üniversitesi',
@@ -40,6 +41,7 @@ const translations = {
       uniLogoAlt: 'Selçuk Üniversitesi logosu',
       description: "Selçuk Üniversitesi'nde Bilgisayar Mühendisliği öğrencisiyim ve C++, C# ve SQL alanlarında uzmanlaşıyorum. Eczane yönetimi, satış noktası ve bankacılık uygulamaları dahil olmak üzere birçok yapılandırılmış yazılım sistemi tasarlayıp geliştirdim; tüm geliştirme süreci boyunca katmanlı mimariyi ve sağlam yazılım tasarım ilkelerini uyguladım.",
       profileName: 'Muhammed Eymen Habbeş',
+      photoAlt: 'Muhammed Eymen Habbeş',
       role: 'Yazılım Geliştirici',
       tech: 'C++ | C# | SQL',
       github: 'GitHub Profilimi Görüntüle',
@@ -61,14 +63,15 @@ const translations = {
     footer: { name: 'Muhammed Eymen Habbeş', tagline: 'Yazılım Geliştirici. Selçuk Üniversitesi Bilgisayar Mühendisliği öğrencisi.', copyright: (year) => `© ${year} Muhammed Eymen Habbeş. Tüm hakları saklıdır.` },
   },
   ar: {
-    nav: { home: 'الرئيسية', about: 'المهارات الأساسية', skills: 'التقنيات والأدوات', projects: 'المشاريع', training: 'التدريب', certificates: 'الشهادات', language: 'اللغة', backToTop: 'العودة إلى الأعلى' },
+    nav: { home: 'الرئيسية', about: 'المهارات الأساسية', skills: 'التقنيات والأدوات', projects: 'المشاريع', training: 'التدريب', certificates: 'الشهادات', language: 'اللغة', backToTop: 'العودة إلى الأعلى', openMenu: 'فتح القائمة', closeMenu: 'إغلاق القائمة' },
     hero: {
-      name: 'محمد أيمن هباش',
+      name: 'محمد أيمن الهباش',
       uniName: 'جامعة سلجوق',
       uniDept: 'هندسة الحاسوب',
       uniLogoAlt: 'شعار جامعة سلجوق',
       description: 'طالب هندسة حاسوب في جامعة سلجوق، أتخصص في لغات C++ وC# وSQL. صمّمتُ وبنيتُ عدة أنظمة برمجية، منها نظام لإدارة الصيدليات ونقاط البيع والبنوك، مع تطبيق البنية متعددة الطبقات ومبادئ التصميم البرمجي السليم في جميع مراحل التطوير.',
-      profileName: 'محمد أيمن هباش',
+      profileName: 'محمد أيمن الهباش',
+      photoAlt: 'محمد أيمن الهباش',
       role: 'مطوّر برمجيات',
       tech: 'C++ | C# | SQL',
       github: 'زيارة حسابي على GitHub',
@@ -103,7 +106,7 @@ const translations = {
       ],
     },
     common: { viewRepository: 'عرض المستودع', viewCertificate: 'عرض الشهادة', course: 'الكورس', certificatesIntro: 'شهادات تم الحصول عليها للدورات المكتملة ضمن مسار التدريب المنهجي في البرمجة وتطوير البرمجيات.', completed: 'مكتمل', upcoming: 'قادم', currentStudent: 'طالب حالي', currentlyPursuing: 'أدرس حاليًا', showMoreProjects: 'عرض المزيد من المشاريع', showLessProjects: 'عرض أقل', visitPlatform: 'زيارة المنصة', certifications: 'الشهادات', certNote: 'تُصدر المنصة الشهادات ابتداءً من الكورس 5.' },
-    footer: { name: 'محمد أيمن هباش', tagline: 'مطوّر برمجيات. طالب هندسة حاسوب في جامعة سلجوق.', copyright: (year) => `© ${year} محمد أيمن هباش. جميع الحقوق محفوظة.` },
+    footer: { name: 'محمد أيمن الهباش', tagline: 'مطوّر برمجيات. طالب هندسة حاسوب في جامعة سلجوق.', copyright: (year) => `© ${year} محمد أيمن الهباش. جميع الحقوق محفوظة.` },
   },
 }
 

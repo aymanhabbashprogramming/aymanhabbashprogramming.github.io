@@ -120,22 +120,28 @@ function SkillsCarousel() {
     // scrollLeft can be negative in RTL in some browsers — use abs
     const absLeft = Math.abs(scrollLeft)
     const maxScroll = scrollWidth - clientWidth
-    setCanScrollStart(absLeft > 4)
-    setCanScrollEnd(absLeft < maxScroll - 4)
+    setCanScrollStart(absLeft > 2)
+    setCanScrollEnd(maxScroll - absLeft > 2)
   }, [])
 
   useEffect(() => {
     const track = trackRef.current
     if (!track) return undefined
-    const frame = requestAnimationFrame(updateArrows)
+    // Double rAF: first fires after paint, second after layout is fully stable
+    let frame
+    const scheduleUpdate = () => { frame = requestAnimationFrame(() => requestAnimationFrame(updateArrows)) }
+    scheduleUpdate()
     track.addEventListener('scroll', updateArrows, { passive: true })
     window.addEventListener('resize', updateArrows)
+    const ro = new ResizeObserver(updateArrows)
+    ro.observe(track)
     return () => {
       cancelAnimationFrame(frame)
       track.removeEventListener('scroll', updateArrows)
       window.removeEventListener('resize', updateArrows)
+      ro.disconnect()
     }
-  }, [updateArrows])
+  }, [updateArrows, language])
 
   const scrollByCol = (direction) => {
     const track = trackRef.current

@@ -1,14 +1,14 @@
 .about {
-  --background: #fafafa;
+  /* --background: #fafafa; */
   --surface: #ffffff;
-  --text: #0f172a;
-  --muted: #5b6472;
+  /* --text: #0f172a; */
+  /* --text-color: #5b6472; */
   --sky: #2563eb;
   --violet: #7c3aed;
   --border: #dbe4f0;
   overflow: hidden;
   padding-inline: clamp(20px, 4vw, 60px);
-  background: var(--background);
+  background: var(--bg-color-section);
 }
 
 .about::after { content: ''; position: absolute; inset-inline-end: -15%; bottom: -35%; width: min(680px, 60vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(124 58 237 / 6%), transparent 67%); pointer-events: none; }
@@ -17,7 +17,7 @@
 .about__heading { display: flex; flex-direction: column; gap: 16px; }
 .about h2 {
   margin: 0;
-  color: var(--text);
+  color: var(--title-color);
   font-size: clamp(28px, 2vw, 46px);
   line-height: 1.15;
   letter-spacing: -.045em;
@@ -28,7 +28,7 @@
 .about__intro {
   margin: 0;
   max-width: 880px;
-  color: var(--muted);
+  color: var(--text-color);
   font-size: 17px;
   line-height: 1.65;
   font-weight: 600;
@@ -49,39 +49,12 @@
   display: flex;
   flex-direction: column;
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: var(--bg-color-section);
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
-  transition: transform 0.35s cubic-bezier(0.2, 0.65, 0.3, 1),
-              border-color 0.35s ease,
-              box-shadow 0.35s ease;
-}
-
-/* تأثير توهج خفيف في الزاوية */
-.about__card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.about__card--sky::before {
-  background: radial-gradient(circle, rgb(37 99 235 / 8%), transparent 70%);
-}
-.about__card--violet::before {
-  background: radial-gradient(circle, rgb(124 58 237 / 8%), transparent 70%);
-}
-
-.about__card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgb(0 0 0 / 12%);
+  transition: border-color 0.35s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .about__card--sky:hover {
@@ -89,10 +62,6 @@
 }
 .about__card--violet:hover {
   border-color: rgb(124 58 237 / 40%);
-}
-
-.about__card:hover::before {
-  opacity: 1;
 }
 
 /* --- الشريط العلوي (الأيقونة + العنوان) --- */
@@ -105,7 +74,7 @@
 }
 
 .about__card--sky .about__card-head {
-  background: rgb(37 99 235 / 8%);
+  background: var(--bg-color-box-top);
 }
 
 .about__card--violet .about__card-head {
@@ -117,7 +86,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: transform 0.35s ease;
 }
 
 .about__card--sky .about__card-icon {
@@ -133,14 +101,10 @@
   height: 22px;
 }
 
-.about__card:hover .about__card-icon {
-  transform: scale(1.08);
-}
-
 /* --- عنوان البطاقة --- */
 .about__card-title {
   margin: 0;
-  color: var(--text);
+  color: var(--title-color);
   font-size: clamp(16px, 1.3vw, 19px);
   font-weight: 650;
   letter-spacing: -0.02em;
@@ -158,17 +122,17 @@
 /* --- وصف البطاقة --- */
 .about__card-description {
   margin: 0;
-  color: var(--muted);
+  color: var(--text-color);
   font-size: 15px;
   line-height: 1.7;
   letter-spacing: normal;
-  text-align: justify;
+
 }
 
 /* --- شارات البطاقة --- */
 .about__card-badges {
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 4px;
   margin: 0;
   padding: 0;
@@ -238,7 +202,7 @@
   border: 1px dashed var(--border);
   border-radius: 12px;
   background: var(--surface);
-  color: var(--muted);
+  color: var(--text-color);
   font-size: 14px;
   text-align: center;
 }
@@ -292,9 +256,6 @@
     transform: none;
     transition: none;
   }
-  .about__card:hover {
-    transform: none;
-  }
 }
 
 /* ── RTL (Arabic) ── */
@@ -303,7 +264,7 @@ html[dir='rtl'] .about__intro,
 html[dir='rtl'] .about__card-title,
 html[dir='rtl'] .about__card-description { text-align: start; }
 
-html[dir='rtl'] .about__card-description { text-align: justify; }
+html[dir='rtl'] .about__card-description { text-align: start; }
 
 html[dir='rtl'] .about__card-badges { justify-content: flex-start; }
 

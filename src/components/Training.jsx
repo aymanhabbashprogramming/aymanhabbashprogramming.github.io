@@ -79,22 +79,28 @@ function CertificateCarousel({ certificates, viewCertificate, completed, courseL
     const { scrollLeft, scrollWidth, clientWidth } = track
     const absLeft = Math.abs(scrollLeft)
     const maxScroll = scrollWidth - clientWidth
-    setCanScrollStart(absLeft > 4)
-    setCanScrollEnd(absLeft < maxScroll - 4)
+    setCanScrollStart(absLeft > 2)
+    setCanScrollEnd(maxScroll - absLeft > 2)
   }, [])
 
   useEffect(() => {
     const track = trackRef.current
     if (!track) return undefined
-    const frame = requestAnimationFrame(updateArrows)
+    // Double rAF: first fires after paint, second after layout is fully stable
+    let frame
+    const scheduleUpdate = () => { frame = requestAnimationFrame(() => requestAnimationFrame(updateArrows)) }
+    scheduleUpdate()
     track.addEventListener('scroll', updateArrows, { passive: true })
     window.addEventListener('resize', updateArrows)
+    const ro = new ResizeObserver(updateArrows)
+    ro.observe(track)
     return () => {
       cancelAnimationFrame(frame)
       track.removeEventListener('scroll', updateArrows)
       window.removeEventListener('resize', updateArrows)
+      ro.disconnect()
     }
-  }, [updateArrows, certificates])
+  }, [updateArrows, certificates, language])
 
   const scrollByCard = (direction) => {
     const track = trackRef.current
@@ -130,7 +136,7 @@ function CertificateCarousel({ certificates, viewCertificate, completed, courseL
               <div className="training__cert-body">
                 <p className="training__cert-title" dir="ltr">{cert.title}</p>
                 {cert.pdf ? (
-                  <a className="training__cert-link" href={cert.pdf} target="_blank" rel="noopener noreferrer">
+                  <a className="training__cert-link site-action-btn site-action-btn--certificate" href={cert.pdf} target="_blank" rel="noopener noreferrer">
                     {viewCertificate}
                   </a>
                 ) : (

@@ -17,7 +17,26 @@ function HomeIcon() {
   )
 }
 
-function LanguageSwitcher({ language, setLanguage, label }) {
+function HamburgerIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+      <line x1="3" y1="6" x2="21" y2="6" />
+      <line x1="3" y1="12" x2="21" y2="12" />
+      <line x1="3" y1="18" x2="21" y2="18" />
+    </svg>
+  )
+}
+
+function CloseIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+      <line x1="5" y1="5" x2="19" y2="19" />
+      <line x1="19" y1="5" x2="5" y2="19" />
+    </svg>
+  )
+}
+
+function LanguageSwitcher({ language, setLanguage, label, onOpen }) {
   const [open, setOpen] = useState(false)
   const containerRef = useRef(null)
   const current = LANGUAGES.find(l => l.code === language) || LANGUAGES[0]
@@ -57,6 +76,12 @@ function LanguageSwitcher({ language, setLanguage, label }) {
     if (e.key === 'Escape') setOpen(false)
   }
 
+  function handleToggle() {
+    const next = !open
+    if (next) onOpen()
+    setOpen(next)
+  }
+
   return (
     <div className="site-navigation__lang-wrap" ref={containerRef}>
       <button
@@ -65,7 +90,7 @@ function LanguageSwitcher({ language, setLanguage, label }) {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={label}
-        onClick={() => setOpen(o => !o)}
+        onClick={handleToggle}
         onKeyDown={handleButtonKey}
       >
         {current.label}
@@ -103,6 +128,8 @@ function LanguageSwitcher({ language, setLanguage, label }) {
 function SiteNavigation() {
   const { language, setLanguage, t } = useLanguage()
   const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const navRef = useRef(null)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -110,37 +137,87 @@ function SiteNavigation() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    if (!menuOpen) return
+    function handleOutside(e) {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setMenuOpen(false)
+      }
+    }
+    function handleKey(e) {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    document.addEventListener('mousedown', handleOutside)
+    document.addEventListener('keydown', handleKey)
+    return () => {
+      document.removeEventListener('mousedown', handleOutside)
+      document.removeEventListener('keydown', handleKey)
+    }
+  }, [menuOpen])
+
   function scrollToTop(e) {
     e.preventDefault()
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  function handleNavLink(e, id) {
+    e.preventDefault()
+    setMenuOpen(false)
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+
   return (
-    <nav className={`site-navigation${scrolled ? ' site-navigation--scrolled' : ''}`} aria-label="Primary navigation">
-      <div className="site-navigation__left">
-        <a
-          className="site-navigation__home"
-          href="#top"
-          onClick={scrollToTop}
-          aria-label={t.nav.backToTop}
-          title={t.nav.backToTop}
-        >
-          <HomeIcon />
-          <span className="site-navigation__home-label">{t.nav.home}</span>
-        </a>
-      </div>
+    <div ref={navRef} className="site-navigation-wrapper">
+      <nav className={`site-navigation${scrolled ? ' site-navigation--scrolled' : ''}`} aria-label="Primary navigation">
+        <div className="site-navigation__left">
+          <a
+            className="site-navigation__home"
+            href="#top"
+            onClick={scrollToTop}
+            aria-label={t.nav.backToTop}
+            title={t.nav.backToTop}
+          >
+            <HomeIcon />
+            <span className="site-navigation__home-label">{t.nav.home}</span>
+          </a>
+        </div>
 
-      <div className="site-navigation__links">
-        <a href="#about">{t.nav.about}</a>
-        <a href="#skills">{t.nav.skills}</a>
-        <a href="#projects">{t.nav.projects}</a>
-        <a href="#training">{t.nav.training}</a>
-      </div>
+        <div className="site-navigation__links">
+          <a href="#about">{t.nav.about}</a>
+          <a href="#skills">{t.nav.skills}</a>
+          <a href="#projects">{t.nav.projects}</a>
+          <a href="#training">{t.nav.training}</a>
+        </div>
 
-      <div className="site-navigation__right">
-        <LanguageSwitcher language={language} setLanguage={setLanguage} label={t.nav.language} />
+        <div className="site-navigation__right">
+          <div className="site-navigation__end-group">
+            <LanguageSwitcher
+              language={language}
+              setLanguage={setLanguage}
+              label={t.nav.language}
+              onOpen={() => setMenuOpen(false)}
+            />
+            <button
+              type="button"
+              className="site-navigation__hamburger"
+              aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen(o => !o)}
+            >
+              {menuOpen ? <CloseIcon /> : <HamburgerIcon />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      <div className={`site-navigation__mobile-menu${menuOpen ? ' site-navigation__mobile-menu--open' : ''}`} aria-hidden={!menuOpen}>
+        <a href="#about" onClick={(e) => handleNavLink(e, 'about')}>{t.nav.about}</a>
+        <a href="#skills" onClick={(e) => handleNavLink(e, 'skills')}>{t.nav.skills}</a>
+        <a href="#projects" onClick={(e) => handleNavLink(e, 'projects')}>{t.nav.projects}</a>
+        <a href="#training" onClick={(e) => handleNavLink(e, 'training')}>{t.nav.training}</a>
       </div>
-    </nav>
+    </div>
   )
 }
 

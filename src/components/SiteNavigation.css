@@ -1,13 +1,18 @@
-.site-navigation {
-  position: fixed;
+.site-navigation-wrapper {
+  position: sticky;
   z-index: 100;
-  top: 0; right: 0; left: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.site-navigation {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   min-height: 72px;
   padding: 0 clamp(24px, 6vw, 96px);
-  background: #2563eb;
+  background: var(--bg-color);
   transition: box-shadow .25s ease;
 }
 .site-navigation--scrolled { box-shadow: 0 2px 16px rgb(0 0 0 / 30%); }
@@ -59,6 +64,12 @@
 
 /* ── Right: custom language switcher ── */
 .site-navigation__right { display: flex; align-items: center; justify-self: end; }
+
+.site-navigation__end-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
 .site-navigation__lang-wrap {
   position: relative;
@@ -137,13 +148,82 @@
   color: #475569;
 }
 
+/* ── Hamburger button (hidden on desktop) ── */
+.site-navigation__hamburger {
+  display: none;
+}
+
+/* ── Mobile menu panel ── */
+.site-navigation__mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--bg-color);
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.25s ease;
+}
+.site-navigation__mobile-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 12px clamp(24px, 6vw, 96px);
+  color: rgb(255 255 255 / 85%);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  text-decoration: none;
+  border-top: 1px solid rgb(255 255 255 / 10%);
+  transition: color .2s ease, background .2s ease;
+}
+.site-navigation__mobile-menu a:hover { color: #ffffff; background: rgb(255 255 255 / 8%); }
+.site-navigation__mobile-menu--open { max-height: 300px; }
+
 /* ── Mobile ── */
-@media (max-width: 680px) {
-  .site-navigation { min-height: 62px; padding: 0 22px; }
-  .site-navigation__links { gap: 13px; overflow-x: auto; scrollbar-width: none; }
-  .site-navigation__links::-webkit-scrollbar { display: none; }
-  .site-navigation__links a { flex: 0 0 auto; font-size: 13px; }
+@media (max-width: 767px) {
+  /* Switch from 3-col grid to flexbox so the two groups reach the edges */
+  .site-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 62px;
+    padding-inline: 22px;
+  }
+
+  /* Hide the right wrapper — its children are re-exposed via end-group */
+  .site-navigation__right { display: contents; }
+
+  /* End group: lang switcher + hamburger, always at the inline-end edge */
+  .site-navigation__end-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-inline-start: auto;
+  }
+
   .site-navigation__lang-btn { padding: 6px 11px; font-size: 13px; }
+
+  /* Hide center links — replaced by hamburger menu */
+  .site-navigation__links { display: none; }
+
+  /* Show hamburger */
+  .site-navigation__hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgb(255 255 255 / 55%);
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background .2s ease;
+  }
+  .site-navigation__hamburger svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .site-navigation__hamburger:hover,
+  .site-navigation__hamburger[aria-expanded="true"] { background: rgb(255 255 255 / 15%); }
+
+  /* Show mobile menu panel */
+  .site-navigation__mobile-menu { display: flex; }
 }
 
 /* ── RTL (Arabic) ── */
@@ -154,10 +234,15 @@
   justify-self: end    → sticks to the inline-end  edge (left  in RTL, right in LTR)
   No order swapping needed — logical properties handle both directions.
 */
+html[dir='rtl'] .site-navigation-wrapper { direction: rtl; }
 html[dir='rtl'] .site-navigation { direction: rtl; }
 
 /* Dropdown opens toward inline-start (leftward in RTL) */
 html[dir='rtl'] .site-navigation__lang-dropdown {
   right: auto;
   left: 0;
+}
+
+@media (max-width: 767px) {
+  html[dir='rtl'] .site-navigation__mobile-menu a { text-align: start; }
 }

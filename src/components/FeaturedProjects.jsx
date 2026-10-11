@@ -401,7 +401,7 @@ function ProjectCard({ project, localized, index, viewRepositoryLabel }) {
       </div>
       <div className="featured-projects__card-foot">
         {project.repositories.map((repository) => (
-          <a href={repository.url} target="_blank" rel="noopener noreferrer" key={repository.url}>
+          <a href={repository.url} target="_blank" rel="noopener noreferrer" key={repository.url} className="site-action-btn">
             <GitHubIcon /> {repository.label === 'View Repository' ? viewRepositoryLabel : repository.label}
           </a>
         ))}

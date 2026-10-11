@@ -1,16 +1,11 @@
 .featured-projects {
-  --background: #fafafa;
-  --surface: #ffffff;
-  --text: #0f172a;
-  --muted: #5b6472;
   --sky: #2563eb;
   --violet: #7c3aed;
   --border: #dbe4f0;
   overflow: hidden;
-  /* تم تقليل الهوامش الجانبية لتوسيع المحتوى */
   padding-left: clamp(20px, 4vw, 60px);
   padding-right: clamp(20px, 4vw, 60px);
-  background: var(--background);
+  background: var(--bg-color-section);
 }
 
 .featured-projects::before {
@@ -36,7 +31,7 @@
 
 .featured-projects h2 {
   margin: 0;
-  color: var(--text);
+  color: var(--title-color);
   font-size: clamp(28px, 2vw, 46px);
   line-height: 1.1;
   letter-spacing: -.075em;
@@ -62,19 +57,18 @@
   border: 1px solid var(--border);
   border-radius: 12px;
   overflow: hidden;
-  background: var(--surface);
+  background: var(--bg-color-section);
   box-shadow: 0 4px 20px rgb(0 0 0 / 8%);
   opacity: 0;
   transform: translateY(20px);
   transition: opacity .68s calc(.11s * var(--project-index) + .15s) ease,
               transform .68s calc(.11s * var(--project-index) + .15s) cubic-bezier(.2, .65, .3, 1),
-              border-color .22s ease,
-              box-shadow .22s ease;
+              border-color 0.35s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .featured-projects__card:hover {
-  border-color: rgb(37 99 235 / 45%);
-  box-shadow: 0 12px 32px rgb(0 0 0 / 12%);
+  border-color: rgb(37 99 235 / 40%);
 }
 
 /* --- الشريط العلوي (الأيقونة + اسم المشروع) --- */
@@ -83,7 +77,7 @@
   align-items: center;
   gap: 12px;
   padding: 18px clamp(18px, 2.2vw, 24px);
-  background: rgb(37 99 235 / 8%);
+  background: var(--bg-color-box-top);
 }
 
 /* أيقونة بلا صندوق مربّع خلفها، تجلس مباشرة على الشريط العلوي */
@@ -97,7 +91,7 @@
 
 .featured-projects h3 {
   margin: 0;
-  color: var(--text);
+  color: var(--title-color);
   font-size: clamp(16px, 1.3vw, 19px);
   line-height: 1.25;
   letter-spacing: -.02em;
@@ -116,10 +110,10 @@
 
 .featured-projects__card-body p {
   margin: 0;
-  color: var(--muted);
+  color: var(--text-color);
   font-size: 14px;
   line-height: 1.7;
-  text-align: justify;
+  text-align: start;
 }
 
 /* --- الشريط السفلي (زر المستودع) --- */
@@ -128,28 +122,12 @@
   flex-wrap: wrap;
   gap: 9px;
   padding: 16px clamp(18px, 2.2vw, 24px);
-  background: rgb(37 99 235 / 8%);
+  background: var(--bg-color-box-top);
 }
 
 .featured-projects__card-foot a {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
   padding: 7px 12px;
-  border: 1px solid rgb(37 99 235 / 42%);
-  border-radius: 999px;
-  color: var(--sky);
-  background: var(--surface);
   font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: transform .2s ease, border-color .2s ease, background .2s ease;
-}
-
-.featured-projects__card-foot a:hover {
-  border-color: var(--sky);
-  background: rgb(37 99 235 / 13%);
-  transform: translateY(-2px);
 }
 
 .featured-projects__card-foot svg {
@@ -229,4 +207,4 @@ html[dir='rtl'] .featured-projects h2 { text-align: start; }
    Flex rows (card-head, site-badge-list, card-foot) mirror automatically because
    the card element carries dir="rtl". Only text alignment needs explicit rules. */
 .featured-projects__card[dir='rtl'] h3 { text-align: start; }
-.featured-projects__card[dir='rtl'] p  { text-align: justify; }
+.featured-projects__card[dir='rtl'] p  { text-align: start; }
