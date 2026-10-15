@@ -108,7 +108,7 @@ function SkillColumn({ title, skills, icon, index }) {
 }
 
 function SkillsCarousel() {
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
   const trackRef = useRef(null)
   const [canScrollStart, setCanScrollStart] = useState(false)
   const [canScrollEnd, setCanScrollEnd]     = useState(false)
@@ -132,13 +132,16 @@ function SkillsCarousel() {
     const scheduleUpdate = () => { frame = requestAnimationFrame(() => requestAnimationFrame(updateArrows)) }
     scheduleUpdate()
     track.addEventListener('scroll', updateArrows, { passive: true })
-    window.addEventListener('resize', updateArrows)
+    let rafId = null
+    const onResize = () => { if (rafId) return; rafId = requestAnimationFrame(() => { rafId = null; updateArrows() }) }
+    window.addEventListener('resize', onResize)
     const ro = new ResizeObserver(updateArrows)
     ro.observe(track)
     return () => {
       cancelAnimationFrame(frame)
+      if (rafId) cancelAnimationFrame(rafId)
       track.removeEventListener('scroll', updateArrows)
-      window.removeEventListener('resize', updateArrows)
+      window.removeEventListener('resize', onResize)
       ro.disconnect()
     }
   }, [updateArrows, language])
@@ -164,7 +167,7 @@ function SkillsCarousel() {
         aria-hidden={!canScrollStart}
         tabIndex={canScrollStart ? 0 : -1}
         onClick={() => scrollByCol(-1)}
-        aria-label="Scroll skills left"
+        aria-label={t.common.scrollSkillsLeft}
       >
         <span className="skills__arrow-icon skills__arrow-icon--back"><ChevronIcon /></span>
       </button>
@@ -191,7 +194,7 @@ function SkillsCarousel() {
         aria-hidden={!canScrollEnd}
         tabIndex={canScrollEnd ? 0 : -1}
         onClick={() => scrollByCol(1)}
-        aria-label="Scroll skills right"
+        aria-label={t.common.scrollSkillsRight}
       >
         <span className="skills__arrow-icon"><ChevronIcon /></span>
       </button>

@@ -6,14 +6,6 @@
   background: var(--bg-color-section);
 }
 
-.skills::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse 42% 30% at 83% 22%, rgb(37 99 235 / 6%), transparent 75%);
-}
-
 .skills__inner { position: relative; width: 100%; margin: 0 auto; }
 
 /* ── Header & intro ── */
@@ -157,6 +149,7 @@
   margin-top: 4px;
 }
 .skills__arrow:hover { background: #1e40af; transform: scale(1.05); }
+.skills__arrow:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; }
 
 .skills__arrow-icon {
   display: flex;

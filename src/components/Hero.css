@@ -1,13 +1,9 @@
-/* Hero — full-width, left-aligned, photo+info as one right-side group */
+/* Hero — full-width banner with left text column and right profile card */
 
 .hero {
- /* --hero-banner-bg: #2563eb;*/  /* same as Training cert header strip (var(--sky)) */
- 
-  --hero-px: clamp(24px, 3vw, 40px);
+  --hero-px: clamp(24px, 4vw, 60px);
   --hero-photo-size: clamp(100px, 13vw, 150px);
   --hero-col-width: 220px;
-  --hero-banner-py: clamp(2rem, 2.8vw, 2.5rem);
-  --hero-nav-h: 72px;
   --hero-uni-logo-size: 68px;
 }
 
@@ -17,32 +13,130 @@
 }
 
 .hero__banner-inner {
-  padding: 100px 40px 45px 40px;
+  padding: 100px var(--hero-px) 52px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 18px;
+  gap: 32px;
   width: 100%;
-  /* background-color: ; */
+  box-sizing: border-box;
 }
 
-.hero__name {
+/* ── Left column ── */
+.hero__left {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  min-width: 0;
+  flex: 1 1 0;
+}
+
+.hero__description {
   margin: 0;
-  color: #ffffff;
-  font-size: clamp(26px, 3.6vw, 44px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
+  color: #fff;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.65;
+  text-align: start;
 }
 
-/* University block in the banner */
+/* ── Action row: GitHub + CV buttons + email ── */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Shared pill button base */
+.hero__github,
+.hero__cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.hero__github svg,
+.hero__cv svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* OLD GITHUB BUTTON STYLE
+.hero__github {
+  background: #fff;
+  color: #1a1a1a;
+  border: 2px solid transparent;
+}
+.hero__github svg { fill: currentColor; }
+.hero__github:hover { background: #dde6f0; }
+*/
+
+/* GitHub button: matches CV button (transparent, white border, white text) */
+.hero__github {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+.hero__github svg { fill: currentColor; }
+.hero__github:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 3px; }
+
+/* CV button: transparent with white border */
+.hero__cv {
+  background: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+}
+.hero__cv svg { fill: none; }
+.hero__cv:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 3px; }
+
+/* Hover: only on devices that support true hover (no sticky state on touch) */
+@media (hover: hover) {
+  .hero__github:hover,
+  .hero__cv:hover { background: rgba(255, 255, 255, 0.15); }
+}
+
+/* Keyboard focus also gets the background */
+.hero__github:focus-visible,
+.hero__cv:focus-visible { background: rgba(255, 255, 255, 0.15); }
+
+/* Email: plain link, no button style */
+.hero__email {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  /* no white-space: nowrap here — the address can move to its own flex line
+     on narrow widths (501–768px) to prevent horizontal overflow */
+}
+.hero__email svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: none;
+}
+.hero__email:hover { color: #fff; }
+.hero__email:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 3px; border-radius: 4px; }
+
+/* ── University block ── */
 .hero__banner-uni {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-/* White circular badge so the logo looks clean on the blue background */
 .hero__banner-uni-badge {
   flex-shrink: 0;
   width: var(--hero-uni-logo-size);
@@ -87,62 +181,20 @@
   line-height: 1.2;
 }
 
-/* ── Body ── */
-.hero__body {
-  background: #ffffff;
-}
-
-.hero__body-inner {
-  display: flex;
-  gap: clamp(3rem, 16vw, 19rem);
-  align-items: flex-start;
-  padding: clamp(20px, 2.5vw, 28px) var(--hero-px) clamp(32px, 5vw, 52px);
-}
-
-/* Left column: paragraph */
-.hero__body-left {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.hero_descraption {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
-
-
-
-.hero__description {
-  width: 60%;
-  margin: 0;
-  color: #fff;
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
-  font-weight: 400;
-  line-height: 1.6;
-}
-
-.hero_header_bottom {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-}
-
-/* Right column: photo + info */
+/* ── Right column: profile card ── */
 .hero__body-right {
-  /* flex: 0 0 var(--hero-col-width); */
   width: var(--hero-col-width);
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   text-align: center;
-  /* margin-top: calc(-1 * (var(--hero-photo-size) / 2 + var(--hero-banner-py) + clamp(20px, 2.5vw, 28px))); */
 }
 
 .hero__photo-wrap {
   flex-shrink: 0;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .hero__avatar {
@@ -168,151 +220,131 @@
   transform: scale(1.3);
   transform-origin: center 35%;
 }
-.hero__avatar svg {
-  width: 46%;
-  height: 46%;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.4;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
 
 .hero__profile-name,
 .hero__profile-role,
-.hero__profile-tech
-
-{
+.hero__profile-tech {
   margin: 0;
   color: #fff;
   font-size: 15px;
   font-weight: 700;
   line-height: 1.3;
-  white-space: nowrap;
+  /* reset h1 browser defaults so the element tag change has no visual effect */
+  letter-spacing: normal;
 }
-
 
 .hero__profile-tech {
   font-size: 14px;
 }
 
-.hero__github {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  width: fit-content;
-  padding: 10px 6px;
-  border-radius: 999px;
-  border: none;
-  background: #fff;
-  color: #1a1a1a;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.25s ease;
-  white-space: nowrap;
+/* ── Body stub (kept for scroll target spacing) ── */
+.hero__body {
+  background: var(--bg-color);
 }
-.hero__github svg {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-  fill: currentColor;
-}
-.hero__github:hover { background: #DDD; }
 
-/* ── Scroll targets for sections below ── */
+/* ── Scroll targets ── */
 #about, #skills, #projects, #training { scroll-margin-top: 84px; }
 
-/* ── Responsive: tablet ── */
+/* ── Tablet (≤768px) ── */
 @media (max-width: 768px) {
+  .hero { --hero-uni-logo-size: 52px; }
+
   .hero__banner-inner {
-    padding-inline-end: var(--hero-px);
-    flex-direction: column;
+    flex-direction: column-reverse;
+    align-items: center;
     text-align: center;
-    
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .hero__left {
+    align-items: center;
+    width: 100%;
   }
 
   .hero__description {
+    text-align: center;
+  }
+
+  .hero__actions {
+    justify-content: center;
+  }
+
+  .hero__banner-uni {
+    justify-content: center;
     width: 100%;
   }
 
-  .hero { --hero-uni-logo-size: 52px; }
-
-  .hero__body-inner {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+  .hero__banner-uni-text {
+    align-items: flex-start;
   }
 
   .hero__body-right {
-    margin-top: calc(-1 * (var(--hero-photo-size) / 2 + var(--hero-banner-py) + clamp(20px, 2.5vw, 28px)));
     width: 100%;
     max-width: var(--hero-col-width);
+  }
+}
+
+/* ── Mobile (≤500px) ── */
+@media (max-width: 500px) {
+  .hero { --hero-uni-logo-size: 48px; }
+
+  .hero__banner-inner {
+    padding-top: 72px;
+    gap: 24px;
   }
 
   .hero__profile-name,
   .hero__profile-role,
   .hero__profile-tech { white-space: normal; }
 
+  .hero__actions {
+    flex-direction: column;
+    align-items: center;
+  }
 
-
-  .hero__banner-uni {
-    justify-content: center;
+  .hero__github,
+  .hero__cv {
     width: 100%;
+    justify-content: center;
+    max-width: 260px;
+  }
+
+  .hero__email {
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
   }
 }
 
-/* ── Responsive: mobile ── */
-@media (max-width: 500px) {
-  .hero { --hero-banner-py: 2rem; --hero-nav-h: 62px; --hero-uni-logo-size: 48px; }
-
-  .hero__body-inner {
-    padding-top: calc(var(--hero-photo-size) / 2 + 16px);
-  }
-
-  .hero__body-right {
-    margin-top: 0;
-    order: -1;
-    margin-top: calc(-1 * (var(--hero-photo-size) / 2 + 16px));
-  }
-}
-
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .hero * { transition-duration: .01ms !important; }
 }
 
 /* ── RTL (Arabic) ── */
-/*
-  padding-inline-start/end on .hero__banner-inner already flip automatically
-  in RTL (start = right, end = left), so the photo-column gap is reserved on
-  the left and the content block sits against the right edge with no overrides.
-  align-items: flex-start on the column container keeps children at the
-  inline-start edge (right in RTL), so name and uni row share the same right edge.
-*/
-
-html[dir='rtl'] .hero__banner-uni-text {
-  align-items: flex-start;  /* text lines align to their own inline-start (right) */
+html[dir='rtl'] .hero__description,
+html[dir='rtl'] .hero__banner-uni-name,
+html[dir='rtl'] .hero__banner-uni-dept {
   text-align: start;
 }
 
-html[dir='rtl'] .hero__name,
-html[dir='rtl'] .hero__banner-uni-name,
-html[dir='rtl'] .hero__banner-uni-dept { text-align: start; }
+html[dir='rtl'] .hero__banner-uni-text {
+  align-items: flex-start;
+  text-align: start;
+}
 
-html[dir='rtl'] .hero__body-inner { flex-direction: row-reverse; }
-
-html[dir='rtl'] .hero__description { text-align: start; }
-
-html[dir='rtl'] .hero__body-right { order: 0; }
-
-
-html[dir='rtl'] .hero__banner-inner {
-  order: -1;
+html[dir='rtl'] .hero__actions {
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 @media (max-width: 768px) {
-  html[dir='rtl'] .hero__body-inner { flex-direction: column; }
-  html[dir='rtl'] .hero__body-right { order: -1; };
+  html[dir='rtl'] .hero__description { text-align: center; }
+  html[dir='rtl'] .hero__actions { flex-direction: row; justify-content: center; }
+  html[dir='rtl'] .hero__banner-uni-text { align-items: flex-start; }
+}
 
+@media (max-width: 500px) {
+  html[dir='rtl'] .hero__actions { flex-direction: column; }
 }

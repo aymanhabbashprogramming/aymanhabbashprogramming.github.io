@@ -11,7 +11,6 @@
   background: var(--bg-color-section);
 }
 
-.about::after { content: ''; position: absolute; inset-inline-end: -15%; bottom: -35%; width: min(680px, 60vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgb(124 58 237 / 6%), transparent 67%); pointer-events: none; }
 .about__frame { position: relative; z-index: 1; width: 100%; margin: 0 auto; }
 
 .about__heading { display: flex; flex-direction: column; gap: 16px; }
@@ -186,6 +185,7 @@
   background: rgb(37 99 235 / 12%);
   border-color: rgb(37 99 235 / 50%);
 }
+.about__more-toggle:focus-visible { outline: 2px solid #93c5fd; outline-offset: 2px; }
 
 .about__more-chevron {
   display: flex;
@@ -196,17 +196,15 @@
 .about__more-chevron svg { width: 14px; height: 14px; }
 .about__more-chevron--up { transform: rotate(180deg); }
 
-.about__more-panel {
-  grid-column: 1 / -1;
-  padding: clamp(20px, 2.5vw, 28px);
-  border: 1px dashed var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-  color: var(--text-color);
-  font-size: 14px;
-  text-align: center;
+/* Extra cards (index >= 4): hidden on desktop until Show More is clicked.
+   On mobile/tablet (≤900px) all cards are always visible — button hidden there too. */
+@media (min-width: 901px) {
+  .about__card--extra { display: none; }
+  .about__grid--expanded .about__card--extra { display: flex; }
 }
-.about__more-panel p { margin: 0; }
+@media (max-width: 900px) {
+  .about__more { display: none; }
+}
 
 /* --- تأثيرات الدخول عند الظهور --- */
 .about__heading,

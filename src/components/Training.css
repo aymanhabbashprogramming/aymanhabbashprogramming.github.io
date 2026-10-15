@@ -1,4 +1,4 @@
-.training { --sky:#2563eb; --violet:#7c3aed; --border:#dbe4f0; overflow:hidden; padding-left:clamp(20px,4vw,60px); padding-right:clamp(20px,4vw,60px); background:var(--bg-color-section); }
+.training { --sky:#2563eb; --violet:#7c3aed; --border:#dbe4f0; overflow:hidden; padding-inline:clamp(20px,4vw,60px); background:var(--bg-color-section); }
 .training__inner { position:relative; width:100%; margin:0 auto; }
 .training__header { display:flex; align-items:baseline; gap:18px; opacity:0; transform:translateY(20px); transition:opacity .7s ease,transform .7s cubic-bezier(.2,.65,.3,1); }
 .training h2 { margin:0; color:var(--title-color); font-size:clamp(28px,2vw,46px); line-height:1.15; letter-spacing:-.045em; word-spacing:.1em; font-weight:620; }
@@ -86,6 +86,7 @@
   transition:background-color .2s ease,transform .2s ease;
 }
 .training__carousel-arrow:hover { background:#1e40af; transform:scale(1.05); }
+.training__carousel-arrow:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; }
 .training__carousel-arrow-icon { display:flex; width:16px; height:16px; }
 .training__carousel-arrow-icon svg { width:16px; height:16px; }
 /* back arrow (toward inline-start): ChevronIcon points right, so rotate for LTR */

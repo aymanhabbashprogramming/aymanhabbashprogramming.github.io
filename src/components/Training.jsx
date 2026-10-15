@@ -26,13 +26,17 @@ const earlyCourses = [
   { title: 'Advanced Solutions for Algorithms Level 1' },
 ].map((course, i) => ({ number: i + 1, title: course.title }))
 
-const courseCertificates = [
-  ...earlyCourses,
-  ...courseTitles.map((title, i) => {
-    const number = i + 5
-    return { number, title, pdf: `/certificates/course-${number}.pdf` }
-  }),
-]
+function buildCourseCertificates() {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+  return [
+    ...earlyCourses,
+    ...courseTitles.map((title, i) => {
+      const number = i + 5
+      return { number, title, pdf: `${base}/certificates/course-${number}.pdf` }
+    }),
+  ]
+}
+const courseCertificates = buildCourseCertificates()
 
 const EN_DESCRIPTION = 'I followed a structured programming learning path on Programming Advices, a platform run by programmer Mohammed Abu-Hadhoud, who has more than 30 years of experience. I started from the fundamentals and progressed step by step. I solved each task on my own first, then compared my solution with the solutions provided on the platform to learn better ways of thinking and implementing. So far, I have completed 18 courses and applied what I learned in practice. The most important things I learned were object-oriented programming in C++, which I applied in the Bank Management System project, and data structures, which I built from scratch in the Data Structures in C++ project. I also learned C# and databases using SQL and SQL Server, and applied them in three projects: ContactHub, ContactsDesktop, and ContactsManager. I am still continuing my learning on the platform.'
 
@@ -69,7 +73,7 @@ const CheckIcon = () => (
 
 function CertificateCarousel({ certificates, viewCertificate, completed, courseLabel }) {
   const trackRef = useRef(null)
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
   const [canScrollStart, setCanScrollStart] = useState(false)
   const [canScrollEnd, setCanScrollEnd]     = useState(false)
 
@@ -91,13 +95,16 @@ function CertificateCarousel({ certificates, viewCertificate, completed, courseL
     const scheduleUpdate = () => { frame = requestAnimationFrame(() => requestAnimationFrame(updateArrows)) }
     scheduleUpdate()
     track.addEventListener('scroll', updateArrows, { passive: true })
-    window.addEventListener('resize', updateArrows)
+    let rafId = null
+    const onResize = () => { if (rafId) return; rafId = requestAnimationFrame(() => { rafId = null; updateArrows() }) }
+    window.addEventListener('resize', onResize)
     const ro = new ResizeObserver(updateArrows)
     ro.observe(track)
     return () => {
       cancelAnimationFrame(frame)
+      if (rafId) cancelAnimationFrame(rafId)
       track.removeEventListener('scroll', updateArrows)
-      window.removeEventListener('resize', updateArrows)
+      window.removeEventListener('resize', onResize)
       ro.disconnect()
     }
   }, [updateArrows, certificates, language])
@@ -120,7 +127,7 @@ function CertificateCarousel({ certificates, viewCertificate, completed, courseL
         aria-hidden={!canScrollStart}
         tabIndex={canScrollStart ? 0 : -1}
         onClick={() => scrollByCard(-1)}
-        aria-label="Previous certificates"
+        aria-label={t.common.prevCerts}
       >
         <span className="training__carousel-arrow-icon training__carousel-arrow-icon--back"><ChevronIcon /></span>
       </button>
@@ -158,7 +165,7 @@ function CertificateCarousel({ certificates, viewCertificate, completed, courseL
         aria-hidden={!canScrollEnd}
         tabIndex={canScrollEnd ? 0 : -1}
         onClick={() => scrollByCard(1)}
-        aria-label="Next certificates"
+        aria-label={t.common.nextCerts}
       >
         <span className="training__carousel-arrow-icon"><ChevronIcon /></span>
       </button>

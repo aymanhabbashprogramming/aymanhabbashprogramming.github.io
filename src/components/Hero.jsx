@@ -1,15 +1,6 @@
 import './Hero.css'
 import { useLanguage } from '../i18n/LanguageContext'
 
-function ProfileIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24">
-      <circle cx="12" cy="8.5" r="3.5" />
-      <path d="M4.5 20.2a7.5 7.5 0 0 1 15 0" />
-    </svg>
-  )
-}
-
 function GitHubIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -18,137 +9,107 @@ function GitHubIcon() {
   )
 }
 
+function EnvelopeIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="2" />
+      <path d="m2 7 10 7 10-7" />
+    </svg>
+  )
+}
+
+const CV_URLS = {
+  en: 'cv/cv_english.pdf',
+  ar: 'cv/cv_arabic.pdf',
+  tr: 'cv/cv_turkish.pdf',
+}
+
 function Hero() {
   const { t, language } = useLanguage()
   const h = t.hero
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '')
+  const cvUrl = `${base}/${CV_URLS[language]}`
 
   return (
     <main className="hero" id="top" aria-labelledby="hero-title">
 
       {/* ── Banner ── */}
       <div className="hero__banner">
-
-
         <div className="hero__banner-inner">
 
-
-          {/* Descraption = Left */}
-
-          <div className="hero_descraption">
-
-            {/* <h1 id="hero-title" className="hero__name">{h.name}</h1> */}
-
-            <p className="hero__description" lang={language}>
-                {h.description}
-            </p>
-
-
-
-
-              <div className="hero__banner-uni">
-                  <div className="hero__banner-uni-badge">
-                    <img
-                      src="/images/Picture2.png"
-                      alt={h.uniLogoAlt}
-                      className="hero__banner-uni-logo"
-                      onError={(e) => { e.currentTarget.style.display = 'none' }}
-                    />
-                  </div>
-                  <div className="hero__banner-uni-text">
-                    <span className="hero__banner-uni-name">{h.uniName}</span>
-                    <span className="hero__banner-uni-dept">{h.uniDept}</span>
-                  </div>
-
-                </div>
-
-
-
-
-          </div>
-
-
-
-
-
-
-
-          {/* Profile + Reight */}
-
-
-
-                
-                <div className="hero__body-right">
-                  <div className="hero__photo-wrap">
-                    <div className="hero__avatar">
-                      <img
-                        src="/images/myimage.png"
-                        alt={h.photoAlt}
-                      />
-                    </div>
-                  </div>
-                  <p className="hero__profile-name">{h.profileName}</p>
-                  <p className="hero__profile-role">{h.role}</p>
-                  <p className="hero__profile-tech" dir="ltr">{h.tech}</p>
-                  <a
-                    className="hero__github"
-                    href="https://github.com/aymanhabbashprogramming"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <GitHubIcon />
-                    {h.github}
-                  </a>
-                </div>
-
-
-
-
-          
-
-        </div>
-
-          
-      </div>
-
-      {/* ── Body ── */}
-      <div className="hero__body">
-
-
-
-
-          {/* <div className="hero__body-left">
+          {/* Left column */}
+          <div className="hero__left">
             <p className="hero__description" lang={language}>
               {h.description}
             </p>
-          </div> */}
 
-          {/* Photo + info column */}
-          {/* <div className="hero__body-right">
-            <div className="hero__photo-wrap">
-              <div className="hero__avatar"><ProfileIcon /></div>
+            {/* Action row: GitHub button + CV button + email */}
+            <div className="hero__actions">
+              <a
+                className="hero__github"
+                href="https://github.com/aymanhabbashprogramming"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <GitHubIcon />
+                {h.github}
+              </a>
+
+              <a
+                className="hero__cv"
+                href={cvUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {h.viewCV}
+              </a>
+
+              <a
+                className="hero__email"
+                href={`mailto:${h.email}`}
+              >
+                <EnvelopeIcon />
+                <span dir="ltr">{h.email}</span>
+              </a>
             </div>
-            <p className="hero__profile-name">{h.profileName}</p>
+
+            {/* University block */}
+            <div className="hero__banner-uni">
+              <div className="hero__banner-uni-badge">
+                <img
+                  src="/images/Picture2.png"
+                  alt={h.uniLogoAlt}
+                  className="hero__banner-uni-logo"
+                  onError={(e) => { e.currentTarget.style.display = 'none' }}
+                />
+              </div>
+              <div className="hero__banner-uni-text">
+                <span className="hero__banner-uni-name">{h.uniName}</span>
+                <span className="hero__banner-uni-dept">{h.uniDept}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right column: profile card */}
+          <div className="hero__body-right">
+            <div className="hero__photo-wrap">
+              <div className="hero__avatar">
+                <img
+                  src="/images/myimage.png"
+                  alt={h.photoAlt}
+                />
+              </div>
+            </div>
+            <h1 id="hero-title" className="hero__profile-name">{h.profileName}</h1>
             <p className="hero__profile-role">{h.role}</p>
             <p className="hero__profile-tech" dir="ltr">{h.tech}</p>
-            <a
-              className="hero__github"
-              href="https://github.com/aymanhabbashprogramming"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <GitHubIcon />
-              {h.github}
-            </a>
-          </div> */}
+          </div>
 
-
-
-
-
-
-
-
+        </div>
       </div>
+
+      {/* ── Body (kept for scroll targets) ── */}
+      <div className="hero__body" />
     </main>
   )
 }

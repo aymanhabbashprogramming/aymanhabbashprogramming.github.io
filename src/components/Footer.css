@@ -64,6 +64,7 @@
 .footer__nav-link:hover {
   color: #ffffff;
 }
+.footer__nav-link:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 3px; border-radius: 3px; }
 
 /* Spacer column (third): empty, just fills space */
 .footer__col--spacer {
@@ -118,6 +119,7 @@
 .footer__top-btn:hover {
   background: rgb(255 255 255 / 25%);
 }
+.footer__top-btn:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; }
 
 /* ── Responsive: tablet ── */
 @media (max-width: 768px) {

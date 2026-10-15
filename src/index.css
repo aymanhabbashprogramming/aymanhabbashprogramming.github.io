@@ -8,7 +8,7 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; min-width: 320px; background: #fff; font-family: Inter, sans-serif; }
-#root { min-height: 100svh; }
+#root { min-height: 100vh; min-height: 100svh; }
 
 /*
   Shared vertical rhythm for page sections.
@@ -135,10 +135,6 @@ body { margin: 0; min-width: 320px; background: #fff; font-family: Inter, sans-s
 
 /* RTL layout overrides */
 html[dir='rtl'] .site-navigation__links,
-html[dir='rtl'] .hero__actions,
-html[dir='rtl'] .featured-projects__repositories,
 html[dir='rtl'] .skills ul { direction: rtl; }
 
-html[dir='rtl'] .hero__description,
-html[dir='rtl'] .about__copy { text-align: right; }
 

@@ -33,6 +33,7 @@
 }
 .site-navigation__home svg { width: 22px; height: 22px; flex-shrink: 0; }
 .site-navigation__home:hover { background: rgb(255 255 255 / 25%); }
+.site-navigation__home:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; }
 
 .site-navigation__home-label {
   font-size: 1rem;
@@ -61,6 +62,7 @@
   transition: color .2s ease;
 }
 .site-navigation__links a:hover { color: #ffffff; }
+.site-navigation__links a:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 3px; border-radius: 3px; }
 
 /* ── Right: custom language switcher ── */
 .site-navigation__right { display: flex; align-items: center; justify-self: end; }
@@ -84,13 +86,15 @@
   background: transparent;
   color: #ffffff;
   padding: 7px 13px;
-  font: 600 1rem Inter, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: background .2s ease;
   white-space: nowrap;
 }
 .site-navigation__lang-btn:hover,
 .site-navigation__lang-btn[aria-expanded="true"] { background: rgb(255 255 255 / 15%); }
+.site-navigation__lang-btn:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; }
 
 .site-navigation__lang-chevron {
   width: 14px;
@@ -129,6 +133,7 @@
 }
 .site-navigation__lang-option:hover,
 .site-navigation__lang-option:focus { background: #f1f5f9; }
+.site-navigation__lang-option:focus-visible { outline: 2px solid #2563eb; outline-offset: -2px; }
 
 .site-navigation__lang-option--active {
   background: #eff6ff;
@@ -176,6 +181,7 @@
   transition: color .2s ease, background .2s ease;
 }
 .site-navigation__mobile-menu a:hover { color: #ffffff; background: rgb(255 255 255 / 8%); }
+.site-navigation__mobile-menu a:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: -2px; }
 .site-navigation__mobile-menu--open { max-height: 300px; }
 
 /* ── Mobile ── */
@@ -221,6 +227,7 @@
   .site-navigation__hamburger svg { width: 20px; height: 20px; flex-shrink: 0; }
   .site-navigation__hamburger:hover,
   .site-navigation__hamburger[aria-expanded="true"] { background: rgb(255 255 255 / 15%); }
+  .site-navigation__hamburger:focus-visible { outline: 2px solid rgba(255,255,255,0.8); outline-offset: 2px; }
 
   /* Show mobile menu panel */
   .site-navigation__mobile-menu { display: flex; }

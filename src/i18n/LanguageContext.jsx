@@ -9,12 +9,14 @@ const translations = {
       uniName: 'Selçuk University',
       uniDept: 'Computer Engineering',
       uniLogoAlt: 'Selçuk University logo',
-      description: 'Computer Engineering student at Selçuk University, with a strong specialization in C++, C#, and SQL. I have designed and built multiple structured software systems, including pharmacy management, point-of-sale, and banking applications, applying layered architecture and solid software design principles throughout the full development lifecycle.',
+      description: 'Computer Engineering student at Selçuk University, with a strong specialization in C++, C#, and SQL. I have designed and built multiple structured software systems, including pharmacy management, point of sale, and banking applications, applying layered architecture and solid software design principles throughout the full development lifecycle.',
       profileName: 'Mohammed Ayman Habbash',
       photoAlt: 'Mohammed Ayman Habbash',
       role: 'Software Developer',
       tech: 'C++ | C# | SQL',
       github: 'View My GitHub',
+      viewCV: 'View CV',
+      email: 'mohammedaymanhabbash447@gmail.com',
     },
     skillsIntro: "Using these technologies, I've built multiple structured software systems, and continue to expand my skill set.",
     headings: { about: 'What My Development Experience Includes', skills: 'Technical Skills and Foundations', featured: 'Projects', other: 'Other Projects', education: 'Education', training: 'Training & Professional Development', achievements: 'Achievements & Certifications' },
@@ -29,7 +31,7 @@ const translations = {
         { title: 'Data Structures', description: 'Data structures are also an important part of my experience. I focus on choosing the right data type for each situation, and when needed, I build custom data types instead of relying only on ready-made ones. I applied this principle practically by building fundamental data structures from scratch in C++, including linked lists, dynamic arrays, stacks, and queues, among others.', badges: ['Custom Data Types', 'Memory Management', 'Algorithm Efficiency'] },
       ],
     },
-    common: { viewRepository: 'View Repository', viewCertificate: 'View Certificate', course: 'Course', certificatesIntro: 'Certificates obtained for the completed courses within the structured programming and software development training path.', completed: 'Completed', upcoming: 'Upcoming', currentStudent: 'Current Student', currentlyPursuing: 'CURRENTLY PURSUING', showMoreProjects: 'Show More Projects', showLessProjects: 'Show Less', visitPlatform: 'Visit Platform', certifications: 'Certifications', certNote: 'Certificates are issued by the platform starting from Course 5.' },
+    common: { viewRepository: 'View Repository', viewCertificate: 'View Certificate', course: 'Course', certificatesIntro: 'Certificates obtained for the completed courses within the structured programming and software development training path.', completed: 'Completed', upcoming: 'Upcoming', currentStudent: 'Current Student', currentlyPursuing: 'CURRENTLY PURSUING', showMoreProjects: 'Show More Projects', showLessProjects: 'Show Less', visitPlatform: 'Visit Platform', certifications: 'Certifications', certNote: 'Certificates are issued by the platform starting from Course 5.', scrollSkillsLeft: 'Scroll skills left', scrollSkillsRight: 'Scroll skills right', prevCerts: 'Previous certificates', nextCerts: 'Next certificates' },
     footer: { name: 'Mohammed Ayman Habbash', tagline: 'Software Developer. Computer Engineering student at Selçuk University.', copyright: (year) => `© ${year} Mohammed Ayman Habbash. All rights reserved.` },
   },
   tr: {
@@ -45,6 +47,8 @@ const translations = {
       role: 'Yazılım Geliştirici',
       tech: 'C++ | C# | SQL',
       github: 'GitHub Profilimi Görüntüle',
+      viewCV: 'CV Göster',
+      email: 'mohammedaymanhabbash447@gmail.com',
     },
     skillsIntro: 'Bu teknolojileri kullanarak birçok yapılandırılmış yazılım sistemi geliştirdim ve becerilerimi genişletmeye devam ediyorum.',
     headings: { about: 'Geliştirme Deneyimim Neleri Kapsıyor', skills: 'Teknik Beceriler ve Temeller', featured: 'Projeler', other: 'Diğer Projeler', education: 'Eğitim', training: 'Eğitim ve Mesleki Gelişim', achievements: 'Başarılar ve Sertifikalar' },
@@ -59,7 +63,7 @@ const translations = {
         { title: 'Veri Yapıları', description: 'Veri yapıları da deneyimimin önemli bir parçasıdır. Her durum için doğru veri tipini seçmeye özen gösteriyor, gerektiğinde yalnızca hazır tiplere bağlı kalmak yerine özel veri tipleri oluşturuyorum. Bu ilkeyi, C++ ile bağlı listeler, dinamik diziler, yığınlar ve kuyruklar gibi temel veri yapılarını sıfırdan geliştirerek uygulamalı olarak hayata geçirdim.', badges: ['Özel Veri Tipleri', 'Bellek Yönetimi', 'Algoritma Verimliliği'] },
       ],
     },
-    common: { viewRepository: 'Depoyu Görüntüle', viewCertificate: 'Sertifikayı Görüntüle', course: 'Kurs', certificatesIntro: 'Yapılandırılmış programlama ve yazılım geliştirme eğitim yolundaki tamamlanmış kurslar için alınan sertifikalar.', completed: 'Tamamlandı', upcoming: 'Yaklaşan', currentStudent: 'Mevcut Öğrenci', currentlyPursuing: 'HALEN DEVAM EDİYOR', showMoreProjects: 'Daha Fazla Proje Göster', showLessProjects: 'Daha Az Göster', visitPlatform: 'Platformu Ziyaret Et', certifications: 'Sertifikalar', certNote: "Platform, sertifikaları Kurs 5'ten itibaren vermektedir." },
+    common: { viewRepository: 'Depoyu Görüntüle', viewCertificate: 'Sertifikayı Görüntüle', course: 'Kurs', certificatesIntro: 'Yapılandırılmış programlama ve yazılım geliştirme eğitim yolundaki tamamlanmış kurslar için alınan sertifikalar.', completed: 'Tamamlandı', upcoming: 'Yaklaşan', currentStudent: 'Mevcut Öğrenci', currentlyPursuing: 'HALEN DEVAM EDİYOR', showMoreProjects: 'Daha Fazla Proje Göster', showLessProjects: 'Daha Az Göster', visitPlatform: 'Platformu Ziyaret Et', certifications: 'Sertifikalar', certNote: "Platform, sertifikaları Kurs 5'ten itibaren vermektedir.", scrollSkillsLeft: 'Becerileri sola kaydır', scrollSkillsRight: 'Becerileri sağa kaydır', prevCerts: 'Önceki sertifikalar', nextCerts: 'Sonraki sertifikalar' },
     footer: { name: 'Muhammed Eymen Habbeş', tagline: 'Yazılım Geliştirici. Selçuk Üniversitesi Bilgisayar Mühendisliği öğrencisi.', copyright: (year) => `© ${year} Muhammed Eymen Habbeş. Tüm hakları saklıdır.` },
   },
   ar: {
@@ -69,12 +73,14 @@ const translations = {
       uniName: 'جامعة سلجوق',
       uniDept: 'هندسة الحاسوب',
       uniLogoAlt: 'شعار جامعة سلجوق',
-      description: 'طالب هندسة حاسوب في جامعة سلجوق، أتخصص في لغات C++ وC# وSQL. صمّمتُ وبنيتُ عدة أنظمة برمجية، منها نظام لإدارة الصيدليات ونقاط البيع والبنوك، مع تطبيق البنية متعددة الطبقات ومبادئ التصميم البرمجي السليم في جميع مراحل التطوير.',
+      description: 'طالب هندسة حاسوب في جامعة سلجوق، أتخصص في لغات ‎C++‎ و‎C#‎ و‎SQL‎. صمّمتُ وبنيتُ عدة أنظمة برمجية، منها نظام لإدارة الصيدليات ونقاط البيع والبنوك، مع تطبيق البنية متعددة الطبقات ومبادئ التصميم البرمجي السليم في جميع مراحل التطوير.',
       profileName: 'محمد أيمن الهباش',
       photoAlt: 'محمد أيمن الهباش',
       role: 'مطوّر برمجيات',
       tech: 'C++ | C# | SQL',
       github: 'زيارة حسابي على GitHub',
+      viewCV: 'عرض سيرتي الذاتية',
+      email: 'mohammedaymanhabbash447@gmail.com',
     },
     skillsIntro: 'باستخدام هذه التقنيات، قمت ببناء العديد من الأنظمة البرمجية المنظمة، وما زلت أعمل على توسيع مجموعة مهاراتي.',
     headings: { about: 'ما تشمله خبرتي في التطوير', skills: 'المهارات والأسس التقنية', featured: 'المشاريع', other: 'مشاريع أخرى', education: 'التعليم', training: 'التدريب والتطوير المهني', achievements: 'الإنجازات والشهادات' },
@@ -90,30 +96,36 @@ const translations = {
         },
         {
           title: 'البرمجة كائنية التوجه',
-          description: 'البرمجة كائنية التوجه جزء أساسي من أسلوبي في كتابة الكود. أقوم بفصل الكيانات المختلفة عن بعضها من خلال إنشاء كلاسات مستقلة لكل منها، مع تطبيق مبادئ التجريد والتغليف والوراثة، وتحديد مستوى الوصول المناسب لكل خاصية أو دالة، سواء كان عامًا أو خاصًا أو محميًا. طبّقت هذه المفاهيم عمليًا من خلال بناء نظام إدارة العمليات البنكية بلغة C++.',
+          description: 'البرمجة كائنية التوجه جزء أساسي من أسلوبي في كتابة الكود. أقوم بفصل الكيانات المختلفة عن بعضها من خلال إنشاء كلاسات مستقلة لكل منها، مع تطبيق مبادئ التجريد والتغليف والوراثة، وتحديد مستوى الوصول المناسب لكل خاصية أو دالة، سواء كان عامًا أو خاصًا أو محميًا. طبّقت هذه المفاهيم عمليًا من خلال بناء نظام إدارة العمليات البنكية بلغة ‎C++‎.',
           badges: ['التغليف', 'الوراثة', 'التجريد'],
         },
         {
           title: 'التكامل مع قواعد البيانات',
-          description: 'في إطار خبرتي مع قواعد البيانات، تعاملت مع ADO.NET في عدة مشاريع، وحرصت دائمًا على كتابة الاستعلامات بطريقة فعالة، لأن كفاءة الاستعلام لا تقل أهمية عن الاستعلام نفسه. كما استخدمت Entity Framework في مشروع نظام المخزون ونقاط البيع، مستفيدًا من فهمي الجيد لقواعد البيانات العلائقية والبرمجة الكائنية في التعامل معها بسهولة.',
+          description: 'في إطار خبرتي مع قواعد البيانات، تعاملت مع ‎ADO.NET‎ في عدة مشاريع، وحرصت دائمًا على كتابة الاستعلامات بطريقة فعالة، لأن كفاءة الاستعلام لا تقل أهمية عن الاستعلام نفسه. كما استخدمت ‎Entity Framework‎ في مشروع نظام المخزون ونقاط البيع، مستفيدًا من فهمي الجيد لقواعد البيانات العلائقية والبرمجة الكائنية في التعامل معها بسهولة.',
           badges: ['ADO.NET', 'Entity Framework'],
         },
         {
           title: 'هياكل البيانات',
-          description: 'تُعد هياكل البيانات جزءًا مهمًا من خبرتي أيضًا، حيث أحرص على اختيار أنواع البيانات المناسبة لكل حالة، وعند الحاجة أقوم ببناء أنواع بيانات مخصصة بدل الاقتصار على الأنواع الجاهزة فقط. طبّقت هذا المبدأ عمليًا من خلال بناء هياكل بيانات أساسية من الصفر بلغة C++، مثل القوائم المترابطة والمصفوفات الديناميكية والمكدسات وطوابير الانتظار.',
+          description: 'تُعد هياكل البيانات جزءًا مهمًا من خبرتي أيضًا، حيث أحرص على اختيار أنواع البيانات المناسبة لكل حالة، وعند الحاجة أقوم ببناء أنواع بيانات مخصصة بدل الاقتصار على الأنواع الجاهزة فقط. طبّقت هذا المبدأ عمليًا من خلال بناء هياكل بيانات أساسية من الصفر بلغة ‎C++‎، مثل القوائم المترابطة والمصفوفات الديناميكية والمكدسات وطوابير الانتظار.',
           badges: ['أنواع بيانات مخصصة', 'إدارة الذاكرة', 'كفاءة الخوارزميات'],
         },
       ],
     },
-    common: { viewRepository: 'عرض المستودع', viewCertificate: 'عرض الشهادة', course: 'الكورس', certificatesIntro: 'شهادات تم الحصول عليها للدورات المكتملة ضمن مسار التدريب المنهجي في البرمجة وتطوير البرمجيات.', completed: 'مكتمل', upcoming: 'قادم', currentStudent: 'طالب حالي', currentlyPursuing: 'أدرس حاليًا', showMoreProjects: 'عرض المزيد من المشاريع', showLessProjects: 'عرض أقل', visitPlatform: 'زيارة المنصة', certifications: 'الشهادات', certNote: 'تُصدر المنصة الشهادات ابتداءً من الكورس 5.' },
+    common: { viewRepository: 'عرض المستودع', viewCertificate: 'عرض الشهادة', course: 'الكورس', certificatesIntro: 'شهادات تم الحصول عليها للدورات المكتملة ضمن مسار التدريب المنهجي في البرمجة وتطوير البرمجيات.', completed: 'مكتمل', upcoming: 'قادم', currentStudent: 'طالب حالي', currentlyPursuing: 'أدرس حاليًا', showMoreProjects: 'عرض المزيد من المشاريع', showLessProjects: 'عرض أقل', visitPlatform: 'زيارة المنصة', certifications: 'الشهادات', certNote: 'تُصدر المنصة الشهادات ابتداءً من الكورس 5.', scrollSkillsLeft: 'تمرير المهارات لليسار', scrollSkillsRight: 'تمرير المهارات لليمين', prevCerts: 'الشهادات السابقة', nextCerts: 'الشهادات التالية' },
     footer: { name: 'محمد أيمن الهباش', tagline: 'مطوّر برمجيات. طالب هندسة حاسوب في جامعة سلجوق.', copyright: (year) => `© ${year} محمد أيمن الهباش. جميع الحقوق محفوظة.` },
   },
 }
 
+const VALID_LANGUAGES = new Set(['en', 'ar', 'tr'])
+
 const LanguageContext = createContext(null)
 
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(() => localStorage.getItem('portfolio-language') || 'en')
+  const [language, setLanguage] = useState(() => {
+    const saved = localStorage.getItem('portfolio-language')
+    if (saved && VALID_LANGUAGES.has(saved)) return saved
+    return 'en'
+  })
 
   useEffect(() => {
     localStorage.setItem('portfolio-language', language)
@@ -121,7 +133,7 @@ export function LanguageProvider({ children }) {
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr'
   }, [language])
 
-  const value = useMemo(() => ({ language, setLanguage, t: translations[language] }), [language])
+  const value = useMemo(() => ({ language, setLanguage, t: translations[language] ?? translations.en }), [language])
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
 }

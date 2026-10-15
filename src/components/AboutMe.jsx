@@ -81,8 +81,7 @@ const arDescriptions = [
 const ICONS = [<LayersIcon />, <ClassesIcon />, <DatabaseIcon />, <TreeIcon />]
 const WRAP_BADGES = [false, false, false, true]
 const ACCENT = 'sky'
-
-const extraCards = []
+const DESKTOP_ROW = 4
 
 function AboutMe() {
   const { t, language } = useLanguage()
@@ -104,6 +103,7 @@ function AboutMe() {
   }, [])
 
   const cards = t.about.cards
+  const hasExtra = cards.length > DESKTOP_ROW
 
   return (
     <section
@@ -118,13 +118,14 @@ function AboutMe() {
           <p className="about__intro">{t.about.intro}</p>
         </div>
 
-        <div className="about__grid" id="about-grid">
+        <div className={`about__grid${showMore ? ' about__grid--expanded' : ''}`} id="about-grid">
           {cards.map((card, index) => {
             const DescNode = language === 'ar' ? arDescriptions[index] : null
+            const isExtra = index >= DESKTOP_ROW
             return (
               <article
                 key={index}
-                className={`about__card about__card--${ACCENT}`}
+                className={`about__card about__card--${ACCENT}${isExtra ? ' about__card--extra' : ''}`}
                 style={{ '--card-index': index }}
               >
                 <div className="about__card-head">
@@ -137,7 +138,7 @@ function AboutMe() {
                   {card.badges && (
                     <ul className={`about__card-badges ${WRAP_BADGES[index] ? 'about__card-badges--wrap' : ''}`}>
                       {card.badges.map((badge) => (
-                        <li key={badge} dir={language === 'ar' ? undefined : undefined}>{badge}</li>
+                        <li key={badge}>{badge}</li>
                       ))}
                     </ul>
                   )}
@@ -148,15 +149,9 @@ function AboutMe() {
               </article>
             )
           })}
-
-          {showMore && (
-            <div className="about__more-panel">
-              <p>More skills coming soon.</p>
-            </div>
-          )}
         </div>
 
-        {extraCards.length > 0 && (
+        {hasExtra && (
           <div className="about__more">
             <button
               type="button"
